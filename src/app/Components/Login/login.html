@@ -1,0 +1,57 @@
+<div class="fondo">
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">tiraparo.com</a>
+      <ul class="nav-links">
+        <li><a href="#home">Inicio</a></li>
+        <li><a href="#about_us">Acerca de</a></li>
+        <li><a href="#services">Servicios</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="tabs">
+      <button (click)="registerMode = false" [class.active]="!registerMode">Iniciar Sesión</button>
+      <button (click)="registerMode = true" [class.active]="registerMode">Registrarse</button>
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="!registerMode" (submit)="login()">
+      <h2>Iniciar Sesión</h2>
+      <div class="form-group">
+        <label for="login-username">Usuario</label>
+        <input type="text" id="login-username" [(ngModel)]="usuario" name="usuario" required>
+      </div>
+
+      <div class="form-group">
+        <label for="login-password">Contraseña</label>
+        <input type="password" id="login-password" [(ngModel)]="contrasena" name="contrasena" required>
+      </div>
+
+      <button class="submit" type="submit">Iniciar Sesión</button>
+    </form>
+
+    <!-- Register Form -->
+    <form *ngIf="registerMode" (submit)="register()">
+      <h2>Registrarse</h2>
+      <div class="form-group">
+        <label for="register-username">Usuario</label>
+        <input type="text" id="register-username" [(ngModel)]="newUsuario" name="newUsuario" required>
+      </div>
+
+      <div class="form-group">
+        <label for="register-password">Contraseña</label>
+        <input type="password" id="register-password" [(ngModel)]="newContrasena" name="newContrasena" required>
+      </div>
+
+      <button type="submit">Registrarse</button>
+    </form>
+  </div>
+</div>
+
+<div id="about_us">
+  <p>jakdjdklvjk</p>
+</div>
