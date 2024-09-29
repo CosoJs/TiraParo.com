@@ -96,7 +96,9 @@ export class loginComponent {
             .then(() => {
               console.log('Usuario registrado con éxito');
               alert('Registro exitoso');
-              this.toggleRegister(); // No necesitas pasarle un evento aquí
+              // Guardar UsuarioId en localStorage
+              localStorage.setItem('UsuarioId', newUser.UsuarioID);
+              this.navegacion.navigate(['/servicesregistro'], { state: this.credencial });
             })
             .catch((error) => {
               console.error('Error al registrar usuario:', error);
