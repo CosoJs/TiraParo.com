@@ -40,7 +40,7 @@
 }
 
 .tabs button.active {
-  background-color: #ff6801;
+  background-color: blue;
   color: white;
   font-weight: bold;
 }
