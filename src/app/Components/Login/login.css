@@ -1,4 +1,4 @@
-.video-background{
+.video-background {
   width: 100%;
 }
 
@@ -6,6 +6,14 @@
   height: 100vh;
   margin-bottom: 7rem;
   /* Adjust height as needed */
+}
+
+.section-divider {
+  border: none;
+  height: 3em;
+  background-color: #333333;
+  margin-top: 0px;
+  width: 100%;
 }
 
 .auth-container {
@@ -167,6 +175,6 @@ button:hover {
   border-radius: 5px;
 }
 
-body{
+body {
   margin: 0px;
 }

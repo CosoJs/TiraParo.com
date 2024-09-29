@@ -9,20 +9,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { loginComponent } from './Components/Login/login';
 import { registroServicios } from './Components/Login/registroServicios';
-import { CardsComponent } from './cards/cards.component';
+import { CardsComponent } from './Components/cards/cards.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     loginComponent,
     CardsComponent,
-    registroServicios // Asegúrate de agregar el componente aquí
+    registroServicios, // Asegúrate de agregar el componente aquí
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
