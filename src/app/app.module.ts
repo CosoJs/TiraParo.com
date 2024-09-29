@@ -8,9 +8,10 @@ import { environment } from '../environments/environment'; // Asegúrate de que 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { loginComponent } from './Components/Login/login';
+import { CardsComponent } from './cards/cards.component';
 
 @NgModule({
-  declarations: [AppComponent, loginComponent],
+  declarations: [AppComponent, loginComponent, CardsComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
