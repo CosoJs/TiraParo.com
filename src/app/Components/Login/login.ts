@@ -58,7 +58,7 @@ export class loginComponent {
           // Guardar UsuarioId en localStorage
           localStorage.setItem('UsuarioId', UsuarioSnap[0].UsuarioID);
 
-          this.navegacion.navigate(['/main'], { state: this.credencial });
+          this.navegacion.navigate(['/servicesregistro'], { state: this.credencial });
         } else {
           console.log('No se encontraron usuarios con esas credenciales');
           alert('No se encontraron usuarios con esas credenciales');
