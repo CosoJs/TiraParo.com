@@ -58,7 +58,9 @@ export class loginComponent {
           // Guardar UsuarioId en localStorage
           localStorage.setItem('UsuarioId', UsuarioSnap[0].UsuarioID);
 
-          this.navegacion.navigate(['/servicesregistro'], { state: this.credencial });
+          this.navegacion.navigate(['/servicesregistro'], {
+            state: this.credencial,
+          });
         } else {
           console.log('No se encontraron usuarios con esas credenciales');
           alert('No se encontraron usuarios con esas credenciales');
@@ -98,7 +100,9 @@ export class loginComponent {
               alert('Registro exitoso');
               // Guardar UsuarioId en localStorage
               localStorage.setItem('UsuarioId', newUser.UsuarioID);
-              this.navegacion.navigate(['/servicesregistro'], { state: this.credencial });
+              this.navegacion.navigate(['/servicesregistro'], {
+                state: this.credencial,
+              });
             })
             .catch((error) => {
               console.error('Error al registrar usuario:', error);

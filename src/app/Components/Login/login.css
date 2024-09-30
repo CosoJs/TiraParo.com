@@ -1,21 +1,31 @@
+/* Video and Background Styling */
 .video-background {
+  display: block;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .fondo {
   height: 100vh;
-  margin-bottom: 7rem;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 4.4rem;
   /* Adjust height as needed */
 }
 
+/* Section Divider */
 .section-divider {
   border: none;
   height: 3em;
   background-color: #333333;
-  margin-top: 0px;
+  margin-top: 10px !important;
+  /* Ensure no margin */
+  padding: 0;
   width: 100%;
 }
 
+/* Auth Container Styling */
 .auth-container {
   position: absolute;
   top: 50%;
@@ -34,6 +44,7 @@
   color: #333;
 }
 
+/* Tabs Styling */
 .tabs button {
   background-color: #c0c0c0;
   /* Default background color for buttons */
@@ -62,6 +73,7 @@
   /* Hover text color */
 }
 
+/* Form Styling */
 form {
   display: flex;
   flex-direction: column;
@@ -115,7 +127,7 @@ button:hover {
   width: 330px;
 }
 
-/* Basic styles for the navbar */
+/* Navbar Styling */
 .navbar {
   position: fixed;
   /* Fixed at the top */
@@ -175,6 +187,7 @@ button:hover {
   border-radius: 5px;
 }
 
+/* Global Body Styling */
 body {
   margin: 0px;
 }
