@@ -1,66 +1,136 @@
-.fatherContainers {
-    margin-top: 5vh;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.card {
+/* Main container for the carousel */
+.carousel-wrapper {
     position: relative;
-    width: 35vw;
-    /* Use viewport width for card dimensions */
-    height: 40vh;
-    /* Use viewport height for card dimensions */
-    background-color: #f2f2f2;
-    border-radius: 0.5em;
+    width: 80%;
+    /* Adjust width as needed */
+    margin: auto;
+    overflow: hidden;
+    height: 70vh;
+    /* Adjust height to your preference */
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    perspective: 1000px;
-    box-shadow: 0 0 0 0.3em #ffffff80;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    margin-bottom: 3vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f8f8f8;
 }
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0.5em 1em rgba(255, 255, 255, 0.2);
-}
-
-.card__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.carousel-container {
+    display: flex;
     height: 100%;
-    padding: 2em;
+}
+
+.slide {
+    display: none;
+    /* Hide all slides by default */
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
     box-sizing: border-box;
-    background-color: #f2f2f2;
-    transform: rotateX(-90deg);
-    transform-origin: bottom;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.card:hover .card__content {
-    transform: rotateX(0deg);
+.slide.active {
+    display: flex;
+    /* Display only the active slide */
 }
 
-.card__title {
-    margin: 0;
-    font-size: 1.5em;
+/* Container that holds both text content and progress bar */
+.slide-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    /* Adjust the text section width */
+    padding-right: 20px;
+    /* Space between text and container edge */
+    margin-right: 20px;
+    /* Add margin-right to create space between text and video */
+}
+
+.slide-content {
+    flex: 1;
+}
+
+.title {
+    font-size: 2.2em;
     color: #333;
-    font-weight: 700;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.card:hover svg {
-    scale: 0;
-}
-
-.card__description {
-    margin: 0.5em 0 0;
-    font-size: 1em;
-    color: #777;
-    line-height: 1.4;
+.description {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.5;
     text-align: justify;
+}
+
+.footnote {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.slide-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    width: 55%;
+    /* Adjust the width of the video/image section */
+}
+
+.image,
+.video-background {
+    max-width: 100%;
+    max-height: 70vh;
+    /* Adjust the height to your preference */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    /* Ensures the video/image fits within the container */
+}
+
+/* Adjust the video styling */
+.video-background {
+    width: 100%;
+    /* Ensure the video covers the full container */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    /* Ensures the video maintains aspect ratio */
+}
+
+/* Adjusted progress bar container to match the text width */
+.progress-bar-container {
+    margin-top: 10px;
+    width: 100%;
+    /* Full width of the text content */
+    height: 4px;
+    /* Adjust the height of the progress bar */
+    display: flex;
+    justify-content: space-between;
+    background-color: #e0e0e0;
+    /* Light grey background for the progress bar */
+    border-radius: 2px;
+}
+
+.progress-bar-segment {
+    flex: 1;
+    height: 100%;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    /* Default segment color */
+    transition: background-color 0.3s ease;
+}
+
+.progress-bar-segment:not(:last-child) {
+    margin-right: 2px;
+    /* Small spacing between segments */
+}
+
+.progress-bar-segment.active {
+    background-color: #ff6801;
+    /* Active segment color */
 }
