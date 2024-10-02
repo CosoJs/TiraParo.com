@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { loginComponent } from './Components/Login/login';
 import { registroServicios } from './Components/Login/registroServicios';
 import { CardsComponent } from './Components/cards/cards.component';
+import { DevsComponent } from './devs/devs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     loginComponent,
     CardsComponent,
-    registroServicios, // Asegúrate de agregar el componente aquí
+    registroServicios,
+    DevsComponent, // Asegúrate de agregar el componente aquí
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
