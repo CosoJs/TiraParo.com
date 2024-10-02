@@ -1,11 +1,11 @@
 /* Main container for the carousel */
 .carousel-wrapper {
     position: relative;
-    width: 80%;
+    width: 75%;
     /* Adjust width as needed */
     margin: auto;
     overflow: hidden;
-    height: 70vh;
+    height: 50vh;
     /* Adjust height to your preference */
     display: flex;
     align-items: center;
@@ -13,6 +13,9 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #f8f8f8;
+    margin-bottom: 150px;
+    margin-top: 150px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .carousel-container {
