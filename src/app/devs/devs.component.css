@@ -1,0 +1,170 @@
+/**/
+
+/* Container for all cards */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Main card styling */
+.card {
+    --font-color: #111;
+    --font-color-sub: #7e7e7e;
+    --main-color: #111;
+    width: 200px;
+    height: 350px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card1 {
+    background: #fff;
+    border: 2px solid #000;
+    /* Orange border for the first card */
+}
+
+.card2 {
+    background: #fff;
+    border: 2px solid #000;
+}
+
+.card-photo {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-photo1 {
+    background-image: url('k8.webp');
+    /* Replace with your actual image path */
+}
+
+.card-photo2 {
+    background-image: url('k2.webp');
+    /* Replace with your actual image path */
+}
+
+.card-photo3 {
+    background-image: url('k3.jpg');
+    /* Replace with your actual image path */
+}
+
+.card-photo4 {
+    background-image: url('k4.jpg');
+    /* Replace with your actual image path */
+}
+
+.card-photo5 {
+    background-image: url('k5.webp');
+    /* Replace with your actual image path */
+}
+
+.card-photo6 {
+    background-image: url('k1.jpg');
+    /* Replace with your actual image path */
+}
+
+.card-title {
+    text-align: center;
+    color: var(--font-color);
+    font-size: 18px;
+    font-weight: 600;
+    font-family: Arial, sans-serif;
+}
+
+.card-title span {
+    font-size: 14px;
+    color: var(--font-color-sub);
+}
+
+/* Social media buttons container */
+.card-socials {
+    display: flex;
+    height: 0;
+    opacity: 0;
+    margin-top: 10px;
+    gap: 10px;
+    transition: opacity 0.5s, height 0.5s;
+}
+
+.card:hover>.card-socials {
+    opacity: 1;
+    height: 45px;
+    /* Adjust height to fit the increased icon size */
+}
+
+.card-socials-btn {
+    width: 64px;
+    height: 64px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth transition effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    /* Rounded corners for hover effect */
+}
+
+/* Icon inside the social button */
+.card-socials-btn svg {
+    width: 60%;
+    /* Adjust icon size relative to the button */
+    height: 60%;
+    /* Adjust icon size relative to the button */
+    fill: var(--main-color);
+    /* Default icon color */
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    /* Shadow effect on card hover */
+}
+
+/* Hover effects for individual social buttons */
+.card-socials-btn.facebook:hover {
+    background-color: #000;
+    /* Facebook blue */
+}
+
+.card-socials-btn.github:hover {
+    background-color: #000;
+    /* GitHub dark gray */
+}
+
+.card-socials-btn.linkedin:hover {
+    background-color: #000;
+    /* LinkedIn blue */
+}
+
+.card-socials-btn:hover svg {
+    fill: #fff;
+    /* Change icon color to white on hover */
+}
+
+/* Optional: style adjustments for hover */
+.card-photo:hover {
+    transform: scale(1.1);
+    /* Slightly increase the image size on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Add a shadow effect */
+}
