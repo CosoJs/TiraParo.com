@@ -11,16 +11,17 @@
   margin: 0;
   padding: 0;
   margin-bottom: 4.4rem;
-  /* Adjust height as needed */
+  /* This can remain as is, or convert to % if needed */
 }
 
 /* Section Divider */
 .section-divider {
   border: none;
   height: 3em;
+  /* Using em for height */
   background-color: #333333;
-  margin-top: 10px !important;
-  /* Ensure no margin */
+  margin-top: 6.6rem;
+  /* Convert to vh for responsive spacing */
   padding: 0;
   width: 100%;
 }
@@ -30,17 +31,17 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 200px;
-  padding: 30px;
-  /* Increased padding for uniform spacing */
-  border-radius: 15px;
-  /* Smoother rounded corners */
+  left: 12.5%;
+  /* Use percentage for horizontal positioning */
+  padding: 2rem;
+  /* Convert padding to rem */
+  border-radius: 0.9375rem;
+  /* 15px to rem (15px = 1.5rem assuming base font-size = 16px) */
   background-color: rgba(255, 255, 255, 0.85);
-  /* Slightly more opaque for better readability */
-  width: 350px;
-  /* Slightly wider */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  /* Softer, more defined shadow */
+  width: 21.875rem;
+  /* 350px to rem */
+  box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.15);
+  /* Adjusted to rem */
   color: #333;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -48,30 +49,27 @@
 /* Tabs Styling */
 .tabs button {
   background-color: #c0c0c0;
-  /* Default background color for buttons */
   border: none;
-  padding: 10px 15px;
+  padding: 0.625rem 0.9375rem;
+  /* 10px 15px to rem */
   cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
+  font-size: 1rem;
+  /* 16px to rem */
+  border-radius: 0.3125rem;
+  /* 5px to rem */
   transition: background-color 0.3s, color 0.3s;
   color: #333;
-  /* Default text color */
 }
 
 .tabs button.active {
   background-color: #ff6801;
-  /* Active button background color */
   color: white;
-  /* Active button text color */
   font-weight: bold;
 }
 
 .tabs button:hover {
   background-color: #D55B09;
-  /* Hover background color */
   color: white;
-  /* Hover text color */
 }
 
 /* Form Styling */
@@ -79,41 +77,47 @@ form {
   display: flex;
   flex-direction: column;
   background: transparent;
-  /* Make the form background transparent */
-  padding: 20px;
-  border-radius: 10px;
+  padding: 1.25rem;
+  /* 20px to rem */
+  border-radius: 0.625rem;
+  /* 10px to rem */
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
+  /* 15px to rem */
 }
 
 label {
-  margin-bottom: 5px;
+  margin-bottom: 0.3125rem;
+  /* 5px to rem */
   font-weight: 600;
-  /* Slightly bolder text */
 }
 
 input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 0.625rem;
+  /* 10px to rem */
+  border: 0.0625rem solid #ccc;
+  /* 1px to rem */
+  border-radius: 0.3125rem;
+  /* 5px to rem */
   width: 100%;
   transition: border-color 0.3s;
 }
 
 input:focus {
   border-color: #ff6801;
-  /* Change border color on focus */
   outline: none;
 }
 
 button {
-  padding: 10px;
+  padding: 0.625rem;
+  /* 10px to rem */
   background-color: #ff6801;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
+  /* 5px to rem */
   cursor: pointer;
   transition: background-color 0.3s;
   font-weight: bold;
@@ -125,52 +129,48 @@ button:hover {
 
 .submit {
   background-color: #ff6801;
-  width: 330px;
+  width: 20.625rem;
+  /* 330px to rem */
 }
 
 /* Navbar Styling */
 .navbar {
   position: fixed;
-  /* Fixed at the top */
   top: 0;
   width: 100%;
-  /* Full width */
   background-color: #333;
-  /* Dark background */
   color: white;
-  padding: 10px 0;
+  padding: 0.625rem 0;
+  /* 10px to rem */
   z-index: 1000;
-  /* Ensures it stays above other elements */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  /* Subtle shadow effect */
+  box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.2);
+  /* Adjusted to rem */
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  /* Adjust the maximum width */
+  max-width: 75rem;
+  /* 1200px to rem */
   margin: 0 auto;
-  /* Center the container */
-  padding: 0 20px;
-  /* Add some padding */
+  padding: 0 1.25rem;
+  /* 20px to rem */
 }
 
 .nav-logo {
   text-decoration: none;
   color: white;
-  font-size: 24px;
+  font-size: 1.5rem;
+  /* 24px to rem */
   font-weight: bold;
 }
 
 .nav-links {
   list-style: none;
-  /* Remove bullet points */
   display: flex;
-  /* Display links in a row */
-  gap: 20px;
-  /* Add space between links */
+  gap: 1.25rem;
+  /* 20px to rem */
   margin: 0;
   padding: 0;
 }
@@ -178,17 +178,18 @@ button:hover {
 .nav-links li a {
   text-decoration: none;
   color: white;
-  padding: 5px 10px;
+  padding: 0.3125rem 0.625rem;
+  /* 5px 10px to rem */
   transition: background-color 0.3s;
 }
 
 .nav-links li a:hover {
   background-color: #555;
-  /* Change background on hover */
-  border-radius: 5px;
+  border-radius: 0.3125rem;
+  /* 5px to rem */
 }
 
 /* Global Body Styling */
 body {
-  margin: 0px;
+  margin: 0;
 }
