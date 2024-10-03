@@ -31,7 +31,9 @@ export class CardsComponent {
       Trabajamos bajo un modelo sencillo y transparente: solo cobramos un 5% sobre el costo de tu mano de obra al mes, sin incluir gastos adicionales como materiales o transporte. 
       <br>
       <br>
-      Esto significa que solo pagas por los trabajos que realizas, y siempre mantienes el control total sobre tu presupuesto y tarifas.`,
+      Esto significa que solo pagas por los trabajos que realizas, y siempre mantienes el control total sobre tu presupuesto y tarifas.
+      <br>
+      <br>`,
       footnote: '',
       image: '',
       videoUrl:
