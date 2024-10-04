@@ -12,6 +12,7 @@ import { registroServicios } from './Components/Login/registroServicios';
 import { CardsComponent } from './Components/cards/cards.component';
 import { DevsComponent } from './Components/devs/devs.component';
 import { SectionComponent } from './Components/section/section.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SectionComponent } from './Components/section/section.component';
     registroServicios,
     DevsComponent,
     SectionComponent,
+    FooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
