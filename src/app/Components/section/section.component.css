@@ -1,0 +1,33 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
+
+.text-block {
+    flex: 1;
+    padding: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.image-block {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-block img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+}

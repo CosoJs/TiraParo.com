@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import { loginComponent } from './Components/Login/login';
 import { registroServicios } from './Components/Login/registroServicios';
 import { CardsComponent } from './Components/cards/cards.component';
-import { DevsComponent } from './devs/devs.component';
+import { DevsComponent } from './Components/devs/devs.component';
+import { SectionComponent } from './Components/section/section.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DevsComponent } from './devs/devs.component';
     loginComponent,
     CardsComponent,
     registroServicios,
-    DevsComponent, // Asegúrate de agregar el componente aquí
+    DevsComponent,
+    SectionComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
