@@ -3,7 +3,7 @@
         <div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentSlide">
             <div class="slide-content-wrapper" *ngIf="i === currentSlide">
                 <div class="slide-content">
-                    <h1 class="title">{{ slide.title }}</h1>
+                    <h1 class="title" style="color: #ff6801;">{{ slide.title }}</h1>
                     <p class="description" [innerHTML]="slide.description"></p>
                     <p class="footnote">{{ slide.footnote }}</p>
                 </div>

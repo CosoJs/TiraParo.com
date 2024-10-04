@@ -13,6 +13,7 @@ import { CardsComponent } from './Components/cards/cards.component';
 import { DevsComponent } from './Components/devs/devs.component';
 import { SectionComponent } from './Components/section/section.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { CirclesComponent } from './Components/circles/circles.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FooterComponent } from './Components/footer/footer.component';
     DevsComponent,
     SectionComponent,
     FooterComponent,
+    CirclesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
