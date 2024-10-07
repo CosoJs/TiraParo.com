@@ -1,12 +1,10 @@
-/* Main container for the carousel */
 .carousel-wrapper {
     position: relative;
-    width: 80%;
-    /* Adjust width as needed */
+    width: 90%;
+    max-width: 1200px;
     margin: auto;
     overflow: hidden;
-    height: 70vh;
-    /* Adjust height to your preference */
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,12 +18,12 @@
 
 .carousel-container {
     display: flex;
-    height: 100%;
+    min-height: 100%;
+    transition: transform 0.5s ease;
 }
 
 .slide {
     display: none;
-    /* Hide all slides by default */
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -35,19 +33,15 @@
 
 .slide.active {
     display: flex;
-    /* Display only the active slide */
+    flex-direction: row;
 }
 
-/* Container that holds both text content and progress bar */
 .slide-content-wrapper {
     display: flex;
     flex-direction: column;
     width: 45%;
-    /* Adjust the text section width */
     padding-right: 20px;
-    /* Space between text and container edge */
     margin-right: 20px;
-    /* Add margin-right to create space between text and video */
 }
 
 .slide-content {
@@ -80,42 +74,24 @@
     display: flex;
     justify-content: center;
     width: 55%;
-    /* Adjust the width of the video/image section */
 }
 
 .image,
 .video-background {
     max-width: 100%;
     max-height: 70vh;
-    /* Adjust the height to your preference */
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     object-fit: cover;
-    /* Ensures the video/image fits within the container */
 }
 
-/* Adjust the video styling */
-.video-background {
-    width: 100%;
-    /* Ensure the video covers the full container */
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    object-fit: cover;
-    /* Ensures the video maintains aspect ratio */
-}
-
-/* Adjusted progress bar container to match the text width */
 .progress-bar-container {
     margin-top: 10px;
     width: 100%;
-    /* Full width of the text content */
     height: 4px;
-    /* Adjust the height of the progress bar */
     display: flex;
     justify-content: space-between;
     background-color: #e0e0e0;
-    /* Light grey background for the progress bar */
     border-radius: 2px;
 }
 
@@ -124,16 +100,111 @@
     height: 100%;
     cursor: pointer;
     background-color: #e0e0e0;
-    /* Default segment color */
     transition: background-color 0.3s ease;
 }
 
 .progress-bar-segment:not(:last-child) {
     margin-right: 2px;
-    /* Small spacing between segments */
 }
 
 .progress-bar-segment.active {
     background-color: #ff6801;
-    /* Active segment color */
+}
+
+/* Media query para pantallas menores a 700px */
+@media (max-width: 700px) {
+    .slide.active {
+        flex-direction: column;
+    }
+
+    .slide-content-wrapper {
+        width: 100%;
+        margin-right: 0;
+        padding-right: 0;
+    }
+
+    .slide-image {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .title {
+        font-size: 1.8em;
+    }
+
+    .description {
+        font-size: 1em;
+    }
+
+    .footnote {
+        font-size: 0.8em;
+    }
+}
+
+/* Media query para pantallas menores a 480px */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.6em;
+    }
+
+    .description {
+        font-size: 1em;
+    }
+
+    .footnote {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 440px) {
+    .contenedor-del-texto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+    }
+
+    .slide.active {
+        flex-direction: column;
+    }
+
+    .slide-image {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    h1, p {
+        font-size: 1em;
+        margin: 0;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.contenedor-del-texto {
+    margin: 0 auto;
+    padding: 15px;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 300px) {
+    .contenedor-del-texto {
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 0.8em;
+    }
 }

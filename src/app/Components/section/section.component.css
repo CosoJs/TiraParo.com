@@ -31,3 +31,65 @@
     max-width: 400px;
     border-radius: 8px;
 }
+
+@media (max-width: 1200px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 992px) {
+    .row {
+        margin: 40px 0;
+    }
+
+    .text-block {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .reverse {
+        flex-direction: column;
+    }
+
+    .image-block img {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+    .row {
+        margin: 30px 0;
+    }
+
+    .text-block {
+        padding: 10px;
+    }
+
+    .image-block img {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 400px) {
+    .row {
+        margin: 20px 0;
+    }
+
+    .text-block h2 {
+        font-size: 1.5rem;
+    }
+
+    .text-block p {
+        font-size: 0.9rem;
+    }
+
+    .image-block img {
+        max-width: 250px;
+    }
+}
