@@ -1,0 +1,103 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    height: 100%;
+}
+
+.hero-section {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 50px;
+    gap: 15px;
+    /* Gap between the cards */
+}
+
+.card-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Wrap cards in multiple rows if necessary */
+}
+
+.card {
+    position: relative;
+    list-style: none;
+    width: 220px;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.card::before {
+    content: "";
+    display: block;
+    padding-bottom: 150%;
+    width: 100%;
+}
+
+.card-background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.9) saturate(1) contrast(1);
+    transform-origin: bottom;
+    transform: scale(1) translateZ(0);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-background {
+    transform: scale(1.15) translateZ(0);
+}
+
+.card-container:hover .card:not(:hover) {
+    transform: scale(0.9);
+}
+
+.card-container:hover .card:not(:hover) .card-background,
+.card-container:hover .card:not(:hover) .card-category {
+    filter: brightness(0.5) saturate(0) contrast(1.2) blur(10px);
+}
+
+.content {
+    top: 50%;
+    left: 0;
+    padding: 25px;
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+.card-category {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.card-heading {
+    color: #fff;
+    font-size: 25px;
+    line-height: 1;
+    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+}
