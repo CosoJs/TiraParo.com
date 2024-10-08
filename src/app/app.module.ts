@@ -14,6 +14,7 @@ import { DevsComponent } from './Components/devs/devs.component';
 import { SectionComponent } from './Components/section/section.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { CirclesComponent } from './Components/circles/circles.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CirclesComponent } from './Components/circles/circles.component';
     SectionComponent,
     FooterComponent,
     CirclesComponent,
+    SidebarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
