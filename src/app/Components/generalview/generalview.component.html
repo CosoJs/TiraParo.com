@@ -1,0 +1,24 @@
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Searchbar -->
+        <div class="searchbar">
+            <app-searchbar></app-searchbar>
+        </div>
+
+        <!-- Short Categories (Tarjetas) -->
+        <div class="cards-container">
+            <app-shortcategories></app-shortcategories>
+        </div>
+
+        <!-- Free Space -->
+        <div class="free-space">
+            FREE SPACE
+        </div>
+    </div>
+</div>

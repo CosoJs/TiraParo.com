@@ -17,7 +17,6 @@ body {
 
 .hero-section {
     display: flex;
-    min-height: 100vh;
     align-items: center;
     justify-content: center;
     background-color: #fff;
@@ -28,7 +27,7 @@ body {
 
 .card-container {
     display: flex;
-    gap: 15px;
+    gap: 5px;
     justify-content: center;
     flex-wrap: wrap;
     /* Wrap cards in multiple rows if necessary */
@@ -37,7 +36,7 @@ body {
 .card {
     position: relative;
     list-style: none;
-    width: 220px;
+    width: 205px;
     transition: transform 0.3s ease;
     overflow: hidden;
     border-radius: 20px;
