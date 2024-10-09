@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../Class/clasesSimples';
 import { take } from 'rxjs/operators';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'login',
   templateUrl: './login.html',
@@ -36,7 +38,13 @@ export class loginComponent {
 
   login() {
     if (this.usuario.trim() === '' || this.contrasena.trim() === '') {
-      alert('Por favor, ingrese usuario y contraseña válidos.');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Ingrese usuario y contraseña válidos',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
 
@@ -50,8 +58,13 @@ export class loginComponent {
       .subscribe((UsuarioSnap: any) => {
         if (UsuarioSnap.length !== 0) {
           console.log('Usuario encontrado:', UsuarioSnap);
-          alert('Acceso Exitoso');
-
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Inicio Exitoso',
+            showConfirmButton: false,
+            timer: 1500,
+          });
           // Asigna UsuarioSnap a credencial
           this.credencial = UsuarioSnap[0];
 
@@ -63,14 +76,26 @@ export class loginComponent {
           });
         } else {
           console.log('No se encontraron usuarios con esas credenciales');
-          alert('No se encontraron usuarios con esas credenciales');
+          Swal.fire({
+            position: 'top-end',
+            icon: 'question',
+            title: 'No se ha encotrado el usuario',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   }
 
   register() {
     if (this.newUsuario.trim() === '' || this.newContrasena.trim() === '') {
-      alert('Por favor, ingrese un nombre de usuario y contraseña válidos.');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Ingrese un usuario o contraseña validos',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return;
     }
 
@@ -97,7 +122,13 @@ export class loginComponent {
           setDoc(userDocRef, JSON.parse(JSON.stringify(newUser)))
             .then(() => {
               console.log('Usuario registrado con éxito');
-              alert('Registro exitoso');
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success', // Corregido: 'warning' en lugar de 'warinig'
+                title: 'Registro exitoso',
+                showConfirmButton: false,
+                timer: 1500,
+              });
               // Guardar UsuarioId en localStorage
               localStorage.setItem('UsuarioId', newUser.UsuarioID);
               this.navegacion.navigate(['/servicesregistro'], {
@@ -106,11 +137,23 @@ export class loginComponent {
             })
             .catch((error) => {
               console.error('Error al registrar usuario:', error);
-              alert('Error al registrar usuario');
+              Swal.fire({
+                position: 'top-end',
+                icon: 'warning', // Corregido: 'warning' en lugar de 'warinig'
+                title: 'Error al registrarse',
+                showConfirmButton: false,
+                timer: 1500,
+              });
             });
         } else {
           console.log('El nombre de usuario ya está en uso');
-          alert('El nombre de usuario ya está en uso');
+          Swal.fire({
+            position: 'top-end',
+            icon: 'warning', // Corregido: 'warning' en lugar de 'warinig'
+            title: 'El nombre de usuario ya esta en uso',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
   }
