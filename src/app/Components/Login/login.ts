@@ -58,7 +58,7 @@ export class loginComponent {
           // Guardar UsuarioId en localStorage
           localStorage.setItem('UsuarioId', UsuarioSnap[0].UsuarioID);
 
-          this.navegacion.navigate(['/servicesregistro'], {
+          this.navegacion.navigate(['/home'], {
             state: this.credencial,
           });
         } else {
