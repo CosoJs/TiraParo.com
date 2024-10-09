@@ -1,0 +1,70 @@
+/* Contenedor principal */
+.container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    /* Sidebar toma el espacio justo y el resto es para el contenido */
+    transition: grid-template-columns 0.3s ease;
+    /* Suave transición cuando cambia el ancho de la sidebar */
+    height: 100vh;
+    /* Ocupa todo el alto de la pantalla */
+}
+
+.sidebar {
+    padding: 20px;
+    width: 80px;
+    /* Sidebar contraída */
+    transition: width 0.3s ease;
+    /* Suave transición para expandir o contraer */
+}
+
+.sidebar.expanded {
+    width: 150px;
+    /* Sidebar expandida */
+}
+
+/* Contenido principal */
+.main-content {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    /* Tres filas: searchbar, cards, free space */
+    padding: 20px;
+    transition: all 0.3s ease;
+    /* Suave ajuste del contenido cuando cambia el tamaño de la sidebar */
+}
+
+/* Searchbar */
+.searchbar {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Tarjetas */
+.cards {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Free Space */
+.free-space {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: absolute;
+        z-index: 1000;
+        left: -250px;
+        height: 100%;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.expanded {
+        left: 0;
+    }
+}

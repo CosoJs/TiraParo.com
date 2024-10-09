@@ -14,7 +14,7 @@ body {
 /* Container for input and SVG */
 .container-input {
     position: relative;
-    width: 500px;
+    width: 90%;
     /* Set a fixed width for the container */
     display: flex;
     align-items: center;
