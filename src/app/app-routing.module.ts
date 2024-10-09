@@ -6,6 +6,7 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { SearchbarComponent } from './Components/searchbar/searchbar.component';
 import { ShortcategoriesComponent } from './Components/shortcategories/shortcategories.component';
 import { GeneralviewComponent } from './Components/generalview/generalview.component';
+import { DevsComponent } from './Components/devs/devs.component';
 
 const routes: Routes = [
   { path: '', component: loginComponent },
