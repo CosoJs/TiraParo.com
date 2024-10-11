@@ -80,8 +80,10 @@
 
         <!-- Add other menu items similarly... -->
 
-        <li [class.active]="activeItem === 'Logout'" (mouseover)="highlightItem('Logout')"
-            (mouseout)="removeHighlight()" (click)="onNavItemClicked('Logout')">
+        <li (submit)="logginout()" [class.active]="activeItem === 'Logout'" 
+            (mouseover)="highlightItem('Logout')"
+            (mouseout)="removeHighlight()" 
+            (click)="logginout(); onNavItemClicked('Logout')">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                 class="bi bi-door-closed-fill" viewBox="0 0 16 16">
                 <path

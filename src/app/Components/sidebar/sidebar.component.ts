@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,6 +9,9 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
   isHovered: boolean = false; // Variable to track hover state
   activeItem: string | null = null; // Tracks the currently highlighted item
+
+  constructor(private navegacion: Router){
+  }
 
   // Called when mouse enters the sidebar
   onMouseEnter() {
@@ -32,5 +36,10 @@ export class SidebarComponent {
   // Called when a navigation item is clicked
   onNavItemClicked(item: string) {
     console.log(`${item} clicked!`); // Corrected string interpolation
+  }
+
+  logginout() {
+    localStorage.removeItem('UsuarioId');
+    this.navegacion.navigate(['/']);
   }
 }
