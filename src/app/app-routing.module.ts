@@ -7,11 +7,12 @@ import { SearchbarComponent } from './Components/searchbar/searchbar.component';
 import { ShortcategoriesComponent } from './Components/shortcategories/shortcategories.component';
 import { GeneralviewComponent } from './Components/generalview/generalview.component';
 import { DevsComponent } from './Components/devs/devs.component';
+import { loginguard } from './Components/guards/login.guard';
 
 const routes: Routes = [
   { path: '', component: loginComponent },
-  { path: 'servicesregistro', component: registroServicios },
-  { path: 'home', component: GeneralviewComponent },
+  { path: 'servicesregistro', component: registroServicios, canActivate: [loginguard]},
+  { path: 'home', component: GeneralviewComponent, canActivate: [loginguard]},
 ];
 
 @NgModule({
