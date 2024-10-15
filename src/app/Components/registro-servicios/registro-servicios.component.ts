@@ -2,14 +2,24 @@ import { Component } from '@angular/core';
 import { Servicios } from '../../Class/clasesSimples';
 import { Firestore, collection, collectionData, DocumentData } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { getDoc, doc } from "firebase/firestore";
 
 @Component({
-  selector: 'registroServicios',
-  templateUrl: './registroServicios.html',
-  styleUrls: ['./registroServicios.css'],
+  selector: 'app-registro-servicios',
+  templateUrl: './registro-servicios.component.html',
+  styleUrl: './registro-servicios.component.css'
 })
+export class RegistroServiciosComponent {
+  isSidebarExpanded: boolean = false;
 
-export class registroServicios {
+  expandSidebar() {
+    this.isSidebarExpanded = true;
+  }
+
+  collapseSidebar() {
+    this.isSidebarExpanded = false;
+  }
+
   categorias: string[] = []; // Solo almacenamos los ids como nombres de categoría
   serviciosFiltrados: string[] = []; // Solo almacenamos los ids como nombres de servicio
   selectedCategoria: string = '';
@@ -22,7 +32,7 @@ export class registroServicios {
 
   // Método para cargar los nombres de los documentos de la colección 'Categorias'
   cargarCategorias() {
-    const categoriasRef = collection(this.firestore, 'Categorias');
+    const categoriasRef = collection(this.firestore, 'Servicios');
 
     collectionData(categoriasRef, { idField: 'id' }).subscribe((categoriasSnap: DocumentData[]) => {
       this.categorias = categoriasSnap.map(categoria => categoria['id']); // Usamos el id de los documentos como nombre
@@ -30,15 +40,26 @@ export class registroServicios {
   }
 
   // Método que se ejecuta cuando cambia la categoría seleccionada
-onCategoriaChange() {
-  if (this.selectedCategoria) {
-    const serviciosRef = collection(this.firestore, `Categorias/${this.selectedCategoria}/services`);
+  onCategoriaChange() {
+    if (this.selectedCategoria) {
+      const serviciosDocRef = doc(this.firestore, `Servicios/${this.selectedCategoria}`);
 
-    collectionData(serviciosRef, { idField: 'id' }).subscribe((serviciosSnap: DocumentData[]) => {
-      this.serviciosFiltrados = serviciosSnap.map(servicio => servicio['id']); // Usamos el id de los servicios como nombre
-    });
+      getDoc(serviciosDocRef).then((docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+
+          // Filtramos los campos para obtener solo los nombres de los campos excepto 'Image'
+          this.serviciosFiltrados = Object.keys(data).filter(key => key !== 'Image'); // Obtenemos solo los nombres de los campos
+        } else {
+          console.log("No such document!");
+        }
+      }).catch((error) => {
+        console.error("Error getting document: ", error);
+      });
+    }
   }
-}
+
+  
 
 
   // Método para guardar el servicio en Firebase (por implementar)

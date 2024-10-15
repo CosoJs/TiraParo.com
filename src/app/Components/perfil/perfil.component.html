@@ -1,0 +1,37 @@
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Circular profile image with upload functionality -->
+        <div style="display: flex; justify-content: center; align-items: center; height: 20vh;">
+            <div (click)="onProfilePicClick()" style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; border: 4px solid #ccc; cursor: pointer;">
+                <img *ngIf="userProfileImageUrl" [src]="userProfileImageUrl" alt="User Profile" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+        <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;" />
+
+        <!-- User Info Form -->
+        <div class="user-info">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" [(ngModel)]="usuario" />
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" [(ngModel)]="nombre" />
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" [(ngModel)]="contrasena" />
+
+            <label for="biografia">Biografía:</label>
+            <textarea id="biografia" [(ngModel)]="biografia"></textarea>
+
+            <label for="intereses">Intereses:</label>
+            <input type="text" id="intereses" [(ngModel)]="intereses" />
+
+            <button (click)="guardarDatos()">Guardar Cambios</button>
+        </div>
+    </div>
+</div>
