@@ -1,0 +1,36 @@
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h2>Registro de Servicios</h2>
+    
+      <!-- Selección de Categorías -->
+      <div class="form-group">
+        <label for="categorias">Categorías:</label>
+        <select id="categorias" [(ngModel)]="selectedCategoria" (change)="onCategoriaChange()">
+          <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+        </select>
+      </div>
+    
+      <!-- Selección de Servicios -->
+      <div class="form-group">
+        <label for="servicios">Servicios:</label>
+        <select id="servicios" [(ngModel)]="selectedServicio">
+          <option *ngFor="let servicio of serviciosFiltrados" [value]="servicio">{{ servicio }}</option>
+        </select>
+      </div>
+    
+      <!-- Descripción del Servicio -->
+      <div class="form-group">
+        <label for="descripcion">Descripción del Servicio:</label>
+        <textarea id="descripcion" [(ngModel)]="descripcionServicio" placeholder="Describe el servicio"></textarea>
+      </div>
+    
+      <!-- Botón para Guardar -->
+      <button (click)="guardarServicio()">Guardar Servicio</button>
+    </div>
+</div>

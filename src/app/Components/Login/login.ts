@@ -131,7 +131,7 @@ export class loginComponent {
               });
               // Guardar UsuarioId en localStorage
               localStorage.setItem('UsuarioId', newUser.UsuarioID);
-              this.navegacion.navigate(['/servicesregistro'], {
+              this.navegacion.navigate(['/home'], {
                 state: this.credencial,
               });
             })

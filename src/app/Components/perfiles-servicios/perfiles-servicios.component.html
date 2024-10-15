@@ -1,0 +1,15 @@
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Short Categories (Tarjetas) esto en un futuro se cambiara para que en ves que salgan
+         todas las categorias solo salgan las categorias en las que tiene un perfil-->
+        <div class="cards-container">
+            <app-shortcategories></app-shortcategories>
+        </div>
+    </div>
+</div>
