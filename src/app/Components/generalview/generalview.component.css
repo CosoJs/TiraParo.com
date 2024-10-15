@@ -68,3 +68,93 @@
         left: 0;
     }
 }
+
+/* Para pantallas medianas o tablets (ancho máximo de 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        /* La sidebar ocupa toda la pantalla en dispositivos más pequeños */
+    }
+
+    .sidebar {
+        position: absolute;
+        z-index: 1000;
+        left: -200px; /* Inicialmente fuera de la vista */
+        width: 200px;
+        transition: left 0.3s ease;
+        /* Cambiar el tamaño de la barra lateral para dispositivos medianos */
+    }
+
+    .sidebar.expanded {
+        left: 0;
+    }
+
+    .main-content {
+        padding-left: 20px;
+        /* Asegúrate de que el contenido se ajuste cuando la barra lateral se expande */
+    }
+}
+
+/* Para pantallas pequeñas (smartphones - ancho máximo de 768px) */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        /* Elimina la estructura de columnas y muestra todo en una sola columna */
+    }
+
+    .sidebar {
+        position: absolute;
+        z-index: 1000;
+        left: -250px; /* Sidebar oculta fuera de la pantalla */
+        height: 100vh;
+        width: 250px;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.expanded {
+        left: 0; /* Sidebar visible en pantallas pequeñas cuando está expandida */
+    }
+
+    .main-content {
+        padding-left: 0;
+        /* No hay espacio lateral en pantallas pequeñas */
+    }
+
+    .searchbar,
+    .cards,
+    .free-space {
+        padding: 5px;
+        /* Reduce el padding para contenido en pantallas pequeñas */
+    }
+}
+
+/* Para pantallas extra pequeñas (ancho máximo de 480px) */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 200px;
+        /* Ajustar la barra lateral para pantallas muy pequeñas */
+    }
+
+    .main-content {
+        padding: 5px;
+        /* Reducir el padding en contenido para pantallas extra pequeñas */
+    }
+
+    .searchbar,
+    .cards,
+    .free-space {
+        padding: 5px;
+        font-size: 14px;
+        /* Reducir el tamaño de texto y padding para adaptarse a pantallas pequeñas */
+    }
+}
+
+/* Margen al contenido principal para que no se solape con la sidebar no expandida */
+.main-content {
+    margin-left: 1.5rem; /* Margen reducido en 1 rem */
+}
+
+/* Ajuste específico para el contenedor del buscador */
+.searchbar {
+    margin-left: 1.5rem; /* Margen reducido en 1 rem */
+}

@@ -57,3 +57,34 @@ body {
     justify-content: center;
     margin-top: 1rem;
 }
+
+/* Para pantallas grandes (monitores de escritorio) */
+@media (min-width: 1200px) {
+    .container-input {
+        width: 60%;
+    }
+}
+
+/* Para pantallas medianas (tabletas y pantallas más pequeñas) */
+@media (max-width: 1199px) and (min-width: 768px) {
+    .container-input {
+        width: 80%;
+    }
+}
+
+/* Para pantallas pequeñas (teléfonos móviles) */
+@media (max-width: 767px) {
+    .container-input {
+        width: 95%;
+    }
+
+    .input {
+        padding: 10px 0px 10px 35px;
+    }
+
+    .container-input svg {
+        width: 18px;
+        height: 18px;
+        left: 8px;
+    }
+}
