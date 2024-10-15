@@ -1,59 +1,11 @@
 <section class="hero-section">
-    <div class="card-container">
-        <a href="">
-            <div class="card">
-                <div class="card-background"
-                    style="background-image: url('https://images.pexels.com/photos/20087982/pexels-photo-20087982/free-photo-of-atolyesinde-bir-marangoz.jpeg?auto=compress&cs=tinysrgb&w=600');">
-                </div>
-                <div class="content">
-                    <h3 class="card-heading">Construcción, Remodelación</h3>
-                </div>
-            </div>
-        </a>
-
-        <a href="">
-            <div class="card">
-                <div class="card-background"
-                    style="background-image: url('https://images.pexels.com/photos/3822900/pexels-photo-3822900.jpeg?auto=compress&cs=tinysrgb&w=600');">
-                </div>
-                <div class="content">
-                    <h3 class="card-heading">Mantenimiento, Reparación</h3>
-                </div>
-            </div>
-        </a>
-
-        <a href="">
-            <div class="card">
-                <div class="card-background"
-                    style="background-image: url('https://images.pexels.com/photos/5691590/pexels-photo-5691590.jpeg?auto=compress&cs=tinysrgb&w=600');">
-                </div>
-                <div class="content">
-                    <h3 class="card-heading">Técnicos, Especializados</h3>
-                </div>
-            </div>
-        </a>
-
-        <a href="">
-            <div class="card">
-                <div class="card-background"
-                    style="background-image: url('https://disenojardin.com/wp-content/uploads/2017/09/PodaJardinVertical-1024x1365.jpg');">
-                </div>
-                <div class="content">
-                    <h3 class="card-heading">Servicios Generales</h3>
-
-                </div>
-            </div>
-        </a>
-
-        <a href="">
-            <div class="card">
-                <div class="card-background"
-                    style="background-image: url('https://img.freepik.com/fotos-premium/bienestar-mujer-recibiendo-masaje-cabeza-spa_79405-9376.jpg');">
-                </div>
-                <div class="content">
-                    <h3 class="card-heading">Salud y Belleza</h3>
-                </div>
-            </div>
-        </a>
+  <div class="card-container">
+    <!-- Itera sobre los servicios obtenidos de Firestore -->
+    <div *ngFor="let servicio of servicios$ | async" class="card" (click)="onCardClick(servicio)">
+      <div class="card-background" [ngStyle]="{'background-image': 'url(' + servicio.Image + ')'}"></div>
+      <div class="content">
+        <h3 class="card-heading">{{ servicio.id }}</h3>
+      </div>
     </div>
+  </div>
 </section>
