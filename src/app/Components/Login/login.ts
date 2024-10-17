@@ -11,7 +11,6 @@ import {
 import { Router } from '@angular/router';
 import { Usuario } from '../../Class/clasesSimples';
 import { take } from 'rxjs/operators';
-
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,11 +24,11 @@ export class loginComponent {
   newUsuario = '';
   newContrasena = '';
   registerMode = false;
-  credencial: any; // Asegúrate de definir el tipo adecuado si es posible
-  UsuariosColeccion: any; // Define el tipo adecuado
+  credencial: any;
+  UsuariosColeccion: any;
 
   constructor(private firestore: Firestore, private navegacion: Router) {
-    this.UsuariosColeccion = collection(this.firestore, 'users'); // Inicialización correcta
+    this.UsuariosColeccion = collection(this.firestore, 'users');
   }
 
   toggleRegister() {
@@ -65,12 +64,8 @@ export class loginComponent {
             showConfirmButton: false,
             timer: 1500,
           });
-          // Asigna UsuarioSnap a credencial
           this.credencial = UsuarioSnap[0];
-
-          // Guardar UsuarioId en localStorage
           localStorage.setItem('UsuarioId', UsuarioSnap[0].UsuarioID);
-
           this.navegacion.navigate(['/home'], {
             state: this.credencial,
           });
@@ -79,7 +74,7 @@ export class loginComponent {
           Swal.fire({
             position: 'top-end',
             icon: 'question',
-            title: 'No se ha encotrado el usuario',
+            title: 'No se ha encontrado el usuario',
             showConfirmButton: false,
             timer: 1500,
           });
@@ -92,7 +87,7 @@ export class loginComponent {
       Swal.fire({
         position: 'top-end',
         icon: 'warning',
-        title: 'Ingrese un usuario o contraseña validos',
+        title: 'Ingrese un usuario o contraseña válidos',
         showConfirmButton: false,
         timer: 1500,
       });
@@ -108,15 +103,14 @@ export class loginComponent {
       .pipe(take(1))
       .subscribe((UsuarioSnap: any) => {
         if (UsuarioSnap.length === 0) {
-          const newUserId = this.generateRandomString(20);
           const newUser = new Usuario();
-          newUser.UsuarioID = newUserId;
           newUser.Usuario = this.newUsuario;
           newUser.Nombre = this.newUsuario;
           newUser.Contrasena = this.newContrasena;
 
-          // Crear una referencia al documento del usuario con el ID generado
-          const userDocRef = doc(this.firestore, `users/${newUserId}`);
+          // Crear una referencia a un nuevo documento en la colección con un ID generado automáticamente
+          const userDocRef = doc(this.UsuariosColeccion); 
+          newUser.UsuarioID = userDocRef.id; // Asignamos el ID generado automáticamente al usuario
 
           // Guardar el nuevo usuario en Firestore usando setDoc
           setDoc(userDocRef, JSON.parse(JSON.stringify(newUser)))
@@ -124,12 +118,11 @@ export class loginComponent {
               console.log('Usuario registrado con éxito');
               Swal.fire({
                 position: 'top-end',
-                icon: 'success', // Corregido: 'warning' en lugar de 'warinig'
+                icon: 'success',
                 title: 'Registro exitoso',
                 showConfirmButton: false,
                 timer: 1500,
               });
-              // Guardar UsuarioId en localStorage
               localStorage.setItem('UsuarioId', newUser.UsuarioID);
               this.navegacion.navigate(['/home'], {
                 state: this.credencial,
@@ -139,7 +132,7 @@ export class loginComponent {
               console.error('Error al registrar usuario:', error);
               Swal.fire({
                 position: 'top-end',
-                icon: 'warning', // Corregido: 'warning' en lugar de 'warinig'
+                icon: 'warning',
                 title: 'Error al registrarse',
                 showConfirmButton: false,
                 timer: 1500,
@@ -149,23 +142,12 @@ export class loginComponent {
           console.log('El nombre de usuario ya está en uso');
           Swal.fire({
             position: 'top-end',
-            icon: 'warning', // Corregido: 'warning' en lugar de 'warinig'
-            title: 'El nombre de usuario ya esta en uso',
+            icon: 'warning',
+            title: 'El nombre de usuario ya está en uso',
             showConfirmButton: false,
             timer: 1500,
           });
         }
       });
-  }
-
-  generateRandomString(num: number): string {
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < num; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
   }
 }
