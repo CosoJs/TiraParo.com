@@ -13,6 +13,7 @@ export class PerfilComponent implements OnInit {
 
   userProfileImageUrl: string = '';
   usuario: string = '';
+  usuarioOriginal: string = ''; // Nuevo campo para guardar el usuario original
   nombre: string = '';
   contrasena: string = '';
   biografia: string = '';
@@ -36,6 +37,7 @@ export class PerfilComponent implements OnInit {
         const userProfileData = docSnapshot.data();
         this.userProfileImageUrl = userProfileData['Perfil'] || '';
         this.usuario = userProfileData['Usuario'] || '';
+        this.usuarioOriginal = this.usuario; // Guardar el usuario original al cargar
         this.nombre = userProfileData['Nombre'] || '';
         this.contrasena = userProfileData['Contrasena'] || '';
         this.biografia = userProfileData['Biografia'] || '';
@@ -48,7 +50,6 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  // Nueva función para verificar si el usuario está disponible
   async verificarDisponibilidadUsuario(): Promise<boolean> {
     const usuariosRef = collection(this.firestore, 'users');
     const q = query(usuariosRef, where('Usuario', '==', this.usuario));
@@ -62,7 +63,6 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  // Función para validar el nombre
   validarNombre(): boolean {
     const nombreRegex = /^[a-zA-Z\s]+$/; // Solo letras y espacios
     if (this.nombre.trim() === '') {
@@ -75,7 +75,6 @@ export class PerfilComponent implements OnInit {
     return true;
   }
 
-  // Función para mostrar un mensaje de éxito
   mostrarExito(mensaje: string) {
     Swal.fire({
       position: 'top-end',
@@ -86,7 +85,6 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  // Función para mostrar un mensaje de error
   mostrarError(mensaje: string) {
     Swal.fire({
       position: 'top-end',
@@ -99,7 +97,6 @@ export class PerfilComponent implements OnInit {
   }
 
   async guardarDatos() {
-    // Validación antes de guardar
     if (!this.usuario || !this.contrasena) {
       this.mostrarError('Ingrese un usuario o contraseña válidos');
       return;
@@ -109,11 +106,13 @@ export class PerfilComponent implements OnInit {
       return; // Si el nombre no es válido, detener el guardado
     }
 
-    // Verificar disponibilidad del nombre de usuario
-    const esUsuarioDisponible = await this.verificarDisponibilidadUsuario();
-    if (!esUsuarioDisponible) {
-      this.mostrarError('El nombre de usuario ya está en uso. Intente con otro.');
-      return;
+    // Verificar si el nombre de usuario ha cambiado
+    if (this.usuario !== this.usuarioOriginal) {
+      const esUsuarioDisponible = await this.verificarDisponibilidadUsuario();
+      if (!esUsuarioDisponible) {
+        this.mostrarError('El nombre de usuario ya está en uso. Intente con otro.');
+        return;
+      }
     }
 
     const usuarioId = localStorage.getItem('UsuarioId');
