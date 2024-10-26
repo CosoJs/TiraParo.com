@@ -23,6 +23,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { RegistroServiciosComponent } from './Components/registro-servicios/registro-servicios.component';
 import { PerfilesServiciosComponent } from './Components/perfiles-servicios/perfiles-servicios.component';
+import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/servicio-de-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PerfilesServiciosComponent } from './Components/perfiles-servicios/perf
     PerfilComponent,
     RegistroServiciosComponent,
     PerfilesServiciosComponent,
+    ServicioDeUsuariosComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

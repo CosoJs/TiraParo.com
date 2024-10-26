@@ -1,0 +1,16 @@
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <p>servicio-de-usuarios works!</p>
+
+        <!-- Free Space -->
+        <div class="free-space">
+
+        </div>
+    </div>
+</div>

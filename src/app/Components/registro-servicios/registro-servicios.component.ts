@@ -9,7 +9,21 @@ import Swal from 'sweetalert2';
 })
 export class RegistroServiciosComponent {
   isSidebarExpanded: boolean = false;
+  categorias: string[] = [];
+  serviciosFiltrados: string[] = [];
+  selectedCategoria: string = '';
+  selectedServicio: string = '';
+  descripcionServicio: string = '';
+  aniosExperiencia: number | null = null;
+  tareasRealizadas: { nombre: string; imagenes: string[] }[] = []; // Cambiado a un array de objetos
+  horarioTrabajo: string = '';
+  ubicacionServicio: string = '';
+  informacionContacto: string = '';
 
+  constructor(private firestore: Firestore) {
+    this.cargarCategorias();
+  }
+  
   expandSidebar() {
     this.isSidebarExpanded = true;
   }
@@ -18,29 +32,15 @@ export class RegistroServiciosComponent {
     this.isSidebarExpanded = false;
   }
 
-  categorias: string[] = [];
-  serviciosFiltrados: string[] = [];
-  selectedCategoria: string = '';
-  selectedServicio: string = '';
-  descripcionServicio: string = '';
-  nombrePerfil: string = '';
-  aniosExperiencia: number | null = null;
-  tareasRealizadas: string = '';
-  horarioTrabajo: string = '';
-  precioMin: string = '';
-  precioMax: string = '';
-  ubicacionServicio: string = '';
-  informacionContacto: string = '';
-
-  constructor(private firestore: Firestore) {
-    this.cargarCategorias();
-  }
-
   cargarCategorias() {
     const categoriasRef = collection(this.firestore, 'Servicios');
     collectionData(categoriasRef, { idField: 'id' }).subscribe((categoriasSnap: DocumentData[]) => {
       this.categorias = categoriasSnap.map(categoria => categoria['id']);
     });
+  }
+
+  abrirModalTareas() {
+    // Lógica para abrir modal y permitir agregar tareas
   }
 
   onCategoriaChange() {
@@ -62,23 +62,12 @@ export class RegistroServiciosComponent {
   validarCampos(): string | null {
     if (!this.selectedCategoria) return 'categoría';
     if (!this.selectedServicio) return 'servicio';
-    if (!this.nombrePerfil) return 'nombre del perfil';
     if (!this.descripcionServicio) return 'descripción del servicio';
     if (this.aniosExperiencia === null) return 'años de experiencia';
-    if (!this.tareasRealizadas) return 'tareas realizadas';
+    if (this.tareasRealizadas.length === 0) return 'tareas realizadas';
     if (!this.horarioTrabajo) return 'horario de trabajo';
-    if (!this.precioMin || !this.precioMax) return 'rango de precios';
     if (!this.ubicacionServicio) return 'ubicación';
     return null; // Todos los campos están completos
-  }
-
-  async existePerfilConServicio(userId: string, servicio: string): Promise<boolean> {
-    const serviciosCollection = collection(this.firestore, `users/${userId}/Servicios`);
-    const q = query(serviciosCollection, where("servicio", "==", servicio));
-    const querySnapshot = await getDocs(q);
-    
-    // Si hay algún documento que coincida, significa que ya existe un perfil con ese servicio
-    return !querySnapshot.empty;
   }
 
   async guardarServicio() {
@@ -101,30 +90,14 @@ export class RegistroServiciosComponent {
       return;
     }
 
-    // Verificar si ya existe un perfil con el mismo servicio para este usuario
-    const perfilExistente = await this.existePerfilConServicio(userId, this.selectedServicio);
-    if (perfilExistente) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'warning',
-        title: `Ya existe un perfil con el servicio: ${this.selectedServicio}`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      return;
-    }
-
     const servicioData = {
       usuario: userId,
       categoria: this.selectedCategoria,
       servicio: this.selectedServicio,
       descripcion: this.descripcionServicio,
-      nombrePerfil: this.nombrePerfil,
       aniosExperiencia: this.aniosExperiencia,
       tareasRealizadas: this.tareasRealizadas,
       horarioTrabajo: this.horarioTrabajo,
-      precioMin: this.precioMin,
-      precioMax: this.precioMax,
       ubicacion: this.ubicacionServicio,
       contacto: this.informacionContacto,
       timestamp: new Date()

@@ -1,81 +1,65 @@
 <div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
-  <!-- Sidebar -->
-  <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
-      <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+  
+    <div class="main-content">
+        <h2>Registro Perfil de Servicio</h2>
+        
+        <!-- Selección de Categorías -->
+        <div class="form-group">
+          <label for="categorias">Categorías:</label>
+          <select id="categorias" (change)="onCategoriaChange()" [(ngModel)]="selectedCategoria">
+            <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+          </select>
+        </div>
+        
+        <!-- Selección de Servicios -->
+        <div class="form-group">
+          <label for="servicios">Servicios:</label>
+          <select id="servicios" [(ngModel)]="selectedServicio">
+            <option *ngFor="let servicio of serviciosFiltrados" [value]="servicio">{{ servicio }}</option>
+          </select>
+        </div>
+        
+        <!-- Descripción del Servicio -->
+        <div class="form-group">
+            <label for="descripcion">Descripción del Servicio:</label>
+            <textarea id="descripcion" placeholder="Describe el servicio" [(ngModel)]="descripcionServicio"></textarea>
+        </div>
+        
+        <!-- Años de Experiencia -->
+        <div class="form-group">
+            <label for="experiencia">Años de Experiencia:</label>
+            <input id="experiencia" type="number" placeholder="Ejemplo: 5" [(ngModel)]="aniosExperiencia">
+        </div>
+        
+        <!-- Tareas Realizadas -->
+        <div class="form-group">
+            <label for="tareas">Tareas Realizadas:</label>
+            <button (click)="abrirModalTareas()">Agregar Tarea</button>
+        </div>
+        
+        <!-- Horario de Trabajo -->
+        <div class="form-group">
+            <label for="horario">Horario de Trabajo:</label>
+            <input id="horario" type="text" placeholder="Ejemplo: Lunes a Viernes, 9am - 6pm" [(ngModel)]="horarioTrabajo">
+        </div>
+        
+        <!-- Ubicación o Área de Servicio -->
+        <div class="form-group">
+            <label for="ubicacion">Ubicación/Área de Servicio:</label>
+            <input id="ubicacion" type="text" placeholder="Ciudad o zona de cobertura" [(ngModel)]="ubicacionServicio">
+        </div>
+        
+        <!-- Información de Contacto Opcional -->
+        <div class="form-group">
+            <label for="contacto">Información de Contacto:</label>
+            <textarea id="contacto" placeholder="Teléfono o email (opcional)" [(ngModel)]="informacionContacto"></textarea>
+        </div>
+        
+        <!-- Botón para Guardar -->
+        <button (click)="guardarServicio()">Crear Perfil de Servicio</button>
+    </div>
   </div>
-
-  <!-- Main Content -->
-  <div class="main-content">
-      <h2>Registro Perfil de Servicio</h2>
-      
-      <!-- Selección de Categorías -->
-      <div class="form-group">
-        <label for="categorias">Categorías:</label>
-        <select id="categorias" (change)="onCategoriaChange()" [(ngModel)]="selectedCategoria">
-          <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
-        </select>
-      </div>
-      
-      <!-- Selección de Servicios -->
-      <div class="form-group">
-        <label for="servicios">Servicios:</label>
-        <select id="servicios" [(ngModel)]="selectedServicio">
-          <option *ngFor="let servicio of serviciosFiltrados" [value]="servicio">{{ servicio }}</option>
-        </select>
-      </div>
-      
-      <!-- Nombre del Perfil de Servicio -->
-      <div class="form-group">
-          <label for="nombrePerfil">Nombre del Perfil:</label>
-          <input id="nombrePerfil" type="text" placeholder="Nombre del perfil de servicio" [(ngModel)]="nombrePerfil">
-      </div>
-      
-      <!-- Descripción del Servicio -->
-      <div class="form-group">
-          <label for="descripcion">Descripción del Servicio:</label>
-          <textarea id="descripcion" placeholder="Describe el servicio" [(ngModel)]="descripcionServicio"></textarea>
-      </div>
-      
-      <!-- Años de Experiencia -->
-      <div class="form-group">
-          <label for="experiencia">Años de Experiencia:</label>
-          <input id="experiencia" type="number" placeholder="Ejemplo: 5" [(ngModel)]="aniosExperiencia">
-      </div>
-      
-      <!-- Tareas Realizadas -->
-      <div class="form-group">
-          <label for="tareas">Tareas Realizadas:</label>
-          <textarea id="tareas" placeholder="Lista de tareas específicas" [(ngModel)]="tareasRealizadas"></textarea>
-      </div>
-      
-      <!-- Horario de Trabajo -->
-      <div class="form-group">
-          <label for="horario">Horario de Trabajo:</label>
-          <input id="horario" type="text" placeholder="Ejemplo: Lunes a Viernes, 9am - 6pm" [(ngModel)]="horarioTrabajo">
-      </div>
-      
-      <!-- Rango de Precios -->
-      <div class="form-group">
-          <label for="precioMin">Rango de Precios:</label>
-          <div>
-              <input id="precioMin" type="text" placeholder="Mínimo" [(ngModel)]="precioMin">
-              <input id="precioMax" type="text" placeholder="Máximo" [(ngModel)]="precioMax">
-          </div>
-      </div>
-      
-      <!-- Ubicación o Área de Servicio -->
-      <div class="form-group">
-          <label for="ubicacion">Ubicación/Área de Servicio:</label>
-          <input id="ubicacion" type="text" placeholder="Ciudad o zona de cobertura" [(ngModel)]="ubicacionServicio">
-      </div>
-      
-      <!-- Información de Contacto Opcional -->
-      <div class="form-group">
-          <label for="contacto">Información de Contacto:</label>
-          <input id="contacto" type="text" placeholder="Teléfono o email (opcional)" [(ngModel)]="informacionContacto">
-      </div>
-      
-      <!-- Botón para Guardar -->
-      <button (click)="guardarServicio()">Crear Perfil de Servicio</button>
-  </div>
-</div>
+  
