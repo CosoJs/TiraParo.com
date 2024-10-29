@@ -43,3 +43,23 @@
     background-color: #0056b3;
   }
   
+
+  .tareas-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .tarea-card {
+    width: 200px; /* Ajusta el tamaño de acuerdo a tus necesidades */
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Firestore, collection, collectionData, DocumentData, doc, setDoc, getDocs, writeBatch, query, where, getDoc } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { TareaModalComponent } from '../tarea-modal/tarea-modal.component';  // Importa el modal
 
 @Component({
   selector: 'app-registro-servicios',
@@ -15,14 +17,20 @@ export class RegistroServiciosComponent {
   selectedServicio: string = '';
   descripcionServicio: string = '';
   aniosExperiencia: number | null = null;
-  tareasRealizadas: { nombre: string; imagenes: string[] }[] = []; // Cambiado a un array de objetos
+  // Define el tipo de datos que esperas para tareas
+  tareasRealizadas: { nombre: string; descripcion: string; precio: number }[] = [];
   horarioTrabajo: string = '';
   ubicacionServicio: string = '';
   informacionContacto: string = '';
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, public dialog: MatDialog) {
     this.cargarCategorias();
+    this.cargarTareasRealizadas();
   }
+  
+  cargarTareasRealizadas() {
+    this.tareasRealizadas = JSON.parse(localStorage.getItem('tareasRealizadas') || '[]');
+  }  
   
   expandSidebar() {
     this.isSidebarExpanded = true;
@@ -39,9 +47,33 @@ export class RegistroServiciosComponent {
     });
   }
 
-  abrirModalTareas() {
-    // Lógica para abrir modal y permitir agregar tareas
+  abrirModalTareas(): void {
+    const dialogRef = this.dialog.open(TareaModalComponent);
+  
+    dialogRef.afterClosed().subscribe((nuevaTarea) => {
+      if (nuevaTarea) {
+        this.tareasRealizadas.push(nuevaTarea);
+        localStorage.setItem('tareasRealizadas', JSON.stringify(this.tareasRealizadas));
+      }
+    });
+  }  
+
+  editarTarea(tarea: any): void {
+    const dialogRef = this.dialog.open(TareaModalComponent, {
+      data: tarea // Pasa la tarea al modal para edición
+    });
+  
+    dialogRef.afterClosed().subscribe((tareaEditada) => {
+      if (tareaEditada) {
+        const index = this.tareasRealizadas.findIndex(t => t.nombre === tarea.nombre);
+        if (index !== -1) {
+          this.tareasRealizadas[index] = tareaEditada;
+          localStorage.setItem('tareasRealizadas', JSON.stringify(this.tareasRealizadas));
+        }
+      }
+    });
   }
+  
 
   onCategoriaChange() {
     if (this.selectedCategoria) {

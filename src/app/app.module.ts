@@ -24,6 +24,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { RegistroServiciosComponent } from './Components/registro-servicios/registro-servicios.component';
 import { PerfilesServiciosComponent } from './Components/perfiles-servicios/perfiles-servicios.component';
 import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/servicio-de-usuarios.component';
+import { TareaModalComponent } from './Components/tarea-modal/tarea-modal.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,8 +45,9 @@ import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/s
     RegistroServiciosComponent,
     PerfilesServiciosComponent,
     ServicioDeUsuariosComponent,
+    TareaModalComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule,
+  imports: [BrowserModule, AppRoutingModule, FormsModule, CommonModule, MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireAuthModule,],

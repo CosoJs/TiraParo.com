@@ -36,9 +36,15 @@
         
         <!-- Tareas Realizadas -->
         <div class="form-group">
-            <label for="tareas">Tareas Realizadas:</label>
-            <button (click)="abrirModalTareas()">Agregar Tarea</button>
+          <label>Tareas Realizadas:</label>
+          <div class="tareas-container">
+            <div class="tarea-card" *ngFor="let tarea of tareasRealizadas" (click)="editarTarea(tarea)">
+              <p>Tarea: {{ tarea.nombre }}</p>
+            </div>
+          </div>
+          <button mat-button (click)="abrirModalTareas()">Agregar Tarea</button>
         </div>
+            
         
         <!-- Horario de Trabajo -->
         <div class="form-group">
