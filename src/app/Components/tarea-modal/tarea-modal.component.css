@@ -149,3 +149,6 @@
     margin-left: 10px;
   }
   
+  .error-border {
+    border-color: red;
+}

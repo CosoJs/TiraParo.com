@@ -4,42 +4,42 @@
       <button class="close-btn" (click)="close()">×</button>
     </div>
     <form class="modal-form">
-      <div class="form-group">
-        <label for="nombre">Nombre de la Tarea</label>
-        <input type="text" id="nombre" class="form-control" placeholder="Escribe el nombre de la tarea" [(ngModel)]="nombreTarea" name="nombreTarea">
-      </div>
-  
-      <div class="form-group">
-        <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" class="form-control" placeholder="Describe la tarea" [(ngModel)]="descripcionTarea" name="descripcionTarea"></textarea>
-      </div>
-  
-      <div class="form-group">
-        <label for="precio">Precio</label>
-        <input type="number" id="precio" class="form-control" placeholder="Precio en $" [(ngModel)]="precioTarea" name="precioTarea">
-      </div>
-  
-      <div class="form-group">
-        <label for="imagen">Agregar Imagen(es)</label>
-        <input type="file" id="imagen" class="form-control" (change)="onImageSelected($event)" multiple>
-      </div>
-  
-      <!-- Contenedor para la galería de imágenes con miniaturas -->
-      <div class="image-gallery" *ngIf="imagePreviews.length > 0">
-        <h4>Vista Previa de Imágenes:</h4>
-        <div class="gallery-container">
-          <button class="nav-left" (click)="scrollLeft()">&larr;</button>
-  
-          <div class="thumbnails">
-            <div class="thumbnail-wrapper" *ngFor="let imgSrc of imagePreviews; let i = index">
-              <img [src]="imgSrc" alt="Vista Previa" class="thumbnail-image">
-              <button class="delete-btn" (click)="deleteImage(i)">×</button>
-            </div>
-          </div>
-  
-          <button class="nav-right" (click)="scrollRight()">&rarr;</button>
+        <div class="form-group">
+            <label for="nombre">Nombre de la Tarea</label>
+            <input type="text" id="nombre" class="form-control" placeholder="Escribe el nombre de la tarea" [(ngModel)]="nombreTarea" name="nombreTarea" [ngClass]="{'error-border': !nombreTarea && isSubmitted}">
         </div>
-      </div>
+        
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" class="form-control" placeholder="Describe la tarea" [(ngModel)]="descripcionTarea" name="descripcionTarea" [ngClass]="{'error-border': !descripcionTarea && isSubmitted}"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="number" id="precio" class="form-control" placeholder="Precio en $" [(ngModel)]="precioTarea" name="precioTarea" [ngClass]="{'error-border': precioTarea === null && isSubmitted}">
+        </div>        
+  
+        <div class="form-group">
+            <label for="imagen">Agregar Imagen(es)</label>
+            <input type="file" id="imagen" class="form-control" (change)="onImageSelected($event)" multiple>
+        </div>
+  
+        <!-- Contenedor para la galería de imágenes con miniaturas -->
+        <div class="image-gallery" *ngIf="imagePreviews.length > 0">
+            <h4>Vista Previa de Imágenes:</h4>
+            <div class="gallery-container">
+                <button class="nav-left" (click)="scrollLeft()">&larr;</button>
+        
+                <div class="thumbnails">
+                    <div class="thumbnail-wrapper" *ngFor="let imgSrc of imagePreviews; let i = index">
+                        <img [src]="imgSrc" alt="Vista Previa" class="thumbnail-image" [style.opacity]="imagesToDelete[i] ? 0.5 : 1">
+                        <button class="delete-btn" (click)="deleteImage(i)">×</button>
+                    </div>
+                </div>
+    
+                <button class="nav-right" (click)="scrollRight()">&rarr;</button>
+            </div>
+        </div>
   
       <div class="modal-actions">
         <button type="button" class="btn cancel-btn" (click)="close()">Cerrar</button>
