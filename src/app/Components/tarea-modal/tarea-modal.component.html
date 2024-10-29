@@ -28,15 +28,15 @@
       <div class="image-gallery" *ngIf="imagePreviews.length > 0">
         <h4>Vista Previa de Imágenes:</h4>
         <div class="gallery-container">
-          <!-- Flecha izquierda para navegar -->
           <button class="nav-left" (click)="scrollLeft()">&larr;</button>
   
-          <!-- Contenedor desplazable de imágenes -->
           <div class="thumbnails">
-            <img *ngFor="let imgSrc of imagePreviews" [src]="imgSrc" alt="Vista Previa" class="thumbnail-image" (click)="viewImage(imgSrc)">
+            <div class="thumbnail-wrapper" *ngFor="let imgSrc of imagePreviews; let i = index">
+              <img [src]="imgSrc" alt="Vista Previa" class="thumbnail-image">
+              <button class="delete-btn" (click)="deleteImage(i)">×</button>
+            </div>
           </div>
   
-          <!-- Flecha derecha para navegar -->
           <button class="nav-right" (click)="scrollRight()">&rarr;</button>
         </div>
       </div>
