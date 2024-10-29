@@ -27,6 +27,7 @@ import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/s
 import { TareaModalComponent } from './Components/tarea-modal/tarea-modal.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CommonModule } from '@angular/common';
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })
