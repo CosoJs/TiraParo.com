@@ -15,6 +15,7 @@ import {
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { TareaModalComponent } from '../tarea-modal/tarea-modal.component'; // Importa el modal
+import { NominatimService } from '../../nominatim.service';
 
 @Component({
   selector: 'app-registro-servicios',
@@ -38,8 +39,9 @@ export class RegistroServiciosComponent {
   horarioTrabajo: string = '';
   ubicacionServicio: string = '';
   informacionContacto: string = '';
+  ubicacionSugerencias: any[] = [];
 
-  constructor(private firestore: Firestore, public dialog: MatDialog) {
+  constructor(private firestore: Firestore, public dialog: MatDialog, private nominatimService: NominatimService) {
     this.cargarCategorias();
     this.cargarTareasRealizadas();
   }
@@ -47,6 +49,27 @@ export class RegistroServiciosComponent {
   ngOnInit() { // Método ngOnInit
     this.limpiarTareasRealizadas(); // Llama a la función para limpiar las tareas
     this.cargarTareasRealizadas(); // Puedes mantener esta llamada si quieres cargar otras tareas
+  }
+
+  buscarUbicacion() {
+    // Limpia sugerencias si el campo está vacío
+    if (this.ubicacionServicio.trim() === '') {
+      this.ubicacionSugerencias = [];
+      return;
+    }
+
+    // Si tiene al menos 3 caracteres, realiza la búsqueda
+    if (this.ubicacionServicio.length > 2) {
+      this.nominatimService.searchAddress(this.ubicacionServicio)
+        .subscribe((data: any) => {
+          this.ubicacionSugerencias = data;
+        });
+    }
+  }
+
+  seleccionarUbicacion(sugerencia: any) {
+    this.ubicacionServicio = sugerencia.display_name;
+    this.ubicacionSugerencias = []; // Limpia sugerencias tras selección
   }
 
   limpiarTareasRealizadas() {

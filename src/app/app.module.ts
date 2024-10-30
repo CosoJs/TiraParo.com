@@ -29,6 +29,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.compo
   imports: [BrowserModule, AppRoutingModule, FormsModule, CommonModule, MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    AngularFireAuthModule,],
+    AngularFireAuthModule, HttpClientModule,],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),

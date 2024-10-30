@@ -83,8 +83,15 @@
         <!-- Ubicación o Área de Servicio -->
         <div class="form-group">
             <label for="ubicacion">Ubicación/Área de Servicio:</label>
-            <input id="ubicacion" type="text" placeholder="Ciudad o zona de cobertura" [(ngModel)]="ubicacionServicio">
-        </div>
+            <input id="ubicacion" type="text" placeholder="Ciudad o zona de cobertura" [(ngModel)]="ubicacionServicio" (input)="buscarUbicacion()">
+            
+            <!-- Lista de Sugerencias -->
+            <ul *ngIf="ubicacionSugerencias.length" class="suggestions-list">
+              <li *ngFor="let sugerencia of ubicacionSugerencias" (click)="seleccionarUbicacion(sugerencia)">
+                {{ sugerencia.display_name }}
+              </li>
+            </ul>
+          </div>
 
         <!-- Información de Contacto Opcional -->
         <div class="form-group">
