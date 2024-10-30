@@ -28,6 +28,7 @@ import { TareaModalComponent } from './Components/tarea-modal/tarea-modal.compon
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     PerfilesServiciosComponent,
     ServicioDeUsuariosComponent,
     TareaModalComponent,
+    PerfilcardsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, CommonModule, MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

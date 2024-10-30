@@ -44,6 +44,17 @@ export class RegistroServiciosComponent {
     this.cargarTareasRealizadas();
   }
 
+  ngOnInit() { // Método ngOnInit
+    this.limpiarTareasRealizadas(); // Llama a la función para limpiar las tareas
+    this.cargarTareasRealizadas(); // Puedes mantener esta llamada si quieres cargar otras tareas
+  }
+
+  limpiarTareasRealizadas() {
+    // Elimina el elemento de localStorage si existe
+    localStorage.removeItem('tareasRealizadas');
+    this.tareasRealizadas = []; // Limpia el arreglo en la memoria
+  }
+
   cargarTareasRealizadas() {
     this.tareasRealizadas = JSON.parse(
       localStorage.getItem('tareasRealizadas') || '[]'
@@ -154,13 +165,18 @@ export class RegistroServiciosComponent {
       );
       return;
     }
-
+  
+    const userId = localStorage.getItem('UsuarioId');
+    if (!userId) {
+      console.error("Usuario no identificado.");
+      return;
+    }
+  
     // Resto de la lógica para guardar el servicio
     try {
       const batch = writeBatch(this.firestore);
-      const servicioRef = doc(collection(this.firestore, 'PerfilServicio'));
-
-      await setDoc(servicioRef, {
+      
+      const servicioData = {
         categoria: this.selectedCategoria,
         servicio: this.selectedServicio,
         descripcion: this.descripcionServicio,
@@ -169,8 +185,20 @@ export class RegistroServiciosComponent {
         horarioTrabajo: this.horarioTrabajo,
         ubicacionServicio: this.ubicacionServicio,
         informacionContacto: this.informacionContacto,
-      });
-
+        timestamp: new Date()
+      };
+  
+      const primeraUbicacionRef = doc(collection(this.firestore, `Servicios/${this.selectedCategoria}/Users`));
+      const uniqueId = primeraUbicacionRef.id; // Obtener un ID único
+      const segundaUbicacionRef = doc(this.firestore, `users/${userId}/Servicios/${uniqueId}`);
+  
+      // Añadir ambas operaciones al batch
+      batch.set(primeraUbicacionRef, servicioData);
+      batch.set(segundaUbicacionRef, servicioData);
+      
+      // Comitar el batch
+      await batch.commit();
+  
       Swal.fire('Éxito', 'Perfil de servicio creado con éxito.', 'success');
       // Reiniciar los campos después de guardar
       this.reiniciarCampos();
@@ -179,6 +207,7 @@ export class RegistroServiciosComponent {
       Swal.fire('Error', 'No se pudo crear el perfil de servicio.', 'error');
     }
   }
+  
 
   reiniciarCampos() {
     this.selectedCategoria = '';

@@ -1,0 +1,10 @@
+<div class="card-container">
+    <div *ngFor="let user of users" class="card">
+      <div class="card-image" [ngStyle]="{'background-image': 'url(' + user.Image + ')'}"></div>
+      <div class="category">{{ user.categoria }}</div>
+      <div class="heading">{{ user.descripcion }}
+        <div class="author"> By <span class="name">{{ user.nombreperfil }}</span></div>
+      </div>
+    </div>
+  </div>
+  

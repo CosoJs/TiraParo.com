@@ -1,9 +1,7 @@
 <section class="hero-section">
   <div class="card-container">
-    <!-- Itera sobre los servicios obtenidos de Firestore -->
     <div *ngFor="let servicio of servicios$ | async" 
          class="card" 
-         [attr.id]="!esPerfilServicio ? servicio.docId : null" 
          (click)="onCardClick(servicio)">
       <div class="card-background" [ngStyle]="{'background-image': 'url(' + servicio.Image + ')'}"></div>
       <div class="content">

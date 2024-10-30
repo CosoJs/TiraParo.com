@@ -71,11 +71,6 @@
                 <button class="nav-right" (click)="scrollRight()">&rarr;</button>
             </div>
             <button class="add-task-button" mat-button (click)="abrirModalTareas()">Agregar Tarea</button>
-            <script>
-                window.addEventListener('beforeunload', function () {
-                    localStorage.removeItem('tareasRealizadas');
-                });
-            </script>
         </div>
 
         <!-- Horario de Trabajo -->
