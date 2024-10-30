@@ -11,7 +11,7 @@
             <div class="profile-image-container" (click)="onProfilePicClick()">
                 <img [src]="userProfileImageUrl || '/assets/default-profile.png'" alt="User Profile">
                 <div class="upload-overlay">
-                    <span>Upload New Photo</span>
+                    <span>Subir Nueva Foto</span>
                 </div>
             </div>
         </div>
@@ -22,43 +22,43 @@
         <!-- User Info Form -->
         <div class="user-info-container">
             <div class="tabs">
-                <button class="tab active">User Info</button>
+                <button class="tab active">Perfil</button>
             </div>
 
             <form class="user-form" (ngSubmit)="guardarDatos()">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="usuario">Username:</label>
+                        <label for="usuario">Correo:</label>
                         <input type="text" id="usuario" [(ngModel)]="usuario" name="usuario">
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Full Name:</label>
+                        <label for="nombre">Nombre Completo:</label>
                         <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="contrasena">Password:</label>
+                        <label for="contrasena">Contraseña:</label>
                         <input type="password" id="contrasena" [(ngModel)]="contrasena" name="contrasena">
                     </div>
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password:</label>
+                        <label for="confirmPassword">Confirmar Contraseña:</label>
                         <input type="password" id="confirmPassword" name="confirmPassword">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="biografia">Biography:</label>
+                    <label for="biografia">Biografía:</label>
                     <textarea id="biografia" [(ngModel)]="biografia" name="biografia" rows="4"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="intereses">Interests:</label>
+                    <label for="intereses">Intereses:</label>
                     <input type="text" id="intereses" [(ngModel)]="intereses" name="intereses">
                 </div>
 
-                <button type="submit" class="submit-button">Update Info</button>
+                <button type="submit" class="submit-button">Actualizar Información</button>
             </form>
         </div>
     </div>
