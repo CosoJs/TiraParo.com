@@ -6,32 +6,60 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Circular profile image with upload functionality -->
-        <div style="display: flex; justify-content: center; align-items: center; height: 20vh;">
-            <div (click)="onProfilePicClick()" style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; border: 4px solid #ccc; cursor: pointer;">
-                <img *ngIf="userProfileImageUrl" [src]="userProfileImageUrl" alt="User Profile" style="width: 100%; height: 100%; object-fit: cover;">
+        <!-- Profile Image Section -->
+        <div class="profile-image-section">
+            <div class="profile-image-container" (click)="onProfilePicClick()">
+                <img [src]="userProfileImageUrl || '/assets/default-profile.png'" alt="User Profile">
+                <div class="upload-overlay">
+                    <span>Upload New Photo</span>
+                </div>
             </div>
         </div>
-        <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;" />
+
+        <input type="file" id="fileInput" (change)="onFileSelected($event)" class="hidden-input"
+            aria-label="Upload Profile Picture">
 
         <!-- User Info Form -->
-        <div class="user-info">
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" [(ngModel)]="usuario" />
+        <div class="user-info-container">
+            <div class="tabs">
+                <button class="tab active">User Info</button>
+            </div>
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" [(ngModel)]="nombre" />
+            <form class="user-form" (ngSubmit)="guardarDatos()">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="usuario">Username:</label>
+                        <input type="text" id="usuario" [(ngModel)]="usuario" name="usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Full Name:</label>
+                        <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre">
+                    </div>
+                </div>
 
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" [(ngModel)]="contrasena" />
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contrasena">Password:</label>
+                        <input type="password" id="contrasena" [(ngModel)]="contrasena" name="contrasena">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword">
+                    </div>
+                </div>
 
-            <label for="biografia">Biografía:</label>
-            <textarea id="biografia" [(ngModel)]="biografia"></textarea>
+                <div class="form-group">
+                    <label for="biografia">Biography:</label>
+                    <textarea id="biografia" [(ngModel)]="biografia" name="biografia" rows="4"></textarea>
+                </div>
 
-            <label for="intereses">Intereses:</label>
-            <input type="text" id="intereses" [(ngModel)]="intereses" />
+                <div class="form-group">
+                    <label for="intereses">Interests:</label>
+                    <input type="text" id="intereses" [(ngModel)]="intereses" name="intereses">
+                </div>
 
-            <button (click)="guardarDatos()">Guardar Cambios</button>
+                <button type="submit" class="submit-button">Update Info</button>
+            </form>
         </div>
     </div>
 </div>
