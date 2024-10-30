@@ -109,7 +109,7 @@
 }
 
 .tab.active {
-    color: #2196f3;
+    color: #ff6801;
     font-weight: 500;
 }
 
@@ -120,7 +120,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #2196f3;
+    background-color: #ff6801;
 }
 
 .user-form {
@@ -158,7 +158,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #2196f3;
+    border-color: #ff6801;
     box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
 }
 
