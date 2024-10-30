@@ -1,154 +1,238 @@
+/* Ocultar el botón "Abrir Modal" cuando el modal esté abierto */
+button[data-bs-toggle="modal"] {
+  display: none;
+}
+
+/* Ajuste de la ventana modal para eliminar bordes negros */
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: none;
+  border: none;
+}
+
+/* Fondo de la superposición del modal */
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* Contenedor del modal con desplazamiento oculto */
 .modal-container {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .modal-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .close-btn {
-    font-size: 1.5rem;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .modal-form {
-    margin-top: 15px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  textarea.form-control {
-    resize: vertical;
-    height: 100px;
-  }
-  
-  .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-  }
-  
-  .btn {
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .cancel-btn {
-    background-color: #f44336;
-    color: white;
-    margin-right: 10px;
-  }
-  
-  .submit-btn {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .btn:hover {
-    opacity: 0.8;
-  }
-  
-  /* Galería de imágenes */
-  .image-gallery {
-    margin-top: 15px;
-  }
-  
-  .gallery-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .thumbnails {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    max-width: 300px;
-  }
-  
-  .thumbnail-wrapper {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .thumbnail-image {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .delete-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 12px;
-    width: 20px;
-    height: 20px;
-    display: none;
-  }
-  
-  .thumbnail-wrapper:hover .delete-btn {
-    display: block;
-  }
-  
-  .nav-left,
-  .nav-right {
-    background-color: #f1f1f1;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s;
-  }
-  
-  .nav-left:hover,
-  .nav-right:hover {
-    background-color: #ddd;
-  }
-  
-  .nav-left {
-    margin-right: 10px;
-  }
-  
-  .nav-right {
-    margin-left: 10px;
-  }
-  
-  .error-border {
-    border-color: red;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  overflow-y: scroll;
+  /* Permite desplazamiento vertical */
+  overflow-x: hidden;
+  max-height: 90vh;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  /* Oculta la barra de desplazamiento en Firefox */
+}
+
+.modal-container::-webkit-scrollbar {
+  display: none;
+  /* Oculta la barra de desplazamiento en Chrome, Safari y Opera */
+}
+
+.modal-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  color: #ff6801;
+  font-weight: bold;
+  margin: 0;
+}
+
+.close-btn {
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal-form {
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.4rem;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #ff6801;
+  box-shadow: 0 0 0 3px rgba(255, 104, 1, 0.2);
+  outline: none;
+}
+
+textarea.form-control {
+  resize: none;
+  height: 100px;
+}
+
+input[type="file"] {
+  font-size: 0.95rem;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Contenedor principal de la galería de imágenes */
+.image-gallery {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.gallery-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Botones de navegación */
+.nav-left,
+.nav-right {
+  background-color: #ff7800;
+  border: none;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.nav-left:hover,
+.nav-right:hover {
+  background-color: #ff6801;
+}
+
+/* Estilos para el contenedor de miniaturas con solo dos imágenes visibles */
+.thumbnails {
+  display: flex;
+  gap: 1rem;
+  overflow: hidden;
+  /* Oculta cualquier contenido que se desborde */
+  width: 210px;
+  /* Ajusta el ancho para mostrar solo dos imágenes */
+  padding: 0.5rem;
+  scroll-behavior: smooth;
+}
+
+.thumbnail-wrapper {
+  position: relative;
+  flex: 0 0 100px;
+  /* Mantiene el ancho fijo de cada miniatura */
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.thumbnail-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botón de eliminación en miniatura */
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(231, 76, 60, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  background-color: #e74c3c;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.cancel-btn,
+.submit-btn {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cancel-btn {
+  background-color: #e74c3c;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+  background-color: #ff7800;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #d73228;
+}
+
+.submit-btn:hover {
+  background-color: #ff6801;
 }

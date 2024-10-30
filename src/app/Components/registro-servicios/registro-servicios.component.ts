@@ -1,13 +1,25 @@
 import { Component } from '@angular/core';
-import { Firestore, collection, collectionData, DocumentData, doc, setDoc, getDocs, writeBatch, query, where, getDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  collectionData,
+  DocumentData,
+  doc,
+  setDoc,
+  getDocs,
+  writeBatch,
+  query,
+  where,
+  getDoc,
+} from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
-import { TareaModalComponent } from '../tarea-modal/tarea-modal.component';  // Importa el modal
+import { TareaModalComponent } from '../tarea-modal/tarea-modal.component'; // Importa el modal
 
 @Component({
   selector: 'app-registro-servicios',
   templateUrl: './registro-servicios.component.html',
-  styleUrls: ['./registro-servicios.component.css']
+  styleUrls: ['./registro-servicios.component.css'],
 })
 export class RegistroServiciosComponent {
   isSidebarExpanded: boolean = false;
@@ -17,8 +29,12 @@ export class RegistroServiciosComponent {
   selectedServicio: string = '';
   descripcionServicio: string = '';
   aniosExperiencia: number | null = null;
-  // Define el tipo de datos que esperas para tareas
-  tareasRealizadas: { nombre: string; descripcion: string; precio: number }[] = [];
+  tareasRealizadas: {
+    nombre: string;
+    descripcion: string;
+    precio: number;
+    imagenes?: string[];
+  }[] = [];
   horarioTrabajo: string = '';
   ubicacionServicio: string = '';
   informacionContacto: string = '';
@@ -29,7 +45,9 @@ export class RegistroServiciosComponent {
   }
 
   cargarTareasRealizadas() {
-    this.tareasRealizadas = JSON.parse(localStorage.getItem('tareasRealizadas') || '[]');
+    this.tareasRealizadas = JSON.parse(
+      localStorage.getItem('tareasRealizadas') || '[]'
+    );
   }
 
   expandSidebar() {
@@ -42,9 +60,11 @@ export class RegistroServiciosComponent {
 
   cargarCategorias() {
     const categoriasRef = collection(this.firestore, 'Servicios');
-    collectionData(categoriasRef, { idField: 'id' }).subscribe((categoriasSnap: DocumentData[]) => {
-      this.categorias = categoriasSnap.map(categoria => categoria['id']);
-    });
+    collectionData(categoriasRef, { idField: 'id' }).subscribe(
+      (categoriasSnap: DocumentData[]) => {
+        this.categorias = categoriasSnap.map((categoria) => categoria['id']);
+      }
+    );
   }
 
   abrirModalTareas(): void {
@@ -53,22 +73,30 @@ export class RegistroServiciosComponent {
     dialogRef.afterClosed().subscribe((nuevaTarea) => {
       if (nuevaTarea) {
         this.tareasRealizadas.push(nuevaTarea);
-        localStorage.setItem('tareasRealizadas', JSON.stringify(this.tareasRealizadas));
+        localStorage.setItem(
+          'tareasRealizadas',
+          JSON.stringify(this.tareasRealizadas)
+        );
       }
     });
   }
 
   editarTarea(tarea: any): void {
     const dialogRef = this.dialog.open(TareaModalComponent, {
-      data: tarea // Pasa la tarea al modal para edición
+      data: tarea, // Pasa la tarea al modal para edición
     });
 
     dialogRef.afterClosed().subscribe((tareaEditada) => {
       if (tareaEditada) {
-        const index = this.tareasRealizadas.findIndex(t => t.nombre === tarea.nombre);
+        const index = this.tareasRealizadas.findIndex(
+          (t) => t.nombre === tarea.nombre
+        );
         if (index !== -1) {
           this.tareasRealizadas[index] = tareaEditada;
-          localStorage.setItem('tareasRealizadas', JSON.stringify(this.tareasRealizadas));
+          localStorage.setItem(
+            'tareasRealizadas',
+            JSON.stringify(this.tareasRealizadas)
+          );
         }
       }
     });
@@ -76,23 +104,35 @@ export class RegistroServiciosComponent {
 
   eliminarTarea(tarea: any, event: MouseEvent): void {
     event.stopPropagation(); // Evitar que se ejecute el evento de click del contenedor
-    this.tareasRealizadas = this.tareasRealizadas.filter(t => t.nombre !== tarea.nombre);
-    localStorage.setItem('tareasRealizadas', JSON.stringify(this.tareasRealizadas));
+    this.tareasRealizadas = this.tareasRealizadas.filter(
+      (t) => t.nombre !== tarea.nombre
+    );
+    localStorage.setItem(
+      'tareasRealizadas',
+      JSON.stringify(this.tareasRealizadas)
+    );
   }
 
   onCategoriaChange() {
     if (this.selectedCategoria) {
-      const serviciosDocRef = doc(this.firestore, `Servicios/${this.selectedCategoria}`);
-      getDoc(serviciosDocRef).then((docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          this.serviciosFiltrados = Object.keys(data).filter(key => key !== 'Image');
-        } else {
-          console.log("No such document!");
-        }
-      }).catch((error) => {
-        console.error("Error getting document: ", error);
-      });
+      const serviciosDocRef = doc(
+        this.firestore,
+        `Servicios/${this.selectedCategoria}`
+      );
+      getDoc(serviciosDocRef)
+        .then((docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            this.serviciosFiltrados = Object.keys(data).filter(
+              (key) => key !== 'Image'
+            );
+          } else {
+            console.log('No such document!');
+          }
+        })
+        .catch((error) => {
+          console.error('Error getting document: ', error);
+        });
     }
   }
 
@@ -107,7 +147,11 @@ export class RegistroServiciosComponent {
   async guardarServicio() {
     const campoInvalido = this.validarCampos();
     if (campoInvalido) {
-      Swal.fire('Error', `Por favor completa el campo: ${campoInvalido}`, 'error');
+      Swal.fire(
+        'Error',
+        `Por favor completa el campo: ${campoInvalido}`,
+        'error'
+      );
       return;
     }
 
@@ -124,14 +168,14 @@ export class RegistroServiciosComponent {
         tareasRealizadas: this.tareasRealizadas,
         horarioTrabajo: this.horarioTrabajo,
         ubicacionServicio: this.ubicacionServicio,
-        informacionContacto: this.informacionContacto
+        informacionContacto: this.informacionContacto,
       });
 
       Swal.fire('Éxito', 'Perfil de servicio creado con éxito.', 'success');
       // Reiniciar los campos después de guardar
       this.reiniciarCampos();
     } catch (error) {
-      console.error("Error al guardar el servicio: ", error);
+      console.error('Error al guardar el servicio: ', error);
       Swal.fire('Error', 'No se pudo crear el perfil de servicio.', 'error');
     }
   }
@@ -146,5 +190,19 @@ export class RegistroServiciosComponent {
     this.horarioTrabajo = '';
     this.ubicacionServicio = '';
     this.informacionContacto = '';
+  }
+
+  scrollLeft() {
+    const container = document.querySelector('.tareas-galeria');
+    if (container) {
+      container.scrollBy({ left: -210, behavior: 'smooth' }); // Desplaza en el ancho de dos tarjetas
+    }
+  }
+
+  scrollRight() {
+    const container = document.querySelector('.tareas-galeria');
+    if (container) {
+      container.scrollBy({ left: 210, behavior: 'smooth' }); // Desplaza en el ancho de dos tarjetas
+    }
   }
 }
