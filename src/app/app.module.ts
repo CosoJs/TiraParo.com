@@ -30,6 +30,8 @@ import { CommonModule } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.component';
 import { HttpClientModule } from '@angular/common/http';
+import { InvoiceComponent } from './Components/invoice/invoice.component';
+
 
 @NgModule({
   declarations: [
@@ -50,8 +52,14 @@ import { HttpClientModule } from '@angular/common/http';
     ServicioDeUsuariosComponent,
     TareaModalComponent,
     PerfilcardsComponent,
+    InvoiceComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, CommonModule, MatDialogModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireAuthModule, HttpClientModule,],

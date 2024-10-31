@@ -11,14 +11,32 @@ import { loginguard } from './Components/guards/login.guard';
 import { PerfilComponent } from './Components/perfil/perfil.component';
 import { PerfilesServiciosComponent } from './Components/perfiles-servicios/perfiles-servicios.component';
 import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/servicio-de-usuarios.component';
+import { InvoiceComponent } from './Components/invoice/invoice.component';
 
 const routes: Routes = [
   { path: '', component: loginComponent },
-  { path: 'servicesregistro', component: RegistroServiciosComponent, canActivate: [loginguard]},
-  { path: 'home', component: GeneralviewComponent, canActivate: [loginguard]},
-  { path: 'perfil', component: PerfilComponent, canActivate: [loginguard]},
-  { path: 'mis-perfiles-servicio', component: PerfilesServiciosComponent, canActivate: [loginguard]},
-  { path: 'perfil-servicio/:id', component: ServicioDeUsuariosComponent, canActivate: [loginguard]},
+  {
+    path: 'servicesregistro',
+    component: RegistroServiciosComponent,
+    canActivate: [loginguard],
+  },
+  { path: 'home', component: GeneralviewComponent, canActivate: [loginguard] },
+  { path: 'perfil', component: PerfilComponent, canActivate: [loginguard] },
+  {
+    path: 'mis-perfiles-servicio',
+    component: PerfilesServiciosComponent,
+    canActivate: [loginguard],
+  },
+  {
+    path: 'perfil-servicio/:id',
+    component: ServicioDeUsuariosComponent,
+    canActivate: [loginguard],
+  },
+  {
+    path: 'invoice',
+    component: InvoiceComponent,
+    canActivate: [loginguard],
+  },
 ];
 
 @NgModule({
