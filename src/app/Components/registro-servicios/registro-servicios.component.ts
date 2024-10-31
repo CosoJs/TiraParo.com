@@ -195,10 +195,19 @@ export class RegistroServiciosComponent {
       return;
     }
   
-    // Resto de la lógica para guardar el servicio
     try {
+      // Verificar si ya existe un perfil para el mismo servicio
+      const userServicesRef = collection(this.firestore, `users/${userId}/Servicios`);
+      const queryExistingService = query(userServicesRef, where('servicio', '==', this.selectedServicio));
+      const existingServiceSnapshot = await getDocs(queryExistingService);
+  
+      if (!existingServiceSnapshot.empty) {
+        Swal.fire('Error', 'Ya tienes un perfil para este servicio.', 'error');
+        return;
+      }
+  
+      // Crear el perfil si no existe duplicado
       const batch = writeBatch(this.firestore);
-      
       const servicioData = {
         categoria: this.selectedCategoria,
         servicio: this.selectedServicio,
@@ -208,28 +217,28 @@ export class RegistroServiciosComponent {
         horarioTrabajo: this.horarioTrabajo,
         ubicacionServicio: this.ubicacionServicio,
         informacionContacto: this.informacionContacto,
-        timestamp: new Date()
+        timestamp: new Date(),
+        usuario: userId  // Aquí se guarda el UsuarioId
       };
   
       const primeraUbicacionRef = doc(collection(this.firestore, `Servicios/${this.selectedCategoria}/Users`));
-      const uniqueId = primeraUbicacionRef.id; // Obtener un ID único
+      const uniqueId = primeraUbicacionRef.id;
       const segundaUbicacionRef = doc(this.firestore, `users/${userId}/Servicios/${uniqueId}`);
   
-      // Añadir ambas operaciones al batch
       batch.set(primeraUbicacionRef, servicioData);
       batch.set(segundaUbicacionRef, servicioData);
-      
-      // Comitar el batch
+  
       await batch.commit();
   
       Swal.fire('Éxito', 'Perfil de servicio creado con éxito.', 'success');
-      // Reiniciar los campos después de guardar
       this.reiniciarCampos();
     } catch (error) {
       console.error('Error al guardar el servicio: ', error);
       Swal.fire('Error', 'No se pudo crear el perfil de servicio.', 'error');
     }
   }
+  
+  
   
 
   reiniciarCampos() {

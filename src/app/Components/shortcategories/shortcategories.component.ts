@@ -27,3 +27,4 @@ export class ShortcategoriesComponent implements OnInit {
   onCardClick(servicio: Servicio) {
   }
 }
+
