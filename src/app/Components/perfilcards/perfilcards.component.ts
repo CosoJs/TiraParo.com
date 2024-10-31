@@ -9,6 +9,7 @@ interface User {
   descripcion: string;
   nombreperfil: string;
   Image: string;
+  usuario?: string; // Marca como opcional para evitar errores si no está presente
 }
 
 @Component({
@@ -34,7 +35,9 @@ export class PerfilcardsComponent implements OnInit {
         const userServicesCollection = collection(this.firestore, `users/${userId}/Servicios`);
         const userServicesSnapshot = await getDocs(userServicesCollection);
         userServicesSnapshot.forEach(serviceDoc => {
-          this.users.push({ id: serviceDoc.id, ...serviceDoc.data() } as User);
+          const data = serviceDoc.data();
+          // Asegúrate de que el campo 'usuario' se acceda de forma segura
+          this.users.push({ id: serviceDoc.id, usuario: data['usuario'], ...data } as User);
         });
       } else {
         const serviciosCollection = collection(this.firestore, 'Servicios');
@@ -44,7 +47,9 @@ export class PerfilcardsComponent implements OnInit {
           const usersCollection = collection(this.firestore, `Servicios/${servicioDoc.id}/Users`);
           const usersSnapshot = await getDocs(usersCollection);
           usersSnapshot.forEach(userDoc => {
-            this.users.push({ id: userDoc.id, ...userDoc.data() } as User); // Asigna manualmente el id de cada userDoc
+            const data = userDoc.data();
+            // Asegúrate de que el campo 'usuario' se acceda de forma segura
+            this.users.push({ id: userDoc.id, usuario: data['usuario'], ...data } as User);
           });
         }
       }
@@ -59,6 +64,15 @@ export class PerfilcardsComponent implements OnInit {
   }
 
   onCardClick(user: User) {
-    this.router.navigate([`/perfil-servicio/${user.id}`]);
+    const usuarioId = user.usuario; // Accede directamente al campo usuario
+    if (usuarioId) {
+      // Almacena ambos identificadores en localStorage
+      localStorage.setItem('UsuarioDeServicio', user.id);
+      localStorage.setItem('usuarioMain', usuarioId);
+      
+      this.router.navigate(['/Servicio-De-Usuarios']); // Navega solo al perfil
+    } else {
+      console.error('ID de usuario no disponible.', user);
+    }
   }
 }

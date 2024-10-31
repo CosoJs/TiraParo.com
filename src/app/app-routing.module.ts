@@ -28,7 +28,7 @@ const routes: Routes = [
     canActivate: [loginguard],
   },
   {
-    path: 'perfil-servicio/:id',
+    path: 'Servicio-De-Usuarios',
     component: ServicioDeUsuariosComponent,
     canActivate: [loginguard],
   },
