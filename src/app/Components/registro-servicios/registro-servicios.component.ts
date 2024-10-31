@@ -16,6 +16,12 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { TareaModalComponent } from '../tarea-modal/tarea-modal.component'; // Importa el modal
 import { NominatimService } from '../../nominatim.service';
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-registro-servicios',
@@ -181,31 +187,27 @@ export class RegistroServiciosComponent {
   async guardarServicio() {
     const campoInvalido = this.validarCampos();
     if (campoInvalido) {
-      Swal.fire(
-        'Error',
-        `Por favor completa el campo: ${campoInvalido}`,
-        'error'
-      );
+      Swal.fire('Error', `Por favor completa el campo: ${campoInvalido}`, 'error');
       return;
     }
-  
+
     const userId = localStorage.getItem('UsuarioId');
     if (!userId) {
-      console.error("Usuario no identificado.");
+      console.error('Usuario no identificado.');
       return;
     }
-  
+
     try {
       // Verificar si ya existe un perfil para el mismo servicio
       const userServicesRef = collection(this.firestore, `users/${userId}/Servicios`);
       const queryExistingService = query(userServicesRef, where('servicio', '==', this.selectedServicio));
       const existingServiceSnapshot = await getDocs(queryExistingService);
-  
+
       if (!existingServiceSnapshot.empty) {
         Swal.fire('Error', 'Ya tienes un perfil para este servicio.', 'error');
         return;
       }
-  
+
       // Crear el perfil si no existe duplicado
       const batch = writeBatch(this.firestore);
       const servicioData = {
@@ -213,23 +215,55 @@ export class RegistroServiciosComponent {
         servicio: this.selectedServicio,
         descripcion: this.descripcionServicio,
         aniosExperiencia: this.aniosExperiencia,
-        tareasRealizadas: this.tareasRealizadas,
         horarioTrabajo: this.horarioTrabajo,
         ubicacionServicio: this.ubicacionServicio,
         informacionContacto: this.informacionContacto,
         timestamp: new Date(),
-        usuario: userId  // Aquí se guarda el UsuarioId
+        usuario: userId
       };
-  
+
       const primeraUbicacionRef = doc(collection(this.firestore, `Servicios/${this.selectedCategoria}/Users`));
       const uniqueId = primeraUbicacionRef.id;
       const segundaUbicacionRef = doc(this.firestore, `users/${userId}/Servicios/${uniqueId}`);
-  
+
       batch.set(primeraUbicacionRef, servicioData);
       batch.set(segundaUbicacionRef, servicioData);
-  
+
+      // *** Subir las imágenes a Firebase Storage y guardar las tareas en subcolección ***
+      const storage = getStorage();
+      for (const tarea of this.tareasRealizadas) {
+        const tareaRef = doc(collection(this.firestore, `users/${userId}/Servicios/${uniqueId}/tareas`));
+        const tareaId = tareaRef.id; // Genera el ID automáticamente
+
+        // Preparar datos de la tarea
+        const tareaData: any = {
+          nombre: tarea.nombre,
+          descripcion: tarea.descripcion,
+          precio: tarea.precio,
+          imagenes: []
+        };
+
+        if (tarea.imagenes && tarea.imagenes.length > 0) {
+          for (let i = 0; i < tarea.imagenes.length; i++) {
+            const imagenBase64 = tarea.imagenes[i];
+            const imagenPath = `images/${userId}/${uniqueId}/${tareaId}/image_${i}.png`;
+
+            const storageRef = ref(storage, imagenPath);
+            await uploadString(storageRef, imagenBase64, 'data_url');
+
+            // Obtener la URL de descarga y agregarla a la tarea
+            const downloadURL = await getDownloadURL(storageRef);
+            tareaData.imagenes.push(downloadURL); // Guardar la URL en la tarea
+          }
+        }
+
+        // Guardar la tarea en la subcolección con la URL de las imágenes
+        batch.set(tareaRef, tareaData);
+      }
+
+      // Una vez subidas las imágenes, ejecuta el batch para guardar el perfil y las tareas
       await batch.commit();
-  
+
       Swal.fire('Éxito', 'Perfil de servicio creado con éxito.', 'success');
       this.reiniciarCampos();
     } catch (error) {
@@ -237,9 +271,6 @@ export class RegistroServiciosComponent {
       Swal.fire('Error', 'No se pudo crear el perfil de servicio.', 'error');
     }
   }
-  
-  
-  
 
   reiniciarCampos() {
     this.selectedCategoria = '';
