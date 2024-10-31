@@ -1,0 +1,79 @@
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+
+    <!-- debera generar se automaticamente , tomando en cuenta todos los servicios realizados, poniendo el total de cada servicio y el total de nuestra comision 5%-->
+    <div class="invoice-container">
+        <header class="invoice-header">
+            <h1>Resumen de operaciones</h1>
+
+            <div class="invoice-info">
+                <p><strong>Fecha:</strong> 30/10/2024</p>
+            </div>
+        </header>
+
+        <section class="invoice-details">
+            <div class="company-info">
+                <h2>De:</h2>
+                <p>Tirando paro</p>
+                <p>Teléfono: (123) 456-7890</p>
+                <p>Email: contacto-empresa.com</p>
+            </div>
+            <div class="client-info">
+                <h2>Para:</h2>
+                <p>Nombre del Cliente</p>
+                <p>Dirección del Cliente</p>
+                <p>Teléfono: (098) 765-4321</p>
+                <p>Email: cliente-ejemplo.com</p>
+            </div>
+        </section>
+
+        <section class="invoice-items">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Precio de Servicio</th>
+                        <th>Comision</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Producto 1</td>
+                        <td>500</td> <!-- lo que cobro el usuario -->
+                        <td>$50.00</td><!-- lo que cobramos -->
+                        <td>$450.00</td><!-- diferencia -->
+                    </tr>
+                    <tr>
+                        <td>Producto 2</td>
+                        <td>750</td>
+                        <td>$75.00</td>
+                        <td>$675.00</td>
+                    </tr>
+                    <tr>
+                        <td>Servicio 1</td>
+                        <td>300</td>
+                        <td>$30.00</td>
+                        <td>$270.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="invoice-summary">
+            <div class="total">
+                <p><strong>Subtotal:</strong> $1550.00</p><!-- total servicios-->
+                <p><strong>Comision (10%):</strong> $155</p><!-- comision -->
+                <h3><strong>Total:</strong> $1395</h3><!-- diferencia -->
+            </div>
+        </section>
+
+        <footer class="invoice-footer">
+            <p>Cobramos una comisión del 5% sobre el valor de cada trabajo completado en la plataforma, asegurando
+                calidad y
+                continuidad en nuestros servicios.</p>
+        </footer>
+    </div>

@@ -29,6 +29,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.component';
+import { InvoiceComponent } from './Components/invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -49,11 +50,18 @@ import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.compo
     ServicioDeUsuariosComponent,
     TareaModalComponent,
     PerfilcardsComponent,
+    InvoiceComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, CommonModule, MatDialogModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    AngularFireAuthModule,],
+    AngularFireAuthModule,
+  ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
