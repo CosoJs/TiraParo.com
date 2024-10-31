@@ -31,6 +31,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InvoiceComponent } from './Components/invoice/invoice.component';
+import { TareascardComponent } from './Components/tareascard/tareascard.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { InvoiceComponent } from './Components/invoice/invoice.component';
     TareaModalComponent,
     PerfilcardsComponent,
     InvoiceComponent,
+    TareascardComponent,
   ],
   imports: [
     BrowserModule,
