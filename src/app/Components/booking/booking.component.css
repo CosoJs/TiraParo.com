@@ -2,6 +2,7 @@
 	position: relative;
 	height: 100vh;
 }
+/*a*/
 
 .section .section-center {
 	position: absolute;
@@ -33,7 +34,6 @@
 	top: 0px;
 	bottom: 0px;
 	width: 250px;
-	background-image: url('');
 	background-size: cover;
 	background-position: center;
 }
@@ -159,3 +159,24 @@
 		margin-left: 0px;
 	}
 }
+
+.form-group {
+	margin-bottom: 20px;
+  }
+  
+  .form-label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+	color: #b5c1cc;
+	text-transform: uppercase;
+  }
+  
+  .form-control {
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	color: #122244;
+	border: 1px solid #dde3e8;
+  }
+  

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Firestore, doc, getDoc, setDoc, collection } from '@angular/fire/firestore';
 import { Timestamp } from 'firebase/firestore';
+import moment from 'moment';
 
 @Component({
   selector: 'app-booking',
@@ -15,13 +16,20 @@ export class BookingComponent implements OnInit {
   UsuarioDeServicio: string | null = null;
   bookingSuccess: boolean = false;
 
+  // Propiedades para fecha de inicio, fecha de fin, hora y duración
+  startDate: moment.Moment = moment();
+  endDate: moment.Moment = moment();
+  startTime: string = '';
+  duration: number = 1;
+
   constructor(
     private route: ActivatedRoute,
     private firestore: Firestore,
     private router: Router
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
+    console.log("Component initialized");
     this.tareaId = this.route.snapshot.paramMap.get('id');
     this.usuarioMain = localStorage.getItem('usuarioMain');
     this.UsuarioDeServicio = localStorage.getItem('UsuarioDeServicio');
@@ -31,7 +39,7 @@ export class BookingComponent implements OnInit {
       return;
     }
 
-    await this.loadTareaDetails();
+    this.loadTareaDetails();
   }
 
   async loadTareaDetails() {
@@ -51,26 +59,44 @@ export class BookingComponent implements OnInit {
       console.error('Error al cargar los detalles de la tarea:', error);
     }
   }
+
+  onStartDateChange(event: any) {
+    this.startDate = moment(event.startDate || event); // Asegúrate de que el formato sea moment
+    console.log("Start Date selected:", this.startDate.format('YYYY-MM-DD'));
+  }
+
+  onEndDateChange(event: any) {
+    this.endDate = moment(event.startDate || event); // Asegúrate de que el formato sea moment
+    console.log("End Date selected:", this.endDate.format('YYYY-MM-DD'));
+  }
+
   async confirmBooking() {
+    console.log("Confirming booking...");
+    console.log("Start date:", this.startDate.format('YYYY-MM-DD'));
+    console.log("End date:", this.endDate.format('YYYY-MM-DD'));
+    console.log("Start time:", this.startTime);
+    console.log("Duration:", this.duration);
+
     if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio) return;
-  
+
     try {
-      // Genera una referencia con un ID automático para la nueva reserva
       const bookingRef = doc(collection(this.firestore, `users/${this.usuarioMain}/bookings`));
-      
+
       await setDoc(bookingRef, {
         tareaId: this.tareaId,
         servicioId: this.UsuarioDeServicio,
         usuarioId: this.usuarioMain,
-        fechaReserva: Timestamp.now(),
+        fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
+        fechaFin: Timestamp.fromDate(this.endDate.toDate()),
+        horaInicio: this.startTime,
+        duracionHoras: this.duration,
         estado: 'confirmado'
       });
-  
+
       this.bookingSuccess = true;
-      setTimeout(() => this.router.navigate(['/']), 2000);  // Redirecciona después de confirmar
+      setTimeout(() => this.router.navigate(['/home']), 2000);
     } catch (error) {
       console.error('Error al confirmar la reserva:', error);
     }
   }
-  
 }
