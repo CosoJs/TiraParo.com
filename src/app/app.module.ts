@@ -33,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { TareascardComponent } from './Components/tareascard/tareascard.component';
 import { BookingComponent } from './Components/booking/booking.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { BookingComponent } from './Components/booking/booking.component';
   ],
   imports: [
     BrowserModule,
+    NgxDaterangepickerMd.forRoot(),
     AppRoutingModule,
     FormsModule,
     CommonModule,

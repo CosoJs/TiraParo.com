@@ -1,70 +1,64 @@
 <div id="booking" class="section">
     <div class="section-center">
-      <div class="container">
-        <div class="row">
-          <div class="booking-form">
-            <div class="booking-bg"></div>
-            <form (ngSubmit)="confirmBooking()" *ngIf="!bookingSuccess">
-              <div class="form-header">
-                <h2>Make your reservation</h2>
-              </div>
-              
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <span class="form-label">Check In</span>
-                    <input class="form-control" type="date"  required>
-                  </div>
+        <div class="container">
+            <div class="row">
+                <div class="booking-form">
+                    <div class="booking-bg"></div>
+                    <form (ngSubmit)="confirmBooking()" *ngIf="!bookingSuccess">
+                        <div class="form-header">
+                            <h2>Reserva para {{ tarea?.nombre }}</h2>
+                            <p class="form-price">Precio: {{ tarea?.precio | currency }}</p>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="form-label">Descripción</span>
+                            <textarea class="form-control" name="description"
+                                placeholder="Escribe una descripción de tu reserva" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="form-label">Email</span>
+                            <input class="form-control" type="email" placeholder="Ingresa tu correo electrónico"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="form-label">Teléfono</span>
+                            <input class="form-control" type="tel" placeholder="Ingresa tu número de teléfono" required>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="form-label">Selecciona la Fecha o el Rango de Fechas</span>
+                            <input ngxDaterangepickerMd [(ngModel)]="selectedRange" 
+                                   (datesUpdated)="onDateRangeChange($event)" 
+                                   name="selectedRange" 
+                                   class="form-control" 
+                                   placeholder="Selecciona la fecha o rango de fechas" 
+                                   required />
+                          </div>                                                   
+
+                        <div class="form-group">
+                            <span class="form-label">Hora de Inicio</span>
+                            <input type="time" class="form-control" name="startTime" [(ngModel)]="startTime" required>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="form-label">Duración en Horas</span>
+                            <input type="number" class="form-control" name="duration" [(ngModel)]="duration"
+                                placeholder="Número de horas" min="1" required>
+                        </div>
+
+                        <div class="form-btn">
+                            <button type="submit" class="submit-btn">Reservar Ahora</button>
+                        </div>
+                    </form>
+
+                    <div *ngIf="bookingSuccess" class="confirmation-message">
+                        <p>¡Reserva confirmada con éxito!</p>
+                        <button class="btn-back">Volver a Inicio</button>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <span class="form-label">Check Out</span>
-                    <input class="form-control" type="date"  required>
-                  </div>
-                </div>
-              </div>
-  
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <span class="form-label">Adults</span>
-                    <select class="form-control"  name="adults">
-                      <option *ngFor="let adult of [1, 2, 3]">{{ adult }}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <span class="form-label">Children</span>
-                    <select class="form-control"name="children">
-                      <option *ngFor="let child of [0, 1, 2]">{{ child }}</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-  
-              <div class="form-group">
-                <span class="form-label">Email</span>
-                <input class="form-control" type="email"  placeholder="Enter your email" required>
-              </div>
-  
-              <div class="form-group">
-                <span class="form-label">Phone</span>
-                <input class="form-control" type="tel"  name="phone" placeholder="Enter your phone number" required>
-              </div>
-  
-              <div class="form-btn">
-                <button type="submit" class="submit-btn">Book Now</button>
-              </div>
-            </form>
-  
-            <div *ngIf="bookingSuccess" class="confirmation-message">
-              <p>¡Reserva confirmada con éxito!</p>
-              <button (click)="confirmBooking()" class="btn-back">Volver a Inicio</button>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  
+</div>
