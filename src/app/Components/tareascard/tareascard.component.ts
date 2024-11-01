@@ -7,7 +7,12 @@ interface Tarea {
   imagenes: string[];
   nombre: string;
   precio: number;
-  currentImageIndex: number; // Add currentImageIndex here
+  currentImageIndex: number;
+}
+
+interface Servicio {
+  descripcion: string;
+  // Agrega aquí otras propiedades necesarias si las hay
 }
 
 @Component({
@@ -17,6 +22,7 @@ interface Tarea {
 })
 export class TareascardComponent implements OnInit {
   tareas: Tarea[] = [];
+  descripcion: string = ''; // Agrega una variable para almacenar la descripción
 
   constructor(private firestore: Firestore) {}
 
@@ -30,6 +36,18 @@ export class TareascardComponent implements OnInit {
     }
 
     try {
+      // Cargar la descripción del servicio
+      const servicioCollection = collection(this.firestore, `users/${usuarioMain}/Servicios`);
+      const servicioSnapshot = await getDocs(servicioCollection);
+      
+      servicioSnapshot.docs.forEach((doc) => {
+        const servicioData = doc.data() as Servicio; // Accede con la interfaz definida
+        if (doc.id === UsuarioDeServicio) {
+          this.descripcion = servicioData.descripcion; // Obtener la descripción
+        }
+      });
+
+      // Cargar las tareas
       const tareasCollection = collection(
         this.firestore,
         `users/${usuarioMain}/Servicios/${UsuarioDeServicio}/tareas`
@@ -39,14 +57,14 @@ export class TareascardComponent implements OnInit {
       this.tareas = tareasSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-        currentImageIndex: 0, // Initialize each task with a currentImageIndex property
+        currentImageIndex: 0,
       })) as Tarea[];
     } catch (error) {
       console.error('Error al cargar las tareas:', error);
     }
   }
 
-  // Methods to change the image
+  // Métodos para cambiar la imagen
   prevImage(tarea: Tarea) {
     tarea.currentImageIndex =
       tarea.currentImageIndex > 0
