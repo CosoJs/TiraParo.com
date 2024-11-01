@@ -3,19 +3,19 @@
 </div>
 
 <div class="card-container">
-  <div *ngFor="let tarea of tareas" class="card" (click)="navigateToBooking(tarea.id)">
+  <div *ngFor="let tarea of tareas" class="card" >
     <div class="card-img" *ngIf="tarea.imagenes && tarea.imagenes.length > 0">
-      <div class="image" [ngStyle]="{'background-image': 'url(' + tarea.imagenes[tarea.currentImageIndex] + ')'}">
+      <div class="image" [ngStyle]="{'background-image': 'url(' + tarea.imagenes[tarea.currentImageIndex] + ')'}" (click)="navigateToBooking(tarea.id)">
       </div>
       <button *ngIf="tarea.imagenes.length > 1" (click)="prevImage(tarea)">←</button>
       <button *ngIf="tarea.imagenes.length > 1" (click)="nextImage(tarea)">→</button>
     </div>
-    <div class="card-info">
+    <div class="card-info" (click)="navigateToBooking(tarea.id)">
       <p class="text-title">{{ tarea.nombre }} </p>
       <p class="text-body">{{ tarea.descripcion }}</p>
     </div>
     <div class="card-footer">
-      <span class="text-title">{{ tarea.precio | currency }}</span>
+      <span class="text-title" (click)="navigateToBooking(tarea.id)">{{ tarea.precio | currency }}</span>
       <div class="card-button">
         <svg class="svg-icon" viewBox="0 0 20 20">
           <path
