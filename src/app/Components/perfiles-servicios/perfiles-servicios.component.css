@@ -64,12 +64,10 @@
 /* Contenedor principal */
 .container {
     display: grid;
-    grid-template-columns: auto 1fr;
-    /* Sidebar toma el espacio justo y el resto es para el contenido */
-    transition: grid-template-columns 0.3s ease;
-    /* Suave transición cuando cambia el ancho de la sidebar */
-    height: 100vh;
-    /* Ocupa todo el alto de la pantalla */
+    grid-template-columns: auto 1fr; /* Sidebar toma el espacio justo y el resto es para el contenido */
+    transition: grid-template-columns 0.3s ease; /* Suave transición cuando cambia el ancho de la sidebar */
+    height: 100vh; /* Ocupa todo el alto de la pantalla */
+    gap: 20px; /* Espacio entre la sidebar y el contenido principal */
 }
 
 .sidebar {
