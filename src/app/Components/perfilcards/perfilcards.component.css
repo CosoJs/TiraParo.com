@@ -1,21 +1,47 @@
 .card-container {
-  display: flex;
-  flex-wrap: wrap; /* Esto permite que las tarjetas se ajusten automáticamente en filas */
-  justify-content: space-between; /* Para separar las tarjetas uniformemente */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* Tres tarjetas por fila */
+  gap: 30px;
+  /* Incrementa el espacio entre tarjetas */
+  justify-items: center;
+  padding: 20px;
+  /* Espacio alrededor del contenedor */
 }
 
 .card {
-  width: 200px; /* Define un ancho fijo para cada tarjeta */
-  margin: 10px; /* Agrega margen entre las tarjetas */
-  background-color: #f5f5f5; /* Estilo de fondo para las tarjetas */
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar relieve */
+  width: 100%;
+  max-width: 350px;
+  /* Limita el ancho máximo de cada tarjeta */
+  background-color: #f5f5f5;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 8px;
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
 
 .card-image {
-  height: 150px;
+  height: 200px;
+  /* Aumenta la altura de la imagen */
   background-size: cover;
   background-position: center;
+  border-radius: 8px;
+}
+
+.card-image-placeholder {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd;
+  color: #777;
+  font-size: 14px;
+  border-radius: 8px;
 }
 
 .category {
@@ -25,7 +51,8 @@
 }
 
 .heading {
-  font-size: 16px;
+  font-size: 18px;
+  /* Aumenta el tamaño de fuente */
   font-weight: bold;
   margin-top: 5px;
 }
@@ -34,4 +61,8 @@
   font-size: 12px;
   color: #555;
   margin-top: 5px;
+}
+
+.name {
+  font-weight: bold;
 }

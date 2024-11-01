@@ -15,7 +15,7 @@ interface User {
 @Component({
   selector: 'app-perfilcards',
   templateUrl: './perfilcards.component.html',
-  styleUrls: ['./perfilcards.component.css']
+  styleUrls: ['./perfilcards.component.css'],
 })
 export class PerfilcardsComponent implements OnInit {
   users: User[] = [];
@@ -25,35 +25,46 @@ export class PerfilcardsComponent implements OnInit {
   async ngOnInit() {
     const userId = localStorage.getItem('UsuarioId');
     if (!userId) {
-      console.error("Usuario no identificado.");
+      console.error('Usuario no identificado.');
       return;
     }
 
     try {
       const isMisPerfilesServicio = this.isInMisPerfilesServicio();
       if (isMisPerfilesServicio) {
-        const userServicesCollection = collection(this.firestore, `users/${userId}/Servicios`);
+        const userServicesCollection = collection(
+          this.firestore,
+          `users/${userId}/Servicios`
+        );
         const userServicesSnapshot = await getDocs(userServicesCollection);
-        userServicesSnapshot.forEach(serviceDoc => {
+        userServicesSnapshot.forEach((serviceDoc) => {
           const data = serviceDoc.data();
-          // Asegúrate de que el campo 'usuario' se acceda de forma segura
-          this.users.push({ id: serviceDoc.id, usuario: data['usuario'], ...data } as User);
+          this.users.push({
+            id: serviceDoc.id,
+            usuario: data['usuario'],
+            ...data,
+          } as User);
         });
       } else {
         const serviciosCollection = collection(this.firestore, 'Servicios');
         const serviciosSnapshot = await getDocs(serviciosCollection);
-      
+
         for (const servicioDoc of serviciosSnapshot.docs) {
-          const usersCollection = collection(this.firestore, `Servicios/${servicioDoc.id}/Users`);
+          const usersCollection = collection(
+            this.firestore,
+            `Servicios/${servicioDoc.id}/Users`
+          );
           const usersSnapshot = await getDocs(usersCollection);
-          usersSnapshot.forEach(userDoc => {
+          usersSnapshot.forEach((userDoc) => {
             const data = userDoc.data();
-            // Asegúrate de que el campo 'usuario' se acceda de forma segura
-            this.users.push({ id: userDoc.id, usuario: data['usuario'], ...data } as User);
+            this.users.push({
+              id: userDoc.id,
+              usuario: data['usuario'],
+              ...data,
+            } as User);
           });
         }
       }
-      
     } catch (error) {
       console.error('Error al cargar los usuarios:', error);
     }
@@ -66,11 +77,9 @@ export class PerfilcardsComponent implements OnInit {
   onCardClick(user: User) {
     const usuarioId = user.usuario; // Accede directamente al campo usuario
     if (usuarioId) {
-      // Almacena ambos identificadores en localStorage
       localStorage.setItem('UsuarioDeServicio', user.id);
       localStorage.setItem('usuarioMain', usuarioId);
-      
-      this.router.navigate(['/Servicio-De-Usuarios']); // Navega solo al perfil
+      this.router.navigate(['/Servicio-De-Usuarios']);
     } else {
       console.error('ID de usuario no disponible.', user);
     }
