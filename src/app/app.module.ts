@@ -32,6 +32,7 @@ import { PerfilcardsComponent } from './Components/perfilcards/perfilcards.compo
 import { HttpClientModule } from '@angular/common/http';
 import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { TareascardComponent } from './Components/tareascard/tareascard.component';
+import { BookingComponent } from './Components/booking/booking.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { TareascardComponent } from './Components/tareascard/tareascard.componen
     PerfilcardsComponent,
     InvoiceComponent,
     TareascardComponent,
+    BookingComponent,
   ],
   imports: [
     BrowserModule,

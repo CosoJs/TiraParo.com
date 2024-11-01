@@ -3,7 +3,7 @@
 </div>
 
 <div class="card-container">
-  <div *ngFor="let tarea of tareas" class="card">
+  <div *ngFor="let tarea of tareas" class="card" (click)="navigateToBooking(tarea.id)">
     <div class="card-img" *ngIf="tarea.imagenes && tarea.imagenes.length > 0">
       <div class="image" [ngStyle]="{'background-image': 'url(' + tarea.imagenes[tarea.currentImageIndex] + ')'}">
       </div>
