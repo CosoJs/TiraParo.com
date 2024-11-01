@@ -16,9 +16,9 @@ export class BookingComponent implements OnInit {
   UsuarioDeServicio: string | null = null;
   bookingSuccess: boolean = false;
 
-  // Propiedades para fechas, horas y duración
-  selectedRange: { startDate: moment.Moment, endDate: moment.Moment } = { startDate: moment(), endDate: moment() };
-  formattedDateRange: string = '';
+  // Propiedades para fecha de inicio, fecha de fin, hora y duración
+  startDate: moment.Moment = moment();
+  endDate: moment.Moment = moment();
   startTime: string = '';
   duration: number = 1;
 
@@ -40,7 +40,6 @@ export class BookingComponent implements OnInit {
     }
 
     this.loadTareaDetails();
-    this.updateFormattedDateRange();
   }
 
   async loadTareaDetails() {
@@ -61,27 +60,20 @@ export class BookingComponent implements OnInit {
     }
   }
 
-  updateFormattedDateRange() {
-    if (this.selectedRange.startDate && this.selectedRange.endDate) {
-      this.formattedDateRange = `${this.selectedRange.startDate.format('YYYY-MM-DD')} - ${this.selectedRange.endDate.format('YYYY-MM-DD')}`;
-    } else {
-      this.formattedDateRange = 'Selecciona la fecha o rango de fechas';
-    }
-    console.log("Formatted Date Range:", this.formattedDateRange);
+  onStartDateChange(event: any) {
+    this.startDate = moment(event.startDate || event); // Asegúrate de que el formato sea moment
+    console.log("Start Date selected:", this.startDate.format('YYYY-MM-DD'));
   }
 
-  onDateRangeChange(range: any) {
-    // Convertir las fechas a Moment si vienen en otro formato
-    this.selectedRange = {
-      startDate: moment(range.startDate),
-      endDate: moment(range.endDate)
-    };
-    this.updateFormattedDateRange();
+  onEndDateChange(event: any) {
+    this.endDate = moment(event.startDate || event); // Asegúrate de que el formato sea moment
+    console.log("End Date selected:", this.endDate.format('YYYY-MM-DD'));
   }
 
   async confirmBooking() {
     console.log("Confirming booking...");
-    console.log("Selected range:", this.selectedRange);
+    console.log("Start date:", this.startDate.format('YYYY-MM-DD'));
+    console.log("End date:", this.endDate.format('YYYY-MM-DD'));
     console.log("Start time:", this.startTime);
     console.log("Duration:", this.duration);
 
@@ -94,8 +86,8 @@ export class BookingComponent implements OnInit {
         tareaId: this.tareaId,
         servicioId: this.UsuarioDeServicio,
         usuarioId: this.usuarioMain,
-        fechaInicio: Timestamp.fromDate(this.selectedRange.startDate.toDate()),
-        fechaFin: Timestamp.fromDate(this.selectedRange.endDate.toDate()),
+        fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
+        fechaFin: Timestamp.fromDate(this.endDate.toDate()),
         horaInicio: this.startTime,
         duracionHoras: this.duration,
         estado: 'confirmado'

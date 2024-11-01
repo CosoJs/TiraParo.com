@@ -28,15 +28,31 @@
                         </div>
 
                         <div class="form-group">
-                            <span class="form-label">Selecciona la Fecha o el Rango de Fechas</span>
-                            <input ngxDaterangepickerMd [(ngModel)]="selectedRange" 
-                                   (datesUpdated)="onDateRangeChange($event)" 
-                                   name="selectedRange" 
+                            <span class="form-label">Fecha de Inicio</span>
+                            <input ngxDaterangepickerMd 
+                                   [(ngModel)]="startDate" 
+                                   (datesUpdated)="onStartDateChange($event)" 
+                                   name="startDate" 
                                    class="form-control" 
-                                   placeholder="Selecciona la fecha o rango de fechas" 
-                                   required />
-                          </div>                                                   
-
+                                   placeholder="Selecciona la fecha de inicio" 
+                                   required 
+                                   [singleDatePicker]="true"
+                                   [autoApply]="true"/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <span class="form-label">Fecha de Fin</span>
+                            <input ngxDaterangepickerMd 
+                                   [(ngModel)]="endDate" 
+                                   (datesUpdated)="onEndDateChange($event)" 
+                                   name="endDate" 
+                                   class="form-control" 
+                                   placeholder="Selecciona la fecha de fin" 
+                                   required 
+                                   [singleDatePicker]="true"
+                                   [autoApply]="true"/>
+                        </div>
+                        
                         <div class="form-group">
                             <span class="form-label">Hora de Inicio</span>
                             <input type="time" class="form-control" name="startTime" [(ngModel)]="startTime" required>
