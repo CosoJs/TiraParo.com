@@ -1,17 +1,35 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* Tres tarjetas por fila */
+    gap: 40px;
+    /* Incrementa el espacio entre tarjetas */
+    justify-items: center;
+    padding: 20px;
+    /* Espacio alrededor del contenedor */
+}
+
 .card {
-    width: 190px;
-    height: 254px;
-    padding: 0.8em;
-    background: #f5f5f5;
-    position: relative;
-    overflow: visible;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    width: 100%;
+    max-width: 350px;
+    /* Limita el ancho máximo de cada tarjeta */
+    background-color: #f5f5f5;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .card-img {
     position: relative;
     background-color: #ffcaa6;
-    height: 40%;
+    height: 200px;
+    /* Aumenta la altura de la imagen */
     width: 100%;
     border-radius: 0.5rem;
     overflow: hidden;
