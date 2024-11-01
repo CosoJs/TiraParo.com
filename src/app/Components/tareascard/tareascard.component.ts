@@ -7,16 +7,16 @@ interface Tarea {
   imagenes: string[];
   nombre: string;
   precio: number;
+  currentImageIndex: number; // Add currentImageIndex here
 }
 
 @Component({
   selector: 'app-tareascard',
   templateUrl: './tareascard.component.html',
-  styleUrls: ['./tareascard.component.css']
+  styleUrls: ['./tareascard.component.css'],
 })
 export class TareascardComponent implements OnInit {
   tareas: Tarea[] = [];
-  currentImageIndex: number = 0; // Para manejar la imagen actual
 
   constructor(private firestore: Firestore) {}
 
@@ -25,26 +25,39 @@ export class TareascardComponent implements OnInit {
     const UsuarioDeServicio = localStorage.getItem('UsuarioDeServicio');
 
     if (!usuarioMain || !UsuarioDeServicio) {
-      console.error("IDs de usuario o servicio no disponibles.");
+      console.error('IDs de usuario o servicio no disponibles.');
       return;
     }
 
     try {
-      const tareasCollection = collection(this.firestore, `users/${usuarioMain}/Servicios/${UsuarioDeServicio}/tareas`);
+      const tareasCollection = collection(
+        this.firestore,
+        `users/${usuarioMain}/Servicios/${UsuarioDeServicio}/tareas`
+      );
       const tareasSnapshot = await getDocs(tareasCollection);
 
-      this.tareas = tareasSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Tarea[];
+      this.tareas = tareasSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        currentImageIndex: 0, // Initialize each task with a currentImageIndex property
+      })) as Tarea[];
     } catch (error) {
       console.error('Error al cargar las tareas:', error);
     }
   }
 
-  // Métodos para cambiar de imagen
-  prevImage() {
-    this.currentImageIndex = (this.currentImageIndex > 0) ? this.currentImageIndex - 1 : this.currentImageIndex;
+  // Methods to change the image
+  prevImage(tarea: Tarea) {
+    tarea.currentImageIndex =
+      tarea.currentImageIndex > 0
+        ? tarea.currentImageIndex - 1
+        : tarea.imagenes.length - 1;
   }
 
-  nextImage() {
-    this.currentImageIndex = (this.currentImageIndex < this.tareas[0].imagenes.length - 1) ? this.currentImageIndex + 1 : this.currentImageIndex;
+  nextImage(tarea: Tarea) {
+    tarea.currentImageIndex =
+      tarea.currentImageIndex < tarea.imagenes.length - 1
+        ? tarea.currentImageIndex + 1
+        : 0;
   }
 }
