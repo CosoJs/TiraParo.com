@@ -8,8 +8,8 @@ interface User {
   servicio: string;
   descripcion: string;
   nombreperfil: string;
-  Image: string;
-  usuario?: string; // Marca como opcional para evitar errores si no está presente
+  logo: string; // Cambia 'Image' a 'logo'
+  usuario?: string;
 }
 
 @Component({
@@ -42,6 +42,7 @@ export class PerfilcardsComponent implements OnInit {
           this.users.push({
             id: serviceDoc.id,
             usuario: data['usuario'],
+            logo: data['logo'], // Asegúrate de capturar el campo 'logo'
             ...data,
           } as User);
         });
@@ -60,6 +61,7 @@ export class PerfilcardsComponent implements OnInit {
             this.users.push({
               id: userDoc.id,
               usuario: data['usuario'],
+              logo: data['logo'], // Asegúrate de capturar el campo 'logo'
               ...data,
             } as User);
           });
@@ -75,7 +77,7 @@ export class PerfilcardsComponent implements OnInit {
   }
 
   onCardClick(user: User) {
-    const usuarioId = user.usuario; // Accede directamente al campo usuario
+    const usuarioId = user.usuario;
     if (usuarioId) {
       localStorage.setItem('UsuarioDeServicio', user.id);
       localStorage.setItem('usuarioMain', usuarioId);

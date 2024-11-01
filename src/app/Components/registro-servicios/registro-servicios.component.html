@@ -23,6 +23,18 @@
             </select>
         </div>
 
+        <!-- Logo del servicio -->
+        <div class="form-group">
+            <label for="logo">Subir Logo del Servicio:</label>
+            <div class="upload-logo-container">
+                <input type="file" id="logo" (change)="onLogoSelected($event)" accept="image/*" style="display: none;" />
+                <input class="upload-logo-button" type="file" (change)="onLogoSelected($event)" accept="image/*" />
+            </div>
+        </div>
+
+        <!-- Vista previa del logo -->
+        <img *ngIf="logoPreview" [src]="logoPreview" alt="Vista previa del logo" class="logo-preview" />
+
         <!-- Descripción del Servicio -->
         <div class="form-group">
             <label for="descripcion">Nombre del Servicio:</label>

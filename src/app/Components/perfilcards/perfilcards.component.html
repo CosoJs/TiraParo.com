@@ -1,8 +1,8 @@
 <div class="card-container">
   <div *ngFor="let user of users" class="card" (click)="onCardClick(user)">
-    <div class="card-image" *ngIf="user.Image" [ngStyle]="{'background-image': 'url(' + user.Image + ')'}">
+    <div class="card-image" *ngIf="user.logo" [ngStyle]="{'background-image': 'url(' + user.logo + ')'}">
     </div>
-    <div *ngIf="!user.Image" class="card-image-placeholder">Sin Imagen</div>
+    <div *ngIf="!user.logo" class="card-image-placeholder">Sin Imagen</div>
     <div class="category">{{ user.categoria }}</div>
     <div class="heading">{{ user.descripcion }}</div>
     <div class="author">Por <span class="name">{{ user.nombreperfil }}</span></div>

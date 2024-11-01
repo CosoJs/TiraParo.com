@@ -16,6 +16,13 @@
   background-color: #f0f0f0;
 }
 
+.logo-preview {
+  max-width: 100px; /* Ajusta el tamaño según lo necesites */
+  max-height: 100px; /* Ajusta el tamaño según lo necesites */
+  margin-top: 10px; /* Espaciado entre el input y la imagen */
+}
+
+
 /* Container and Layout */
 .container {
   display: flex;

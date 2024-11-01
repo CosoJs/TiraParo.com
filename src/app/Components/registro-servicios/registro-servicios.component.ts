@@ -46,6 +46,7 @@ export class RegistroServiciosComponent {
   ubicacionServicio: string = '';
   informacionContacto: string = '';
   ubicacionSugerencias: any[] = [];
+  logoPreview: string | ArrayBuffer | null = null;
 
   constructor(private firestore: Firestore, public dialog: MatDialog, private nominatimService: NominatimService) {
     this.cargarCategorias();
@@ -184,30 +185,48 @@ export class RegistroServiciosComponent {
     return null;
   }
 
+  logoFile: string | null = null; // Guardar el archivo en formato base64
+
+  onLogoSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+
+        // Cargar la imagen como base64
+        reader.onload = (e: any) => {
+            this.logoFile = e.target.result; // Guardar la imagen como base64
+            this.logoPreview = e.target.result; // Establecer la vista previa
+        };
+
+        reader.readAsDataURL(file);
+    }
+  }
+
+
   async guardarServicio() {
     const campoInvalido = this.validarCampos();
     if (campoInvalido) {
       Swal.fire('Error', `Por favor completa el campo: ${campoInvalido}`, 'error');
       return;
     }
-
+  
     const userId = localStorage.getItem('UsuarioId');
     if (!userId) {
       console.error('Usuario no identificado.');
       return;
     }
-
+  
     try {
       // Verificar si ya existe un perfil para el mismo servicio
       const userServicesRef = collection(this.firestore, `users/${userId}/Servicios`);
       const queryExistingService = query(userServicesRef, where('servicio', '==', this.selectedServicio));
       const existingServiceSnapshot = await getDocs(queryExistingService);
-
+  
       if (!existingServiceSnapshot.empty) {
         Swal.fire('Error', 'Ya tienes un perfil para este servicio.', 'error');
         return;
       }
-
+  
       // Crear el perfil si no existe duplicado
       const batch = writeBatch(this.firestore);
       const servicioData = {
@@ -219,22 +238,35 @@ export class RegistroServiciosComponent {
         ubicacionServicio: this.ubicacionServicio,
         informacionContacto: this.informacionContacto,
         timestamp: new Date(),
-        usuario: userId
+        usuario: userId,
+        logo: '' // Inicializa como vacío
       };
-
+  
       const primeraUbicacionRef = doc(collection(this.firestore, `Servicios/${this.selectedCategoria}/Users`));
       const uniqueId = primeraUbicacionRef.id;
       const segundaUbicacionRef = doc(this.firestore, `users/${userId}/Servicios/${uniqueId}`);
-
+  
+      // *** Subir el logo a Firebase Storage ***
+      const storage = getStorage();
+      if (this.logoFile) {
+        const logoPath = `images/${userId}/${uniqueId}/logo.png`;
+        const logoRef = ref(storage, logoPath);
+        await uploadString(logoRef, this.logoFile, 'data_url');
+  
+        // Obtener la URL de descarga del logo
+        const logoURL = await getDownloadURL(logoRef);
+        servicioData.logo = logoURL; // Agregar la URL del logo al perfil de servicio
+      }
+  
+      // Agregar el servicioData (con el logo actualizado) al batch
       batch.set(primeraUbicacionRef, servicioData);
       batch.set(segundaUbicacionRef, servicioData);
-
-      // *** Subir las imágenes a Firebase Storage y guardar las tareas en subcolección ***
-      const storage = getStorage();
+  
+      // *** Subir las imágenes de tareas a Firebase Storage y guardar las tareas en subcolección ***
       for (const tarea of this.tareasRealizadas) {
         const tareaRef = doc(collection(this.firestore, `users/${userId}/Servicios/${uniqueId}/tareas`));
         const tareaId = tareaRef.id; // Genera el ID automáticamente
-
+  
         // Preparar datos de la tarea
         const tareaData: any = {
           nombre: tarea.nombre,
@@ -242,28 +274,28 @@ export class RegistroServiciosComponent {
           precio: tarea.precio,
           imagenes: []
         };
-
+  
         if (tarea.imagenes && tarea.imagenes.length > 0) {
           for (let i = 0; i < tarea.imagenes.length; i++) {
             const imagenBase64 = tarea.imagenes[i];
             const imagenPath = `images/${userId}/${uniqueId}/${tareaId}/image_${i}.png`;
-
+  
             const storageRef = ref(storage, imagenPath);
             await uploadString(storageRef, imagenBase64, 'data_url');
-
+  
             // Obtener la URL de descarga y agregarla a la tarea
             const downloadURL = await getDownloadURL(storageRef);
             tareaData.imagenes.push(downloadURL); // Guardar la URL en la tarea
           }
         }
-
+  
         // Guardar la tarea en la subcolección con la URL de las imágenes
         batch.set(tareaRef, tareaData);
       }
-
+  
       // Una vez subidas las imágenes, ejecuta el batch para guardar el perfil y las tareas
       await batch.commit();
-
+  
       Swal.fire('Éxito', 'Perfil de servicio creado con éxito.', 'success');
       this.reiniciarCampos();
     } catch (error) {
@@ -271,7 +303,8 @@ export class RegistroServiciosComponent {
       Swal.fire('Error', 'No se pudo crear el perfil de servicio.', 'error');
     }
   }
-
+  
+  
   reiniciarCampos() {
     this.selectedCategoria = '';
     this.selectedServicio = '';
@@ -282,6 +315,8 @@ export class RegistroServiciosComponent {
     this.horarioTrabajo = '';
     this.ubicacionServicio = '';
     this.informacionContacto = '';
+    this.logoFile = null; // Limpiar la variable que guarda el archivo
+    this.logoPreview = null; // Limpiar la vista previa del logo
   }
 
   scrollLeft() {
@@ -298,3 +333,4 @@ export class RegistroServiciosComponent {
     }
   }
 }
+
