@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 interface Tarea {
   id: string;
@@ -21,10 +22,11 @@ interface Servicio {
   styleUrls: ['./tareascard.component.css'],
 })
 export class TareascardComponent implements OnInit {
+
   tareas: Tarea[] = [];
   descripcion: string = ''; // Agrega una variable para almacenar la descripción
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, private router: Router) {}
 
   async ngOnInit() {
     const usuarioMain = localStorage.getItem('usuarioMain');
@@ -77,5 +79,9 @@ export class TareascardComponent implements OnInit {
       tarea.currentImageIndex < tarea.imagenes.length - 1
         ? tarea.currentImageIndex + 1
         : 0;
+  }
+
+  navigateToBooking(tareaId: string) {
+    this.router.navigate(['/booking', tareaId]);
   }
 }

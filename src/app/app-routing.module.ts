@@ -12,6 +12,7 @@ import { PerfilComponent } from './Components/perfil/perfil.component';
 import { PerfilesServiciosComponent } from './Components/perfiles-servicios/perfiles-servicios.component';
 import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/servicio-de-usuarios.component';
 import { InvoiceComponent } from './Components/invoice/invoice.component';
+import { BookingComponent } from './Components/booking/booking.component';
 
 const routes: Routes = [
   { path: '', component: loginComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
     component: InvoiceComponent,
     canActivate: [loginguard],
   },
+  { path: 'booking/:id', component: BookingComponent },
 ];
 
 @NgModule({
