@@ -99,4 +99,14 @@ export class BookingComponent implements OnInit {
       console.error('Error al confirmar la reserva:', error);
     }
   }
+
+  isSidebarExpanded: boolean = false;
+
+  expandSidebar() {
+    this.isSidebarExpanded = true;
+  }
+
+  collapseSidebar() {
+    this.isSidebarExpanded = false;
+  }
 }
