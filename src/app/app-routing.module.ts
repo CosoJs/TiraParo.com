@@ -14,9 +14,11 @@ import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/s
 import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { BookingComponent } from './Components/booking/booking.component';
 import { OrdenesComponent } from './Components/orders/orders.component';
+import { EditarServicioComponent } from './Components/editar-servicio/editar-servicio.component';
 
 const routes: Routes = [
   { path: '', component: loginComponent },
+  { path: 'edit/:id', component: EditarServicioComponent },
   {
     path: 'servicesregistro',
     component: RegistroServiciosComponent,

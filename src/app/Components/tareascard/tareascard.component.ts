@@ -25,17 +25,20 @@ export class TareascardComponent implements OnInit {
 
   tareas: Tarea[] = [];
   descripcion: string = ''; // Agrega una variable para almacenar la descripción
+  isSameUser: boolean = false; // Variable para verificar si los usuarios coinciden
 
   constructor(private firestore: Firestore, private router: Router) {}
 
   async ngOnInit() {
     const usuarioMain = localStorage.getItem('usuarioMain');
-    const UsuarioDeServicio = localStorage.getItem('UsuarioDeServicio');
+    const usuarioId = localStorage.getItem('UsuarioId');
 
-    if (!usuarioMain || !UsuarioDeServicio) {
+    if (!usuarioMain || !usuarioId) {
       console.error('IDs de usuario o servicio no disponibles.');
       return;
     }
+
+    this.isSameUser = usuarioMain === usuarioId; // Compara usuarioMain y usuarioId
 
     try {
       // Cargar la descripción del servicio
@@ -44,7 +47,7 @@ export class TareascardComponent implements OnInit {
       
       servicioSnapshot.docs.forEach((doc) => {
         const servicioData = doc.data() as Servicio; // Accede con la interfaz definida
-        if (doc.id === UsuarioDeServicio) {
+        if (doc.id === localStorage.getItem('UsuarioDeServicio')) {
           this.descripcion = servicioData.descripcion; // Obtener la descripción
         }
       });
@@ -52,7 +55,7 @@ export class TareascardComponent implements OnInit {
       // Cargar las tareas
       const tareasCollection = collection(
         this.firestore,
-        `users/${usuarioMain}/Servicios/${UsuarioDeServicio}/tareas`
+        `users/${usuarioMain}/Servicios/${localStorage.getItem('UsuarioDeServicio')}/tareas`
       );
       const tareasSnapshot = await getDocs(tareasCollection);
 
@@ -81,6 +84,12 @@ export class TareascardComponent implements OnInit {
         : 0;
   }
 
+  // Navegar a la página de edición
+  navigateToEdit(tareaId: string) {
+    this.router.navigate(['/edit', tareaId]);
+  }
+
+  // Navegar a la página de booking
   navigateToBooking(tareaId: string) {
     this.router.navigate(['/booking', tareaId]);
   }

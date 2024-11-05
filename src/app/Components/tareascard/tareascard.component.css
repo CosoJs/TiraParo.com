@@ -102,3 +102,31 @@ svg {
     border: 1px solid #ffcaa6;
     background-color: #ffcaa6;
 }
+
+.card-button {
+    border: 1px solid #252525;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3em;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+    width: 40px; /* Tamaño del botón */
+    height: 40px; /* Tamaño del botón */
+}
+
+.card-button:hover {
+    border: 1px solid #ffcaa6;
+    background-color: #ffcaa6;
+}
+
+.svg-icon {
+    width: 24px; /* Ajusta el tamaño del icono */
+    height: 24px; /* Ajusta el tamaño del icono */
+    fill: #252525; /* Color del icono */
+}
+
+.card-button:hover .svg-icon {
+    fill: #fff; /* Cambia el color del icono al pasar el ratón */
+}
