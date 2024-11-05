@@ -1,106 +1,47 @@
 <div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
     <!-- Sidebar -->
     <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
-        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+      <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
     </div>
-
-  <!-- Main Content -->
-  <section class="main-container">
-    <!-- Mis Peticiones Section -->
-    <div class="section ordenes-container">
+  
+    <!-- Main Content -->
+    <section class="main-container">
+      <!-- Mis Peticiones Section -->
+      <div class="section ordenes-container">
         <h2>Mis peticiones de servicios</h2>
         <hr>
         <div class="orders-gallery">
-            <button class="nav-left">&larr;</button>
-            <div class="orders-thumbnails">
-                <div class="order-wrapper">
-                    <div class="card-content">
-                        <h3>Servicio 1</h3>
-                        <p>Descripción del servicio 1.</p>
-                        <p>Precio: $100</p>
-                        <div>
-                            <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
-                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
-                              </svg></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="order-wrapper">
-                    <div class="card-content">
-                        <h3>Servicio 2</h3>
-                        <p>Descripción del servicio 2.</p>
-                        <p>Precio: $200</p>
-                        <div>
-                            <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
-                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
-                              </svg></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="order-wrapper">
-                    <div class="card-content">
-                        <h3>Servicio 3</h3>
-                        <p>Descripción del servicio 3.</p>
-                        <p>Precio: $150</p>
-                    </div>
-                    <div>
-                        <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
-                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
-                          </svg></button>
-                    </div>
-                </div>
+          <button class="nav-left" (click)="scrollOrdersLeft()">&larr;</button>
+          <div class="orders-thumbnails">
+            <div *ngFor="let peticion of misPeticiones" class="order-wrapper" [attr.id]="peticion.id">
+              <div class="card-content">
+                <h3>{{ peticion.nombre }}</h3> <!-- Se muestra el nombre -->
+                <p>{{ peticion.descripcion }}</p> <!-- Se muestra la descripción -->
+                <p>Precio: ${{ peticion.precio }}</p>
+              </div>
             </div>
-            <button class="nav-right">&rarr;</button>
+          </div>
+          <button class="nav-right" (click)="scrollOrdersRight()">&rarr;</button>
         </div>
-    </div>
-
-
-    <!-- Mis Órdenes de Servicio Section -->
-    <div class="section ordenes-container">
+      </div>
+  
+      <!-- Mis Órdenes de Servicio Section -->
+      <div class="section ordenes-container">
         <h2>Mis órdenes de servicio</h2>
         <hr>
         <div class="orders-gallery">
-            <button class="nav-left">&larr;</button>
-            <div class="orders-thumbnails">
-                <div class="order-wrapper">
-                    <div class="card-content">
-                        <h3>Orden 1</h3>
-                        <p>Descripción de la orden 1.</p>
-                        <p>Precio: $300</p>
-                        <div>
-                            <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
-                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
-                              </svg></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="order-wrapper">
-                    <div class="card-content">
-                        <h3>Orden 2</h3>
-                        <p>Descripción de la orden 2.</p>
-                        <p>Precio: $400</p>
-                        <div>
-                            <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
-                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
-                              </svg></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="order-wrapper">
-                    <div class="card-content">
-                        <h3>Orden 3</h3>
-                        <p>Descripción de la orden 3.</p>
-                        <p>Precio: $250</p>
-                        <div>
-                            <button><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
-                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
-                              </svg></button>
-                        </div>
-                    </div>
-                </div>
+          <button class="nav-left" (click)="scrollOrdersLeft()">&larr;</button>
+          <div class="orders-thumbnails">
+            <div *ngFor="let orden of misOrdenes" class="order-wrapper" [attr.id]="orden.id">
+              <div class="card-content">
+                <h3>{{ orden.nombre }}</h3> <!-- Se muestra el nombre -->
+                <p>{{ orden.descripcion }}</p> <!-- Se muestra la descripción -->
+                <p>Precio: ${{ orden.precio }}</p>
+              </div>
             </div>
-            <button class="nav-right">&rarr;</button>
+          </div>
+          <button class="nav-right" (click)="scrollOrdersRight()">&rarr;</button>
         </div>
-    </div>
-</section>
-</div>
+      </div>
+    </section>
+  </div>
