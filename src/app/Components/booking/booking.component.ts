@@ -14,9 +14,9 @@ export class BookingComponent implements OnInit {
   tarea: any = null;
   usuarioMain: string | null = null;
   UsuarioDeServicio: string | null = null;
+  usuarioId: string | null = null;
   bookingSuccess: boolean = false;
 
-  // Propiedades para fecha de inicio, fecha de fin, hora y duración
   startDate: moment.Moment = moment();
   endDate: moment.Moment = moment();
   startTime: string = '';
@@ -33,8 +33,9 @@ export class BookingComponent implements OnInit {
     this.tareaId = this.route.snapshot.paramMap.get('id');
     this.usuarioMain = localStorage.getItem('usuarioMain');
     this.UsuarioDeServicio = localStorage.getItem('UsuarioDeServicio');
+    this.usuarioId = localStorage.getItem('UsuarioId'); // Nueva variable para el usuario
 
-    if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio) {
+    if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) {
       console.error('ID de tarea o usuario no disponible.');
       return;
     }
@@ -61,12 +62,12 @@ export class BookingComponent implements OnInit {
   }
 
   onStartDateChange(event: any) {
-    this.startDate = moment(event.startDate || event); // Asegúrate de que el formato sea moment
+    this.startDate = moment(event.startDate || event);
     console.log("Start Date selected:", this.startDate.format('YYYY-MM-DD'));
   }
 
   onEndDateChange(event: any) {
-    this.endDate = moment(event.startDate || event); // Asegúrate de que el formato sea moment
+    this.endDate = moment(event.startDate || event);
     console.log("End Date selected:", this.endDate.format('YYYY-MM-DD'));
   }
 
@@ -77,21 +78,28 @@ export class BookingComponent implements OnInit {
     console.log("Start time:", this.startTime);
     console.log("Duration:", this.duration);
 
-    if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio) return;
+    if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) return;
+
+    const bookingData = {
+      tareaId: this.tareaId,
+      servicioId: this.UsuarioDeServicio,
+      usuarioId: this.usuarioMain,
+      fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
+      fechaFin: Timestamp.fromDate(this.endDate.toDate()),
+      horaInicio: this.startTime,
+      duracionHoras: this.duration,
+      estado: 'Pendiente',
+      cliente: this.usuarioId,
+    };
 
     try {
-      const bookingRef = doc(collection(this.firestore, `users/${this.usuarioMain}/bookings`));
+      // Guardar en la primera ubicación
+      const bookingRef1 = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`));
+      await setDoc(bookingRef1, bookingData);
 
-      await setDoc(bookingRef, {
-        tareaId: this.tareaId,
-        servicioId: this.UsuarioDeServicio,
-        usuarioId: this.usuarioMain,
-        fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
-        fechaFin: Timestamp.fromDate(this.endDate.toDate()),
-        horaInicio: this.startTime,
-        duracionHoras: this.duration,
-        estado: 'confirmado'
-      });
+      // Guardar en la segunda ubicación
+      const bookingRef2 = doc(collection(this.firestore, `users/${this.usuarioId}/misreservas`));
+      await setDoc(bookingRef2, bookingData);
 
       this.bookingSuccess = true;
       setTimeout(() => this.router.navigate(['/home']), 2000);
