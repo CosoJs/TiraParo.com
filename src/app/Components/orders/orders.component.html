@@ -1,0 +1,75 @@
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+    </div>
+
+  <!-- Main Content -->
+  <section class="main-container">
+    <!-- Mis Peticiones Section -->
+    <div class="section ordenes-container">
+        <h2>Mis peticiones de servicios</h2>
+        <hr>
+        <div class="orders-gallery">
+            <button class="nav-left">&larr;</button>
+            <div class="orders-thumbnails">
+                <div class="order-wrapper">
+                    <div class="card-content">
+                        <h3>Servicio 1</h3>
+                        <p>Descripción del servicio 1.</p>
+                        <p>Precio: $100</p>
+                    </div>
+                </div>
+                <div class="order-wrapper">
+                    <div class="card-content">
+                        <h3>Servicio 2</h3>
+                        <p>Descripción del servicio 2.</p>
+                        <p>Precio: $200</p>
+                    </div>
+                </div>
+                <div class="order-wrapper">
+                    <div class="card-content">
+                        <h3>Servicio 3</h3>
+                        <p>Descripción del servicio 3.</p>
+                        <p>Precio: $150</p>
+                    </div>
+                </div>
+            </div>
+            <button class="nav-right">&rarr;</button>
+        </div>
+    </div>
+
+    <!-- Mis Órdenes de Servicio Section -->
+    <div class="section ordenes-container">
+        <h2>Mis órdenes de servicio</h2>
+        <hr>
+        <div class="orders-gallery">
+            <button class="nav-left">&larr;</button>
+            <div class="orders-thumbnails">
+                <div class="order-wrapper">
+                    <div class="card-content">
+                        <h3>Orden 1</h3>
+                        <p>Descripción de la orden 1.</p>
+                        <p>Precio: $300</p>
+                    </div>
+                </div>
+                <div class="order-wrapper">
+                    <div class="card-content">
+                        <h3>Orden 2</h3>
+                        <p>Descripción de la orden 2.</p>
+                        <p>Precio: $400</p>
+                    </div>
+                </div>
+                <div class="order-wrapper">
+                    <div class="card-content">
+                        <h3>Orden 3</h3>
+                        <p>Descripción de la orden 3.</p>
+                        <p>Precio: $250</p>
+                    </div>
+                </div>
+            </div>
+            <button class="nav-right">&rarr;</button>
+        </div>
+    </div>
+</section>
+</div>
