@@ -47,27 +47,31 @@ export class RegistroServiciosComponent {
   informacionContacto: string = '';
   ubicacionSugerencias: any[] = [];
   logoPreview: string | ArrayBuffer | null = null;
+  logoFile: string | null = null; // Guardar el archivo en formato base64
 
-  constructor(private firestore: Firestore, public dialog: MatDialog, private nominatimService: NominatimService) {
+  constructor(
+    private firestore: Firestore,
+    public dialog: MatDialog,
+    private nominatimService: NominatimService
+  ) {
     this.cargarCategorias();
     this.cargarTareasRealizadas();
   }
 
-  ngOnInit() { // Método ngOnInit
+  ngOnInit() {
     this.limpiarTareasRealizadas(); // Llama a la función para limpiar las tareas
     this.cargarTareasRealizadas(); // Puedes mantener esta llamada si quieres cargar otras tareas
   }
 
   buscarUbicacion() {
-    // Limpia sugerencias si el campo está vacío
     if (this.ubicacionServicio.trim() === '') {
       this.ubicacionSugerencias = [];
       return;
     }
 
-    // Si tiene al menos 3 caracteres, realiza la búsqueda
     if (this.ubicacionServicio.length > 2) {
-      this.nominatimService.searchAddress(this.ubicacionServicio)
+      this.nominatimService
+        .searchAddress(this.ubicacionServicio)
         .subscribe((data: any) => {
           this.ubicacionSugerencias = data;
         });
@@ -76,13 +80,12 @@ export class RegistroServiciosComponent {
 
   seleccionarUbicacion(sugerencia: any) {
     this.ubicacionServicio = sugerencia.display_name;
-    this.ubicacionSugerencias = []; // Limpia sugerencias tras selección
+    this.ubicacionSugerencias = [];
   }
 
   limpiarTareasRealizadas() {
-    // Elimina el elemento de localStorage si existe
     localStorage.removeItem('tareasRealizadas');
-    this.tareasRealizadas = []; // Limpia el arreglo en la memoria
+    this.tareasRealizadas = [];
   }
 
   cargarTareasRealizadas() {
@@ -144,7 +147,7 @@ export class RegistroServiciosComponent {
   }
 
   eliminarTarea(tarea: any, event: MouseEvent): void {
-    event.stopPropagation(); // Evitar que se ejecute el evento de click del contenedor
+    event.stopPropagation();
     this.tareasRealizadas = this.tareasRealizadas.filter(
       (t) => t.nombre !== tarea.nombre
     );
@@ -185,23 +188,17 @@ export class RegistroServiciosComponent {
     return null;
   }
 
-  logoFile: string | null = null; // Guardar el archivo en formato base64
-
   onLogoSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
-        const reader = new FileReader();
-
-        // Cargar la imagen como base64
-        reader.onload = (e: any) => {
-            this.logoFile = e.target.result; // Guardar la imagen como base64
-            this.logoPreview = e.target.result; // Establecer la vista previa
-        };
-
-        reader.readAsDataURL(file);
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.logoFile = e.target.result;
+        this.logoPreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
-
 
   async guardarServicio() {
     const campoInvalido = this.validarCampos();
@@ -209,25 +206,32 @@ export class RegistroServiciosComponent {
       Swal.fire('Error', `Por favor completa el campo: ${campoInvalido}`, 'error');
       return;
     }
-  
+
     const userId = localStorage.getItem('UsuarioId');
     if (!userId) {
       console.error('Usuario no identificado.');
       return;
     }
-  
+
     try {
-      // Verificar si ya existe un perfil para el mismo servicio
+      Swal.fire({
+        title: 'Guardando...',
+        html: 'Por favor, espera mientras se guarda el perfil.',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
       const userServicesRef = collection(this.firestore, `users/${userId}/Servicios`);
       const queryExistingService = query(userServicesRef, where('servicio', '==', this.selectedServicio));
       const existingServiceSnapshot = await getDocs(queryExistingService);
-  
+
       if (!existingServiceSnapshot.empty) {
         Swal.fire('Error', 'Ya tienes un perfil para este servicio.', 'error');
         return;
       }
-  
-      // Crear el perfil si no existe duplicado
+
       const batch = writeBatch(this.firestore);
       const servicioData = {
         categoria: this.selectedCategoria,
@@ -239,63 +243,53 @@ export class RegistroServiciosComponent {
         informacionContacto: this.informacionContacto,
         timestamp: new Date(),
         usuario: userId,
-        logo: '' // Inicializa como vacío
+        logo: ''
       };
-  
+
       const primeraUbicacionRef = doc(collection(this.firestore, `Servicios/${this.selectedCategoria}/Users`));
       const uniqueId = primeraUbicacionRef.id;
       const segundaUbicacionRef = doc(this.firestore, `users/${userId}/Servicios/${uniqueId}`);
-  
-      // *** Subir el logo a Firebase Storage ***
+
       const storage = getStorage();
       if (this.logoFile) {
         const logoPath = `images/${userId}/${uniqueId}/logo.png`;
         const logoRef = ref(storage, logoPath);
         await uploadString(logoRef, this.logoFile, 'data_url');
-  
-        // Obtener la URL de descarga del logo
         const logoURL = await getDownloadURL(logoRef);
-        servicioData.logo = logoURL; // Agregar la URL del logo al perfil de servicio
+        servicioData.logo = logoURL;
       }
-  
-      // Agregar el servicioData (con el logo actualizado) al batch
+
       batch.set(primeraUbicacionRef, servicioData);
       batch.set(segundaUbicacionRef, servicioData);
-  
-      // *** Subir las imágenes de tareas a Firebase Storage y guardar las tareas en subcolección ***
+
       for (const tarea of this.tareasRealizadas) {
         const tareaRef = doc(collection(this.firestore, `users/${userId}/Servicios/${uniqueId}/tareas`));
-        const tareaId = tareaRef.id; // Genera el ID automáticamente
-  
-        // Preparar datos de la tarea
+        const tareaId = tareaRef.id;
+
         const tareaData: any = {
           nombre: tarea.nombre,
           descripcion: tarea.descripcion,
           precio: tarea.precio,
           imagenes: []
         };
-  
+
         if (tarea.imagenes && tarea.imagenes.length > 0) {
           for (let i = 0; i < tarea.imagenes.length; i++) {
             const imagenBase64 = tarea.imagenes[i];
             const imagenPath = `images/${userId}/${uniqueId}/${tareaId}/image_${i}.png`;
-  
+
             const storageRef = ref(storage, imagenPath);
             await uploadString(storageRef, imagenBase64, 'data_url');
-  
-            // Obtener la URL de descarga y agregarla a la tarea
+
             const downloadURL = await getDownloadURL(storageRef);
-            tareaData.imagenes.push(downloadURL); // Guardar la URL en la tarea
+            tareaData.imagenes.push(downloadURL);
           }
         }
-  
-        // Guardar la tarea en la subcolección con la URL de las imágenes
+
         batch.set(tareaRef, tareaData);
       }
-  
-      // Una vez subidas las imágenes, ejecuta el batch para guardar el perfil y las tareas
+
       await batch.commit();
-  
       Swal.fire('Éxito', 'Perfil de servicio creado con éxito.', 'success');
       this.reiniciarCampos();
     } catch (error) {
@@ -303,8 +297,7 @@ export class RegistroServiciosComponent {
       Swal.fire('Error', 'No se pudo crear el perfil de servicio.', 'error');
     }
   }
-  
-  
+
   reiniciarCampos() {
     this.selectedCategoria = '';
     this.selectedServicio = '';
@@ -315,22 +308,21 @@ export class RegistroServiciosComponent {
     this.horarioTrabajo = '';
     this.ubicacionServicio = '';
     this.informacionContacto = '';
-    this.logoFile = null; // Limpiar la variable que guarda el archivo
-    this.logoPreview = null; // Limpiar la vista previa del logo
+    this.logoFile = null;
+    this.logoPreview = null;
   }
 
   scrollLeft() {
     const container = document.querySelector('.tareas-galeria');
     if (container) {
-      container.scrollBy({ left: -210, behavior: 'smooth' }); // Desplaza en el ancho de dos tarjetas
+      container.scrollBy({ left: -210, behavior: 'smooth' });
     }
   }
 
   scrollRight() {
     const container = document.querySelector('.tareas-galeria');
     if (container) {
-      container.scrollBy({ left: 210, behavior: 'smooth' }); // Desplaza en el ancho de dos tarjetas
+      container.scrollBy({ left: 210, behavior: 'smooth' });
     }
   }
 }
-
