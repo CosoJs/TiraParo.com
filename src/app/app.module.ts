@@ -34,6 +34,7 @@ import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { TareascardComponent } from './Components/tareascard/tareascard.component';
 import { BookingComponent } from './Components/booking/booking.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { OrdenesComponent } from './Components/orders/orders.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     InvoiceComponent,
     TareascardComponent,
     BookingComponent,
+    OrdenesComponent,
   ],
   imports: [
     BrowserModule,

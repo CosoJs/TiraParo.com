@@ -41,7 +41,7 @@
             <span class="item-title" *ngIf="isHovered">Calendario</span>
         </li>
 
-        <li [class.active]="activeItem === 'All Reports'" (mouseover)="highlightItem('All Reports')"
+        <li [routerLink]="['/order']" [class.active]="activeItem === 'All Reports'" (mouseover)="highlightItem('All Reports')"
             (mouseout)="removeHighlight()" (click)="onNavItemClicked('All Reports')">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                 class="bi bi-clipboard2-check-fill" viewBox="0 0 16 16">
