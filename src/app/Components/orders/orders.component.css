@@ -1,118 +1,121 @@
 /* General Container for Sidebar and Main Content */
 .container {
-  display: flex;
-  height: 100vh; /* Full height of the viewport */
-  overflow: hidden;
+    display: flex;
+    height: 100vh; /* Full height of the viewport */
+    overflow: hidden;
 }
 
 /* Sidebar Styles */
 .sidebar {
-  transition: width 0.3s ease;
-  width: 60px; /* Default width when collapsed */
-  overflow: hidden;
-  background-color: #f8f9fa;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%; /* Ensure the sidebar takes full height */
+    transition: width 0.3s ease;
+    width: 60px; /* Default width when collapsed */
+    overflow: hidden;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%; /* Ensure the sidebar takes full height */
 }
 
 .sidebar.expanded {
-  width: 200px; /* Expanded width */
+    width: 200px; /* Expanded width */
 }
 
 /* Main Container Styles */
 .main-container {
-  flex-grow: 1;
-  overflow-y: auto;
-  transition: margin-left 0.3s ease;
+    flex-grow: 1;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    padding: 20px; /* Adding padding for better spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.sidebar-expanded .main-container {
-  margin-left: 60px; /* Default margin when sidebar is collapsed */
+.container .sidebar + .main-container {
+    margin-left: 60px; /* Margin to account for collapsed sidebar width */
 }
 
-.sidebar-expanded .ordenes-container {
-  margin-left: 200px; /* Adjust margin for expanded sidebar in "Mis órdenes de servicio" */
-}
-
-/* Section General Styles */
-.section {
-  margin-bottom: 40px;
-}
-
-h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-hr {
-  border: 1px solid #000;
-  margin-bottom: 20px;
+.sidebar.expanded + .main-container {
+    margin-left: 200px; /* Adjust margin for expanded sidebar */
 }
 
 /* Orders Carousel Styles */
 .orders-gallery {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Center horizontally */
-  gap: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensure space between arrows */
+    overflow: hidden; /* Hide overflow to limit visible cards */
+    width: calc(100% - 6rem); /* Adjust width to ensure both arrows are visible */
+    max-width: 1000px; /* Optional max width for large screens */
+    padding: 0 3rem; /* Ensure space for arrows */
 }
 
 .orders-thumbnails {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 1rem;
-  width: 100%;
+    display: flex;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    overflow-x: auto;
+    width: 100%; /* Full width inside gallery */
+    padding: 0 1rem; /* Padding inside gallery */
 }
 
+/* Cards */
 .order-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  width: 250px; /* Adjust the card width */
-  height: 150px; /* Adjust the card height */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
-  overflow: hidden;
+    flex: 0 0 calc((100% - 5rem) / 4); /* Display exactly 4 cards */
+    height: auto; /* Auto height to fit content */
+    min-height: 300px; /* Increased minimum height for better visibility */
+    max-height: 350px; /* Increased maximum height to allow more content */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .order-wrapper:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .card-content {
-  padding: 20px;
-  text-align: center; /* Center text */
+    padding: 20px;
+    text-align: center; /* Center text */
+    overflow: hidden;
+    white-space: normal;
 }
 
 /* Navigation Buttons */
 .nav-left, .nav-right {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ff7800;
+    border: none;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease;
+    z-index: 10; /* Ensure they are above other elements */
 }
 
-.nav-left, .nav-right {
-  background-color: #ff7800;
-  border: none;
-  color: white;
-  padding: 0.5rem 0.75rem;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.5rem;
-  transition: background-color 0.3s ease;
+.nav-left {
+    left: 0.5rem; /* Position inside the gallery padding */
+}
+
+.nav-right {
+    right: 0.5rem; /* Position inside the gallery padding */
 }
 
 .nav-left:hover, .nav-right:hover {
-  background-color: #ff6801;
+    background-color: #ff6801;
 }
