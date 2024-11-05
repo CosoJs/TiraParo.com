@@ -1,38 +1,43 @@
 <div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
     <!-- Sidebar -->
     <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
-        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+      <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
     </div>
-
-<div id="booking" class="section">
-    <div class="booking-form">
+  
+    <div id="booking" class="section">
+      <div class="booking-form">
         <div class="form-title">Reserva para {{ tarea?.nombre }}</div>
         <form (ngSubmit)="confirmBooking()" *ngIf="!bookingSuccess">
-            <div class="form-group">
-                <label for="description">Descripción</label>
-                <textarea id="description" class="form-control" placeholder="Escribe una descripción de tu reserva" required></textarea>
+          <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea id="description" class="form-control" placeholder="Escribe una descripción de tu reserva" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" type="tel" class="form-control" placeholder="Ingresa tu número de teléfono" required>
+          </div>
+          <div class="form-group">
+            <label for="startDate">Fecha de Inicio</label>
+            <div class="date-picker-container">
+                <input ngxDaterangepickerMd [(ngModel)]="startDate" (ngModelChange)="onStartDateChange($event)"
+                id="startDate" class="form-control" placeholder="Selecciona la fecha de inicio" 
+                required [singleDatePicker]="true" [autoApply]="true" [locale]="{ format: 'D/M/YY' }" autocomplete="off">
+         
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" placeholder="Ingresa tu correo electrónico" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input id="telefono" type="tel" class="form-control" placeholder="Ingresa tu número de teléfono" required>
-            </div>
-            <div class="form-group">
-                <label for="startDate">Fecha de Inicio</label>
-                <div class="date-picker-container">
-                    <input ngxDaterangepickerMd [(ngModel)]="startDate" id="startDate" class="form-control" placeholder="Selecciona la fecha de inicio" required [singleDatePicker]="true" [autoApply]="true" autocomplete="off"> 
-                </div>
-            </div>
-            <button type="submit" class="submit-button">Reservar Ahora</button>
+          </div>
+          <button type="submit" class="submit-button">Reservar Ahora</button>
         </form>
+  
+        <!-- Mensaje de confirmación -->
+        <div *ngIf="bookingSuccess" class="confirmation-message">
+          <p>¡Reserva confirmada con éxito!</p>
 
-        <!-- <div *ngIf="bookingSuccess" class="confirmation-message">
-            <p>¡Reserva confirmada con éxito!</p>
-            <button class="submit-button" (click)="goBack()">Volver a Inicio</button>
-        </div> -->
+        </div>
+      </div>
     </div>
-</div>
-
+  </div>
+  
