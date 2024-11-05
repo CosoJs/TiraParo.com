@@ -1,74 +1,45 @@
-/* General Container for Sidebar and Main Content */
-.container {
-    display: flex;
-    height: 100vh; /* Full height of the viewport */
-    overflow: hidden;
-}
-
-/* Sidebar Styles */
-.sidebar {
-    transition: width 0.3s ease;
-    width: 60px; /* Default width when collapsed */
-    overflow: hidden;
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%; /* Ensure the sidebar takes full height */
-}
-
-.sidebar.expanded {
-    width: 200px; /* Expanded width */
-}
-
-/* Main Container Styles */
-.main-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    transition: margin-left 0.3s ease, width 0.3s ease;
-    padding: 20px; /* Adding padding for better spacing */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.container .sidebar + .main-container {
-    margin-left: 60px; /* Margin to account for collapsed sidebar width */
-}
-
-.sidebar.expanded + .main-container {
-    margin-left: 200px; /* Adjust margin for expanded sidebar */
-}
-
-/* Orders Carousel Styles */
+/* Contenedor principal del carrusel */
 .orders-gallery {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Ensure space between arrows */
-    overflow: hidden; /* Hide overflow to limit visible cards */
-    width: calc(100% - 6rem); /* Adjust width to ensure both arrows are visible */
-    max-width: 1000px; /* Optional max width for large screens */
-    padding: 0 3rem; /* Ensure space for arrows */
+    justify-content: space-between;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 2rem;
+    margin: 2rem auto; /* Separación entre los carruseles */
 }
 
+.main-container{
+    margin-top: 2rem;
+}
+
+/* Estilo de las miniaturas (cards) y ocultar scrollbars */
 .orders-thumbnails {
     display: flex;
-    scroll-behavior: smooth;
     gap: 1rem;
     overflow-x: auto;
-    width: 100%; /* Full width inside gallery */
-    padding: 0 1rem; /* Padding inside gallery */
+    scroll-behavior: smooth;
+    width: calc(100% - 4rem);
+    padding: 0 1rem;
 }
 
-/* Cards */
+/* Ocultar las barras de desplazamiento */
+.orders-thumbnails::-webkit-scrollbar {
+    display: none;
+}
+.orders-thumbnails {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Estilo de las tarjetas */
 .order-wrapper {
-    flex: 0 0 calc((100% - 5rem) / 4); /* Display exactly 4 cards */
-    height: auto; /* Auto height to fit content */
-    min-height: 300px; /* Increased minimum height for better visibility */
-    max-height: 350px; /* Increased maximum height to allow more content */
+    flex: 0 0 250px;
+    height: auto;
+    min-height: 300px;
+    max-height: 350px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
@@ -87,12 +58,10 @@
 
 .card-content {
     padding: 20px;
-    text-align: center; /* Center text */
-    overflow: hidden;
-    white-space: normal;
+    text-align: center;
 }
 
-/* Navigation Buttons */
+/* Botones de navegación */
 .nav-left, .nav-right {
     position: absolute;
     top: 50%;
@@ -100,20 +69,18 @@
     background-color: #ff7800;
     border: none;
     color: white;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.5rem;
-    transition: background-color 0.3s ease;
-    z-index: 10; /* Ensure they are above other elements */
 }
 
 .nav-left {
-    left: 0.5rem; /* Position inside the gallery padding */
+    left: 0.5rem;
 }
 
 .nav-right {
-    right: 0.5rem; /* Position inside the gallery padding */
+    right: 0.5rem;
 }
 
 .nav-left:hover, .nav-right:hover {

@@ -69,19 +69,19 @@ export class OrdenesComponent implements OnInit {
     });
   }
    
-  scrollOrdersLeft() {
-    const container = document.querySelector('.orders-thumbnails');
+  scrollOrdersLeft(containerClass: string) {
+    const container = document.querySelector(`.${containerClass}`);
     if (container) {
       container.scrollBy({ left: -210, behavior: 'smooth' });
     }
   }
-
-  scrollOrdersRight() {
-    const container = document.querySelector('.orders-thumbnails');
+  
+  scrollOrdersRight(containerClass: string) {
+    const container = document.querySelector(`.${containerClass}`);
     if (container) {
       container.scrollBy({ left: 210, behavior: 'smooth' });
     }
-  }
+  }  
 
   onCheck(item: any) {
     // Acción para el evento de check
