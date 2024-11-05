@@ -33,7 +33,7 @@ export class BookingComponent implements OnInit {
     this.tareaId = this.route.snapshot.paramMap.get('id');
     this.usuarioMain = localStorage.getItem('usuarioMain');
     this.UsuarioDeServicio = localStorage.getItem('UsuarioDeServicio');
-    this.usuarioId = localStorage.getItem('UsuarioId'); // Nueva variable para el usuario
+    this.usuarioId = localStorage.getItem('UsuarioId');
 
     if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) {
       console.error('ID de tarea o usuario no disponible.');
@@ -62,17 +62,26 @@ export class BookingComponent implements OnInit {
   }
 
   onStartDateChange(event: any) {
-    this.startDate = moment(event.startDate || event);
+    this.startDate = moment(event.startDate || event); // Asegura que es un objeto moment
     console.log("Start Date selected:", this.startDate.format('YYYY-MM-DD'));
   }
 
   onEndDateChange(event: any) {
-    this.endDate = moment(event.startDate || event);
+    this.endDate = moment(event.startDate || event); // Asegura que es un objeto moment
     console.log("End Date selected:", this.endDate.format('YYYY-MM-DD'));
   }
 
   async confirmBooking() {
     console.log("Confirming booking...");
+
+    // Asegurarse de que startDate y endDate sean instancias de moment
+    if (!moment.isMoment(this.startDate)) {
+      this.startDate = moment(this.startDate);
+    }
+    if (!moment.isMoment(this.endDate)) {
+      this.endDate = moment(this.endDate);
+    }
+
     console.log("Start date:", this.startDate.format('YYYY-MM-DD'));
     console.log("End date:", this.endDate.format('YYYY-MM-DD'));
     console.log("Start time:", this.startTime);
@@ -93,15 +102,10 @@ export class BookingComponent implements OnInit {
     };
 
     try {
-      // Generar un id único para ambas reservas
-      const bookingId = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`)).id;
-
-      // Guardar en la primera ubicación usando el mismo id
-      const bookingRef1 = doc(this.firestore, `users/${this.usuarioMain}/reservas/${bookingId}`);
+      const bookingRef1 = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`));
       await setDoc(bookingRef1, bookingData);
 
-      // Guardar en la segunda ubicación usando el mismo id
-      const bookingRef2 = doc(this.firestore, `users/${this.usuarioId}/misreservas/${bookingId}`);
+      const bookingRef2 = doc(collection(this.firestore, `users/${this.usuarioId}/misreservas`));
       await setDoc(bookingRef2, bookingData);
 
       this.bookingSuccess = true;
