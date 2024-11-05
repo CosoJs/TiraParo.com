@@ -22,19 +22,9 @@
             </div>
             <div class="form-group">
                 <label for="startDate">Fecha de Inicio</label>
-                <input ngxDaterangepickerMd [(ngModel)]="startDate" id="startDate" class="form-control" placeholder="Selecciona la fecha de inicio" required [singleDatePicker]="true" [autoApply]="true">
-            </div>
-            <div class="form-group">
-                <label for="endDate">Fecha de Fin</label>
-                <input ngxDaterangepickerMd [(ngModel)]="endDate" id="endDate" class="form-control" placeholder="Selecciona la fecha de fin" required [singleDatePicker]="true" [autoApply]="true">
-            </div>
-            <div class="form-group">
-                <label for="startTime">Hora de Inicio</label>
-                <input type="time" id="startTime" class="form-control" [(ngModel)]="startTime" required>
-            </div>
-            <div class="form-group">
-                <label for="duration">Duración en Horas</label>
-                <input type="number" id="duration" class="form-control" [(ngModel)]="duration" placeholder="Número de horas" min="1" required>
+                <div class="date-picker-container">
+                    <input ngxDaterangepickerMd [(ngModel)]="startDate" id="startDate" class="form-control" placeholder="Selecciona la fecha de inicio" required [singleDatePicker]="true" [autoApply]="true" autocomplete="off"> 
+                </div>
             </div>
             <button type="submit" class="submit-button">Reservar Ahora</button>
         </form>

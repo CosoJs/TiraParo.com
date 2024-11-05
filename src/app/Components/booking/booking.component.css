@@ -79,3 +79,14 @@ textarea {
 .submit-button:hover {
     background-color: #ff6801;
 }
+
+::ng-deep .md-drppicker {
+    left: 50% !important; /* Centra el calendario */
+    transform: translateX(-50%) !important; /* Ajusta para centrar */
+    top: auto !important;
+    padding: 0px !important;
+}
+
+::ng-deep .md-drppicker td.active, ::ng-deep .md-drppicker td.active:hover{
+    background-color: #ff6801 !important;
+}
