@@ -23,9 +23,7 @@
           <div class="form-group">
             <label for="startDate">Fecha de Inicio</label>
             <div class="date-picker-container">
-                <input ngxDaterangepickerMd [(ngModel)]="startDate" (ngModelChange)="onStartDateChange($event)"
-                id="startDate" class="form-control" placeholder="Selecciona la fecha de inicio" 
-                required [singleDatePicker]="true" [autoApply]="true" [locale]="{ format: 'D/M/YY' }" autocomplete="off">
+              <input ngxDaterangepickerMd [(ngModel)]="startDate" id="startDate" class="form-control" placeholder="Selecciona la fecha de inicio" required [singleDatePicker]="true" [autoApply]="true" autocomplete="off"> 
          
             </div>
           </div>
