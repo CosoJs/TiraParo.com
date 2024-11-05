@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Firestore, doc, getDoc, setDoc, collection } from '@angular/fire/firestore';
 import { Timestamp } from 'firebase/firestore';
 import moment from 'moment';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-booking',
@@ -23,8 +22,6 @@ export class BookingComponent implements OnInit {
   startTime: string = '';
   duration: number = 1;
 
-  isSidebarExpanded: boolean = false;
-
   constructor(
     private route: ActivatedRoute,
     private firestore: Firestore,
@@ -32,10 +29,11 @@ export class BookingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("Component initialized");
     this.tareaId = this.route.snapshot.paramMap.get('id');
     this.usuarioMain = localStorage.getItem('usuarioMain');
     this.UsuarioDeServicio = localStorage.getItem('UsuarioDeServicio');
-    this.usuarioId = localStorage.getItem('UsuarioId');
+    this.usuarioId = localStorage.getItem('UsuarioId'); // Nueva variable para el usuario
 
     if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) {
       console.error('ID de tarea o usuario no disponible.');
@@ -64,66 +62,56 @@ export class BookingComponent implements OnInit {
   }
 
   onStartDateChange(event: any) {
-    this.startDate = moment(event);
-    console.log("Start Date selected:", this.startDate.format('DD/MM/YY'));
+    this.startDate = moment(event.startDate || event);
+    console.log("Start Date selected:", this.startDate.format('YYYY-MM-DD'));
   }
 
   onEndDateChange(event: any) {
-    this.endDate = moment(event);
-    console.log("End Date selected:", this.endDate.format('DD/MM/YY'));
+    this.endDate = moment(event.startDate || event);
+    console.log("End Date selected:", this.endDate.format('YYYY-MM-DD'));
   }
 
   async confirmBooking() {
+    console.log("Confirming booking...");
+    console.log("Start date:", this.startDate.format('YYYY-MM-DD'));
+    console.log("End date:", this.endDate.format('YYYY-MM-DD'));
+    console.log("Start time:", this.startTime);
+    console.log("Duration:", this.duration);
+
+    if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) return;
+
+    const bookingData = {
+      tareaId: this.tareaId,
+      servicioId: this.UsuarioDeServicio,
+      usuarioId: this.usuarioMain,
+      fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
+      fechaFin: Timestamp.fromDate(this.endDate.toDate()),
+      horaInicio: this.startTime,
+      duracionHoras: this.duration,
+      estado: 'Pendiente',
+      cliente: this.usuarioId,
+    };
+
     try {
-      // Mostrar el spinner de carga
-      Swal.fire({
-        title: 'Confirmando reserva...',
-        html: 'Por favor, espera mientras se confirma la reserva.',
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading(); // Muestra el spinner
-        }
-      });
+      // Generar un id único para ambas reservas
+      const bookingId = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`)).id;
 
-      console.log("Confirming booking...");
-      console.log("Start date:", this.startDate.format('DD/MM/YY'));
-      console.log("End date:", this.endDate.format('DD/MM/YY'));
-      console.log("Start time:", this.startTime);
-      console.log("Duration:", this.duration);
-
-      if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) return;
-
-      const bookingData = {
-        tareaId: this.tareaId,
-        servicioId: this.UsuarioDeServicio,
-        usuarioId: this.usuarioMain,
-        fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
-        fechaFin: Timestamp.fromDate(this.endDate.toDate()),
-        horaInicio: this.startTime,
-        duracionHoras: this.duration,
-        estado: 'Pendiente',
-        cliente: this.usuarioId,
-      };
-
-      // Guardar en la primera ubicación
-      const bookingRef1 = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`));
+      // Guardar en la primera ubicación usando el mismo id
+      const bookingRef1 = doc(this.firestore, `users/${this.usuarioMain}/reservas/${bookingId}`);
       await setDoc(bookingRef1, bookingData);
 
-      // Guardar en la segunda ubicación
-      const bookingRef2 = doc(collection(this.firestore, `users/${this.usuarioId}/misreservas`));
+      // Guardar en la segunda ubicación usando el mismo id
+      const bookingRef2 = doc(this.firestore, `users/${this.usuarioId}/misreservas/${bookingId}`);
       await setDoc(bookingRef2, bookingData);
 
       this.bookingSuccess = true;
-
-      // Ocultar el spinner y mostrar éxito
-      Swal.fire('Éxito', 'Reserva confirmada con éxito.', 'success');
       setTimeout(() => this.router.navigate(['/home']), 2000);
     } catch (error) {
       console.error('Error al confirmar la reserva:', error);
-      // Ocultar el spinner y mostrar error
-      Swal.fire('Error', 'No se pudo confirmar la reserva.', 'error');
     }
   }
+
+  isSidebarExpanded: boolean = false;
 
   expandSidebar() {
     this.isSidebarExpanded = true;
