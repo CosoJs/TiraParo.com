@@ -37,6 +37,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { OrdenesComponent } from './Components/orders/orders.component';
 import { EditarServicioComponent } from './Components/editar-servicio/editar-servicio.component';
 import { ModalordenesdeservicioComponent } from './Components/modalordenesdeservicio/modalordenesdeservicio.component';
+import { CalendarComponent } from './Components/calendar/calendar.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { ModalordenesdeservicioComponent } from './Components/modalordenesdeserv
     OrdenesComponent,
     EditarServicioComponent,
     ModalordenesdeservicioComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,

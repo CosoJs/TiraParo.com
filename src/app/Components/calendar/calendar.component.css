@@ -1,0 +1,129 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", serif;
+  background: radial-gradient(circle, #eeaeca 0%, #94bbe9 100%);
+  min-height: 100vh;
+  margin: 0;
+}
+
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 1600px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.calendar-header h1 {
+  margin: 0;
+  font-weight: 800;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.calendar-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.calendar-days li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 9rem; /* Ajuste para hacer las celdas más grandes */
+  width: 9rem;
+  font-weight: 300;
+  font-size: 1.4rem;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.calendar-days li time {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.today {
+  background: #ffffff70;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 250px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.37);
+}
+
+.legend {
+  font-size: 1.2em;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.platform-1 {
+  background-color: #b0c4de;
+}
+.platform-2 {
+  background-color: #90ee90;
+}
+.platform-3 {
+  background-color: #ff69b4;
+}
+.platform-4 {
+  background-color: #ffeb3b;
+}

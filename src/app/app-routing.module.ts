@@ -15,6 +15,7 @@ import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { BookingComponent } from './Components/booking/booking.component';
 import { OrdenesComponent } from './Components/orders/orders.component';
 import { EditarServicioComponent } from './Components/editar-servicio/editar-servicio.component';
+import { CalendarComponent } from './Components/calendar/calendar.component';
 
 const routes: Routes = [
   { path: '', component: loginComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   },
   { path: 'booking/:id', component: BookingComponent },
   {path: 'order', component: OrdenesComponent},
+  {path: 'calendar', component: CalendarComponent},
 ];
 
 @NgModule({
