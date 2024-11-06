@@ -62,9 +62,9 @@ export class BookingComponent implements OnInit {
 
   async confirmBooking() {
     console.log("Confirming booking...");
-
+  
     if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) return;
-
+  
     const bookingData = {
       tareaId: this.tareaId,
       servicioId: this.UsuarioDeServicio,
@@ -76,20 +76,26 @@ export class BookingComponent implements OnInit {
       estado: 'Pendiente',
       cliente: this.usuarioId,
     };
-
+  
     try {
-      const bookingRef1 = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`));
+      // Generar un nuevo ID manualmente
+      const bookingId = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`)).id;
+  
+      // Guardar en la primera ubicación con el ID generado
+      const bookingRef1 = doc(this.firestore, `users/${this.usuarioMain}/reservas/${bookingId}`);
       await setDoc(bookingRef1, bookingData);
-
-      const bookingRef2 = doc(collection(this.firestore, `users/${this.usuarioId}/misreservas`));
+  
+      // Guardar en la segunda ubicación con el mismo ID
+      const bookingRef2 = doc(this.firestore, `users/${this.usuarioId}/misreservas/${bookingId}`);
       await setDoc(bookingRef2, bookingData);
-
+  
       this.bookingSuccess = true;
       setTimeout(() => this.router.navigate(['/home']), 2000);
     } catch (error) {
       console.error('Error al confirmar la reserva:', error);
     }
   }
+  
 
   isSidebarExpanded: boolean = false;
 

@@ -1,0 +1,84 @@
+/* Modal de Detalles de la Orden */
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: none;
+    border: none;
+    max-width: 500px;
+    margin: 0 auto;
+    overflow-y: auto;
+    max-height: 90vh;
+    scrollbar-width: none;
+  }
+  
+  .modal-content::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-title {
+    font-size: 1.6rem;
+    color: #ff6801;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .close-btn {
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  /* Contenido del modal */
+  .modal-body {
+    margin-top: 1rem;
+  }
+  
+  .modal-body p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-body p strong {
+    color: #ff7800;
+    font-weight: 600;
+  }
+  
+  /* Botones de acciones en el modal */
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .submit-btn {
+    background-color: #ff7800;
+    color: white;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #ff6801;
+  }
+  

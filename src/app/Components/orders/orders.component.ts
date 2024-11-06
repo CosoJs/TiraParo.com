@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalordenesdeservicioComponent } from '../modalordenesdeservicio/modalordenesdeservicio.component';
 
 @Component({
   selector: 'app-ordenes',
@@ -12,7 +14,7 @@ export class OrdenesComponent implements OnInit {
   isSidebarExpanded: boolean = false;
   userId: string = '';
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.userId = localStorage.getItem('UsuarioId') || '';
@@ -23,6 +25,38 @@ export class OrdenesComponent implements OnInit {
       console.error('UsuarioId no encontrado en localStorage.');
     }
   }
+
+  abrirModalOrden(id: string, collection: string) {
+    const userId = localStorage.getItem('UsuarioId');
+    if (!userId) {
+      console.error('UsuarioId no encontrado en localStorage.');
+      return;
+    }
+  
+    const reservaRef = doc(this.firestore, `users/${userId}/${collection}/${id}`);
+    getDoc(reservaRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        const reservaData = docSnap.data();
+        const dialogRef = this.dialog.open(ModalordenesdeservicioComponent, {
+          data: {
+            cliente: reservaData?.['cliente'],
+            descripcion: reservaData?.['descripcion'],
+            email: reservaData?.['email'],
+            estado: reservaData?.['estado'],
+            fechaInicio: reservaData?.['fechaInicio'],
+            servicioId: reservaData?.['servicioId'],
+            tareaId: reservaData?.['tareaId'],
+            telefono: reservaData?.['telefono'],
+            usuarioId: reservaData?.['usuarioId'],
+            origen: collection === 'reservas' ? 'ordenesDeServicio' : 'peticionesDeServicio'
+          },
+        });
+      } else {
+        console.error('Documento no encontrado en Firestore.');
+      }
+    });
+  }
+   
 
   expandSidebar() {
     this.isSidebarExpanded = true;

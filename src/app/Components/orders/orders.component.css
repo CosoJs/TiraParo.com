@@ -86,3 +86,21 @@
 .nav-left:hover, .nav-right:hover {
     background-color: #ff6801;
 }
+
+/* Estilo del botón "Marcar como Completado" en el modal */
+.complete-btn {
+    background-color: #ff7800;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: inline-block;
+    text-align: center;
+}
+
+.complete-btn:hover {
+    background-color: #ff6801;
+}

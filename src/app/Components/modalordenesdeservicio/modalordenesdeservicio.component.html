@@ -1,0 +1,24 @@
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles de la Orden</h5>
+        <button type="button" class="btn-close close-btn" (click)="cerrarModal()" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Cliente:</strong> {{ clienteNombre }}</p>
+        <p><strong>Descripción:</strong> {{ data.descripcion }}</p>
+        <p><strong>Email:</strong> {{ data.email }}</p>
+        <p><strong>Estado:</strong> {{ data.estado }}</p>
+        <p><strong>Fecha de Inicio:</strong> {{ fechaInicioFormatted }}</p>
+        <p><strong>Servicio:</strong> {{ servicioDescripcion }}</p>
+        <p><strong>Tarea:</strong> {{ tareaNombre }}</p>
+        <p><strong>Teléfono:</strong> {{ data.telefono }}</p>
+        <p><strong>Usuario:</strong> {{ usuarioNombre }}</p>
+      </div>
+      <div class="modal-footer modal-actions">
+        <button type="button" class="btn btn-primary submit-btn" (click)="cerrarModal()">Cerrar</button>
+        <button *ngIf="data.origen === 'ordenesDeServicio'" type="button" class="btn btn-success complete-btn" (click)="marcarComoCompletado()">Marcar como Completado</button>
+      </div>
+    </div>
+  </div>
+  

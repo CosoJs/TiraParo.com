@@ -36,6 +36,7 @@ import { BookingComponent } from './Components/booking/booking.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { OrdenesComponent } from './Components/orders/orders.component';
 import { EditarServicioComponent } from './Components/editar-servicio/editar-servicio.component';
+import { ModalordenesdeservicioComponent } from './Components/modalordenesdeservicio/modalordenesdeservicio.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { EditarServicioComponent } from './Components/editar-servicio/editar-ser
     BookingComponent,
     OrdenesComponent,
     EditarServicioComponent,
+    ModalordenesdeservicioComponent,
   ],
   imports: [
     BrowserModule,
