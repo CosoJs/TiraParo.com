@@ -32,6 +32,8 @@
             <h3>{{ orden.nombre }}</h3>
             <p>{{ orden.descripcion }}</p>
             <p>Precio: ${{ orden.precio }}</p>
+            <!-- Mostrar botón solo si el estado no es "Completado" -->
+            <button *ngIf="orden.estado !== 'Completado'" (click)="marcarComoCompletado(orden.id)">Marcar como Completado</button>
           </div>
         </div>
       </div>

@@ -30,13 +30,13 @@ export class OrdenesComponent implements OnInit {
   }
 
   abrirModalOrden(id: string, collection: string) {
-    console.log('ID recibido:', id); 
+    console.log('ID recibido:', id);
     const userId = localStorage.getItem('UsuarioId');
     if (!userId) {
       console.error('UsuarioId no encontrado en localStorage.');
       return;
     }
-  
+
     const reservaRef = doc(this.firestore, `users/${userId}/${collection}/${id}`);
     getDoc(reservaRef).then((docSnap) => {
       if (docSnap.exists()) {
@@ -55,7 +55,7 @@ export class OrdenesComponent implements OnInit {
             usuarioId: reservaData?.['usuarioId'],
             origen: collection === 'reservas' ? 'ordenesDeServicio' : 'peticionesDeServicio'
           },
-        });        
+        });
       } else {
         console.error('Documento no encontrado en Firestore.');
       }
@@ -77,7 +77,7 @@ export class OrdenesComponent implements OnInit {
     getDocs(misReservasRef).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const reservaData = doc.data();
-        const reservaId = doc.id; 
+        const reservaId = doc.id;
         this.obtenerDetalles(reservaData, reservaId, (detalle) => {
           if (reservaData['estado'] === 'Pendiente') {
             this.misPeticiones.push(detalle);
@@ -93,12 +93,12 @@ export class OrdenesComponent implements OnInit {
     const reservasRef = collection(this.firestore, `users/${userId}/reservas`);
     getDocs(reservasRef).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        const ordenData = doc.data();
-        const ordenId = doc.id; 
-        this.obtenerDetalles(ordenData, ordenId, (detalle) => {
-          if (ordenData['estado'] === 'Pendiente') {
+        const servicioData = doc.data();
+        const servicioId = doc.id;
+        this.obtenerDetalles(servicioData, servicioId, (detalle) => {
+          if (servicioData['estado'] === 'Pendiente') {
             this.misOrdenes.push(detalle);
-          } else if (ordenData['estado'] === 'Completado') {
+          } else if (servicioData['estado'] === 'Completado') {
             this.misOrdenesCompletadas.push(detalle);
           }
         });
@@ -109,15 +109,14 @@ export class OrdenesComponent implements OnInit {
   }
 
   cargarMisServiciosCompletados(userId: string) {
-    const serviciosRef = collection(this.firestore, `users/${userId}/Servicios`);
+    const serviciosRef = collection(this.firestore, `users/${userId}/misreservas`);
     getDocs(serviciosRef).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const servicioData = doc.data();
-        const servicioId = doc.id; 
-        if (servicioData['estado'] === 'Completado') {
-          const detalle = { ...servicioData, id: servicioId };
+        const servicioId = doc.id;
+        this.obtenerDetalles(servicioData, servicioId, (detalle) => {
           this.misServiciosCompletados.push(detalle);
-        }
+        });
       });
     }).catch((error) => {
       console.error('Error al cargar los servicios completados:', error);
@@ -126,6 +125,13 @@ export class OrdenesComponent implements OnInit {
 
   obtenerDetalles(data: any, id: string, callback: (detalle: any) => void) {
     callback({ ...data, id });
+  }
+
+  marcarComoCompletado(id: string) {
+    // Lógica para actualizar el estado de la orden o servicio a "Completado"
+    console.log(`Marcando como completado el servicio/orden con id ${id}`);
+    // Actualiza el estado en Firestore, por ejemplo:
+    // this.firestore.collection(`users/${this.userId}/reservas`).doc(id).update({ estado: 'Completado' });
   }
 
   scrollOrdersLeft(className: string) {
