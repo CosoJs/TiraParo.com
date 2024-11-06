@@ -1,11 +1,12 @@
 .section {
     position: relative;
-    min-height: 100vh;
+    min-height: 110vh; /* Mantén la altura aumentada del fondo */
     padding: 2rem 4rem; /* Espacio adicional en los laterales */
     background-color: #f5f5f5;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Alinea el formulario al inicio de la sección */
+    padding-top: 2rem; /* Espacio desde el top */
 }
 
 .booking-form {
@@ -16,6 +17,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     padding: 2rem 3rem 2rem 2rem; /* Aumenta el padding a la derecha */
     margin: 0 auto;
+    position: relative;
 }
 
 .form-title {
@@ -80,13 +82,35 @@ textarea {
     background-color: #ff6801;
 }
 
+/* Estilos para el calendario */
 ::ng-deep .md-drppicker {
     left: 50% !important; /* Centra el calendario */
     transform: translateX(-50%) !important; /* Ajusta para centrar */
     top: auto !important;
     padding: 0px !important;
+    background-color: transparent !important; /* Evita el cambio de fondo */
+    box-shadow: none !important; /* Elimina cualquier sombra */
 }
 
-::ng-deep .md-drppicker td.active, ::ng-deep .md-drppicker td.active:hover{
-    background-color: #ff6801 !important;
+::ng-deep .md-drppicker .calendar-table .table-condensed .month,
+::ng-deep .md-drppicker .calendar-table .table-condensed .year,
+::ng-deep .md-drppicker .calendar-table .table-condensed .date {
+    background-color: transparent !important; /* Fondo transparente para mes y año */
+}
+
+::ng-deep .md-drppicker td.active,
+::ng-deep .md-drppicker td.active:hover {
+    background-color: #ff6801 !important; /* Mantén el color activo solo en la selección */
+}
+
+::ng-deep .md-drppicker .ranges li,
+::ng-deep .md-drppicker .drp-buttons .cancelBtn,
+::ng-deep .md-drppicker .drp-buttons .applyBtn {
+    background-color: transparent !important; /* Fondo transparente para botones */
+    color: #ff6801 !important; /* Color del texto */
+}
+
+::ng-deep .md-drppicker .drp-buttons .applyBtn {
+    background-color: #ff6801 !important; /* Fondo naranja para botón aplicar */
+    color: white !important;
 }
