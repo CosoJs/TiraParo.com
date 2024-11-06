@@ -1,18 +1,19 @@
 .card-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    /* Tres tarjetas por fila */
     gap: 40px;
-    /* Incrementa el espacio entre tarjetas */
     justify-items: center;
     padding: 20px;
-    /* Espacio alrededor del contenedor */
+    align-items: stretch;
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     max-width: 350px;
-    /* Limita el ancho máximo de cada tarjeta */
+    min-height: 450px;
     background-color: #f5f5f5;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,7 +30,6 @@
     position: relative;
     background-color: #ffcaa6;
     height: 200px;
-    /* Aumenta la altura de la imagen */
     width: 100%;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -50,6 +50,11 @@
     background-color: rgba(255, 255, 255, 0.8);
     border: none;
     cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-img button:first-of-type {
@@ -60,8 +65,19 @@
     right: 10px;
 }
 
+.card-img button .svg-icon {
+    width: 20px;
+    height: 20px;
+    fill: #252525;
+}
+
+.card-img button:hover .svg-icon {
+    fill: #000;
+}
+
 .card-info {
     padding-top: 10%;
+    flex-grow: 1;
 }
 
 svg {
@@ -92,28 +108,14 @@ svg {
 .card-button {
     border: 1px solid #252525;
     display: flex;
-    padding: 0.3em;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: 0.3s ease-in-out;
-}
-
-.card-button:hover {
-    border: 1px solid #ffcaa6;
-    background-color: #ffcaa6;
-}
-
-.card-button {
-    border: 1px solid #252525;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.3em;
     cursor: pointer;
     border-radius: 50%;
     transition: 0.3s ease-in-out;
-    width: 40px; /* Tamaño del botón */
-    height: 40px; /* Tamaño del botón */
+    width: 40px;
+    height: 40px;
 }
 
 .card-button:hover {
@@ -122,11 +124,13 @@ svg {
 }
 
 .svg-icon {
-    width: 24px; /* Ajusta el tamaño del icono */
-    height: 24px; /* Ajusta el tamaño del icono */
-    fill: #252525; /* Color del icono */
+    width: 24px;
+    height: 24px;
+    fill: #252525;
+    display: block;
+    margin: auto;
 }
 
 .card-button:hover .svg-icon {
-    fill: #fff; /* Cambia el color del icono al pasar el ratón */
+    fill: #fff;
 }
