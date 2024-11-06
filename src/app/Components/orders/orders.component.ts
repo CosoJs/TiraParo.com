@@ -11,6 +11,8 @@ import { ModalordenesdeservicioComponent } from '../modalordenesdeservicio/modal
 export class OrdenesComponent implements OnInit {
   misPeticiones: any[] = [];
   misOrdenes: any[] = [];
+  misOrdenesCompletadas: any[] = [];
+  misServiciosCompletados: any[] = [];
   isSidebarExpanded: boolean = false;
   userId: string = '';
 
@@ -21,13 +23,14 @@ export class OrdenesComponent implements OnInit {
     if (this.userId) {
       this.cargarMisPeticiones(this.userId);
       this.cargarMisOrdenes(this.userId);
+      this.cargarMisServiciosCompletados(this.userId);
     } else {
       console.error('UsuarioId no encontrado en localStorage.');
     }
   }
 
   abrirModalOrden(id: string, collection: string) {
-    console.log('ID recibido:', id); // Verificar si el ID es correcto
+    console.log('ID recibido:', id); 
     const userId = localStorage.getItem('UsuarioId');
     if (!userId) {
       console.error('UsuarioId no encontrado en localStorage.');
@@ -40,7 +43,7 @@ export class OrdenesComponent implements OnInit {
         const reservaData = docSnap.data();
         const dialogRef = this.dialog.open(ModalordenesdeservicioComponent, {
           data: {
-            id,  // Aquí pasamos el ID que recibes como argumento a la función
+            id,
             cliente: reservaData?.['cliente'],
             descripcion: reservaData?.['descripcion'],
             email: reservaData?.['email'],
@@ -60,7 +63,6 @@ export class OrdenesComponent implements OnInit {
       console.error('Error al obtener el documento:', error);
     });
   }
-  
 
   expandSidebar() {
     this.isSidebarExpanded = true;
@@ -75,11 +77,11 @@ export class OrdenesComponent implements OnInit {
     getDocs(misReservasRef).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const reservaData = doc.data();
-        const reservaId = doc.id; // Obtener el ID del documento principal
-        console.log('Reserva ID:', reservaId); // Verificar ID
+        const reservaId = doc.id; 
         this.obtenerDetalles(reservaData, reservaId, (detalle) => {
-          console.log('Detalle:', detalle); // Verificar datos
-          this.misPeticiones.push(detalle);
+          if (reservaData['estado'] === 'Pendiente') {
+            this.misPeticiones.push(detalle);
+          }
         });
       });
     }).catch((error) => {
@@ -92,11 +94,13 @@ export class OrdenesComponent implements OnInit {
     getDocs(reservasRef).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const ordenData = doc.data();
-        const ordenId = doc.id; // Obtener el ID del documento principal
-        console.log('Orden ID:', ordenId); // Verificar ID
+        const ordenId = doc.id; 
         this.obtenerDetalles(ordenData, ordenId, (detalle) => {
-          console.log('Detalle de orden:', detalle); // Verificar datos
-          this.misOrdenes.push(detalle);
+          if (ordenData['estado'] === 'Pendiente') {
+            this.misOrdenes.push(detalle);
+          } else if (ordenData['estado'] === 'Completado') {
+            this.misOrdenesCompletadas.push(detalle);
+          }
         });
       });
     }).catch((error) => {
@@ -104,39 +108,37 @@ export class OrdenesComponent implements OnInit {
     });
   }
 
-  obtenerDetalles(data: any, documentId: string, callback: (detalle: any) => void) {
-    const { usuarioId, servicioId, tareaId } = data;
-    if (!usuarioId || !servicioId || !tareaId) {
-      console.error('Datos faltantes:', { usuarioId, servicioId, tareaId });
-      return;
-    }
-    
-    const tareaRef = doc(this.firestore, `users/${usuarioId}/Servicios/${servicioId}/tareas/${tareaId}`);
-    getDoc(tareaRef).then((docSnap) => {
-      const tareaData = docSnap.data();
-      const detalle = {
-        nombre: tareaData?.['nombre'],
-        descripcion: tareaData?.['descripcion'],
-        precio: tareaData?.['precio'],
-        id: documentId // Usar el ID del documento principal
-      };
-      callback(detalle);
+  cargarMisServiciosCompletados(userId: string) {
+    const serviciosRef = collection(this.firestore, `users/${userId}/Servicios`);
+    getDocs(serviciosRef).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const servicioData = doc.data();
+        const servicioId = doc.id; 
+        if (servicioData['estado'] === 'Completado') {
+          const detalle = { ...servicioData, id: servicioId };
+          this.misServiciosCompletados.push(detalle);
+        }
+      });
     }).catch((error) => {
-      console.error('Error al obtener los detalles de la tarea:', error);
+      console.error('Error al cargar los servicios completados:', error);
     });
   }
 
-  scrollOrdersLeft(containerClass: string) {
-    const container = document.querySelector(`.${containerClass}`);
-    if (container) {
-      container.scrollBy({ left: -210, behavior: 'smooth' });
+  obtenerDetalles(data: any, id: string, callback: (detalle: any) => void) {
+    callback({ ...data, id });
+  }
+
+  scrollOrdersLeft(className: string) {
+    const element = document.querySelector(`.${className}`);
+    if (element) {
+      element.scrollLeft -= 200; // Ajusta según el desplazamiento deseado
     }
   }
 
-  scrollOrdersRight(containerClass: string) {
-    const container = document.querySelector(`.${containerClass}`);
-    if (container) {
-      container.scrollBy({ left: 210, behavior: 'smooth' });
+  scrollOrdersRight(className: string) {
+    const element = document.querySelector(`.${className}`);
+    if (element) {
+      element.scrollLeft += 200; // Ajusta según el desplazamiento deseado
     }
   }
 }

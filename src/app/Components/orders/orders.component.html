@@ -37,5 +37,37 @@
       </div>
       <button class="nav-right" (click)="scrollOrdersRight('orders-thumbnails-ordenes')">&rarr;</button>
     </div>
+
+    <!-- Título y Carrusel de Mis Órdenes Completadas -->
+    <h2>Mis Órdenes Completadas</h2>
+    <div class="orders-gallery">
+      <button class="nav-left" (click)="scrollOrdersLeft('orders-thumbnails-ordenes-completadas')">&larr;</button>
+      <div class="orders-thumbnails orders-thumbnails-ordenes-completadas">
+        <div *ngFor="let orden of misOrdenesCompletadas" class="order-wrapper" [attr.id]="orden.id" (click)="abrirModalOrden(orden.id, 'reservas')">
+          <div class="card-content">
+            <h3>{{ orden.nombre }}</h3>
+            <p>{{ orden.descripcion }}</p>
+            <p>Precio: ${{ orden.precio }}</p>
+          </div>
+        </div>
+      </div>
+      <button class="nav-right" (click)="scrollOrdersRight('orders-thumbnails-ordenes-completadas')">&rarr;</button>
+    </div>
+
+    <!-- Título y Carrusel de Mis Servicios Completados -->
+    <h2>Mis Servicios Completados</h2>
+    <div class="orders-gallery">
+      <button class="nav-left" (click)="scrollOrdersLeft('orders-thumbnails-servicios-completados')">&larr;</button>
+      <div class="orders-thumbnails orders-thumbnails-servicios-completados">
+        <div *ngFor="let servicio of misServiciosCompletados" class="order-wrapper" [attr.id]="servicio.id" (click)="abrirModalOrden(servicio.id, 'misreservas')">
+          <div class="card-content">
+            <h3>{{ servicio.nombre }}</h3>
+            <p>{{ servicio.descripcion }}</p>
+            <p>Precio: ${{ servicio.precio }}</p>
+          </div>
+        </div>
+      </div>
+      <button class="nav-right" (click)="scrollOrdersRight('orders-thumbnails-servicios-completados')">&rarr;</button>
+    </div>
   </section>
 </div>
