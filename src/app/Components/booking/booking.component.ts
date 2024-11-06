@@ -18,9 +18,9 @@ export class BookingComponent implements OnInit {
   bookingSuccess: boolean = false;
 
   startDate: moment.Moment = moment();
-  endDate: moment.Moment = moment();
-  startTime: string = '';
-  duration: number = 1;
+  email: string = '';
+  telefono: string = '';
+  description: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +29,6 @@ export class BookingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("Component initialized");
     this.tareaId = this.route.snapshot.paramMap.get('id');
     this.usuarioMain = localStorage.getItem('usuarioMain');
     this.UsuarioDeServicio = localStorage.getItem('UsuarioDeServicio');
@@ -61,31 +60,8 @@ export class BookingComponent implements OnInit {
     }
   }
 
-  onStartDateChange(event: any) {
-    this.startDate = moment(event.startDate || event); // Asegura que es un objeto moment
-    console.log("Start Date selected:", this.startDate.format('YYYY-MM-DD'));
-  }
-
-  onEndDateChange(event: any) {
-    this.endDate = moment(event.startDate || event); // Asegura que es un objeto moment
-    console.log("End Date selected:", this.endDate.format('YYYY-MM-DD'));
-  }
-
   async confirmBooking() {
     console.log("Confirming booking...");
-
-    // Asegurarse de que startDate y endDate sean instancias de moment
-    if (!moment.isMoment(this.startDate)) {
-      this.startDate = moment(this.startDate);
-    }
-    if (!moment.isMoment(this.endDate)) {
-      this.endDate = moment(this.endDate);
-    }
-
-    console.log("Start date:", this.startDate.format('YYYY-MM-DD'));
-    console.log("End date:", this.endDate.format('YYYY-MM-DD'));
-    console.log("Start time:", this.startTime);
-    console.log("Duration:", this.duration);
 
     if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) return;
 
@@ -94,9 +70,9 @@ export class BookingComponent implements OnInit {
       servicioId: this.UsuarioDeServicio,
       usuarioId: this.usuarioMain,
       fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
-      fechaFin: Timestamp.fromDate(this.endDate.toDate()),
-      horaInicio: this.startTime,
-      duracionHoras: this.duration,
+      descripcion: this.description,
+      email: this.email,
+      telefono: this.telefono,
       estado: 'Pendiente',
       cliente: this.usuarioId,
     };
