@@ -21,13 +21,15 @@ export class ModalordenesdeservicioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("Datos recibidos en el modal:", this.data);
     this.obtenerNombreCliente();
     this.obtenerDescripcionServicio();
     this.obtenerNombreTarea();
     this.obtenerNombreUsuario();
     this.formatearFechaInicio();
-  }
+  }  
 
+  // Formatear la fecha de inicio a formato legible
   formatearFechaInicio(): void {
     if (this.data.fechaInicio && this.data.fechaInicio.seconds) {
       const date = new Date(this.data.fechaInicio.seconds * 1000); // Convertir segundos a milisegundos
@@ -35,6 +37,7 @@ export class ModalordenesdeservicioComponent implements OnInit {
     }
   }
 
+  // Obtener nombre del cliente desde Firestore
   async obtenerNombreCliente(): Promise<void> {
     try {
       const clienteRef = doc(this.firestore, `users/${this.data.cliente}`);
@@ -47,6 +50,7 @@ export class ModalordenesdeservicioComponent implements OnInit {
     }
   }
 
+  // Obtener descripción del servicio desde Firestore
   async obtenerDescripcionServicio(): Promise<void> {
     try {
       const servicioRef = doc(this.firestore, `users/${this.data.usuarioId}/Servicios/${this.data.servicioId}`);
@@ -59,6 +63,7 @@ export class ModalordenesdeservicioComponent implements OnInit {
     }
   }
 
+  // Obtener nombre de la tarea desde Firestore
   async obtenerNombreTarea(): Promise<void> {
     try {
       const tareaRef = doc(this.firestore, `users/${this.data.usuarioId}/Servicios/${this.data.servicioId}/tareas/${this.data.tareaId}`);
@@ -71,6 +76,7 @@ export class ModalordenesdeservicioComponent implements OnInit {
     }
   }
 
+  // Obtener nombre del usuario desde Firestore
   async obtenerNombreUsuario(): Promise<void> {
     try {
       const usuarioRef = doc(this.firestore, `users/${this.data.usuarioId}`);
@@ -83,16 +89,27 @@ export class ModalordenesdeservicioComponent implements OnInit {
     }
   }
 
+  // Cerrar el modal
   cerrarModal(): void {
     this.dialogRef.close();
   }
 
+  // Marcar la orden como completada
   async marcarComoCompletado(): Promise<void> {
+    if (!this.data.usuarioId || !this.data.cliente || !this.data.id) {
+      console.error("Datos incompletos: usuarioId, cliente o id faltan.");
+      return;
+    }
+    
     try {
-      // Referencias a ambas ubicaciones en Firestore
+      // Construir las referencias a las rutas en Firestore
       const ordenProveedorRef = doc(this.firestore, `users/${this.data.usuarioId}/reservas/${this.data.id}`);
       const ordenClienteRef = doc(this.firestore, `users/${this.data.cliente}/misreservas/${this.data.id}`);
-  
+      
+      // Imprimir las rutas para verificar que sean correctas
+      console.log("Ruta Proveedor:", `users/${this.data.usuarioId}/reservas/${this.data.id}`);
+      console.log("Ruta Cliente:", `users/${this.data.cliente}/misreservas/${this.data.id}`);
+      
       // Actualizar el campo 'estado' a 'Completado' en ambas rutas
       await Promise.all([
         updateDoc(ordenProveedorRef, { estado: 'Completado' }),
@@ -108,5 +125,4 @@ export class ModalordenesdeservicioComponent implements OnInit {
       console.error("Error al marcar como completado:", error);
     }
   }
-  
 }
