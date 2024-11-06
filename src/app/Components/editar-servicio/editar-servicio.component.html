@@ -1,1 +1,45 @@
-<p>editar-servicio works!</p>
+<div class="container">
+    <h2 class="form-title">Editar Tarea de Servicio</h2>
+  
+    <!-- Campo de Nombre de la Tarea -->
+    <div class="form-group">
+      <label for="nombre">Nombre de la Tarea:</label>
+      <input id="nombre" type="text" [(ngModel)]="nombre" placeholder="Nombre de la tarea">
+    </div>
+  
+    <!-- Campo de Descripción de la Tarea -->
+    <div class="form-group">
+      <label for="descripcion">Descripción de la Tarea:</label>
+      <textarea id="descripcion" [(ngModel)]="descripcion" placeholder="Describe la tarea"></textarea>
+    </div>
+  
+    <!-- Campo de Precio -->
+    <div class="form-group">
+      <label for="precio">Precio:</label>
+      <input id="precio" type="number" [(ngModel)]="precio" placeholder="Precio de la tarea">
+    </div>
+  
+    <!-- Input para añadir imágenes -->
+    <div class="form-group">
+      <label for="nuevaImagen">Añadir Imágenes:</label>
+      <input type="file" (change)="onImageSelected($event)" accept="image/*" multiple />
+    </div>
+  
+    <!-- Carrusel de Imágenes -->
+    <div class="form-group" *ngIf="imagenes && imagenes.length">
+      <label>Imágenes:</label>
+      <div class="tareas-container">
+        <button class="nav-left" (click)="scrollLeft()">&larr;</button>
+        <div class="tareas-galeria">
+          <div class="card" *ngFor="let imagen of imagenes">
+            <img [src]="imagen" alt="Imagen de la tarea" class="imagen-preview">
+          </div>
+        </div>
+        <button class="nav-right" (click)="scrollRight()">&rarr;</button>
+      </div>
+    </div>
+  
+    <!-- Botón para Guardar Cambios -->
+    <button class="submit-button" (click)="guardarCambios()">Guardar Cambios</button>
+  </div>
+  
