@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
-  daysInMonth: { day: number; items: { contentType: string; platform: string }[]; isToday?: boolean }[] = [];
+  daysInMonth: { day: number | null; items: { contentType: string; platform: string }[]; isToday?: boolean, isOtherMonth?: boolean }[] = [];
   selectedYear = new Date().getFullYear();
   selectedMonth = new Date().getMonth();
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -19,23 +19,39 @@ export class CalendarComponent {
   generateDaysInMonth() {
     this.daysInMonth = [];
     const today = new Date();
-    const days = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
+    const firstDayOfMonth = new Date(this.selectedYear, this.selectedMonth, 1).getDay();
+    const daysInCurrentMonth = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate();
 
-    for (let i = 1; i <= days; i++) {
-      const isToday = this.selectedYear === today.getFullYear() &&
-                      this.selectedMonth === today.getMonth() &&
-                      i === today.getDate();
+    // Obtener días del mes anterior
+    const previousMonthDays = new Date(this.selectedYear, this.selectedMonth, 0).getDate();
+    const startOffset = (firstDayOfMonth + 6) % 7;
 
-      // Añade datos de ejemplo
-      const items = [];
-      if (i === 2 || i === 10 || i === 17 || i === 23) {
-        items.push({ contentType: 'RESERVAS', platform: 'platform-1' });
-      }
-      if (i === 14 || i === 25) {
-        items.push({ contentType: 'MIS RESERVAS', platform: 'platform-2' });
-      }
+    // Añadir días del mes anterior
+    for (let i = startOffset; i > 0; i--) {
+        this.daysInMonth.push({ day: previousMonthDays - i + 1, items: [], isOtherMonth: true });
+    }
 
-      this.daysInMonth.push({ day: i, items, isToday });
+    // Añadir días del mes actual
+    for (let i = 1; i <= daysInCurrentMonth; i++) {
+        const isToday = this.selectedYear === today.getFullYear() &&
+                        this.selectedMonth === today.getMonth() &&
+                        i === today.getDate();
+
+        const items = [];
+        if (i === 2 || i === 10 || i === 17 || i === 23) {
+            items.push({ contentType: 'RESERVAS', platform: 'platform-1' });
+        }
+        if (i === 14 || i === 25) {
+            items.push({ contentType: 'MIS RESERVAS', platform: 'platform-2' });
+        }
+
+        this.daysInMonth.push({ day: i, items, isToday });
+    }
+
+    // Añadir días del siguiente mes para completar la cuadrícula de 42 días (6 filas)
+    const endOffset = 42 - this.daysInMonth.length;
+    for (let i = 1; i <= endOffset; i++) {
+        this.daysInMonth.push({ day: i, items: [], isOtherMonth: true });
     }
   }
 
@@ -59,7 +75,7 @@ export class CalendarComponent {
     this.generateDaysInMonth();
   }
 
-  getDateString(day: { day: number }): string {
-    return `${this.selectedYear}-${String(this.selectedMonth + 1).padStart(2, '0')}-${String(day.day).padStart(2, '0')}`;
+  getDateString(day: { day: number | null }): string {
+    return day.day ? `${this.selectedYear}-${String(this.selectedMonth + 1).padStart(2, '0')}-${String(day.day).padStart(2, '0')}` : '';
   }
 }

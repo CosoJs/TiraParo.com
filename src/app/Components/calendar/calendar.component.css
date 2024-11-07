@@ -91,6 +91,10 @@ button {
   background: #ffffff70;
 }
 
+.other-month time {
+  color: #ccc;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -120,10 +124,4 @@ button {
 }
 .platform-2 {
   background-color: #90ee90;
-}
-.platform-3 {
-  background-color: #ff69b4;
-}
-.platform-4 {
-  background-color: #ffeb3b;
 }

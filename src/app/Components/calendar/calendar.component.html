@@ -12,8 +12,10 @@
             </div>
 
             <ul class="calendar-days">
-                <li *ngFor="let day of daysInMonth" [ngClass]="{'today': day.isToday}">
-                    <time [attr.datetime]="getDateString(day)">{{ day.day }}</time>
+                <li *ngFor="let day of daysInMonth" [ngClass]="{'today': day.isToday, 'other-month': day.isOtherMonth}">
+                    <time *ngIf="day.items.length === 0" [attr.datetime]="getDateString(day)">
+                        {{ day.day }}
+                    </time>
                     <div *ngFor="let item of day.items" [ngClass]="item.platform" class="item-card">
                         {{ item.contentType }}
                     </div>
