@@ -15,7 +15,8 @@ interface Servicio {
   styleUrls: ['./shortcategories.component.css']
 })
 export class ShortcategoriesComponent implements OnInit {
-  servicios$!: Observable<Servicio[]>; 
+  servicios$!: Observable<Servicio[]>;
+  selectedServicioId: string | null = localStorage.getItem('filtro') || null;
 
   constructor(private firestore: Firestore, private router: Router) {}
 
@@ -25,6 +26,15 @@ export class ShortcategoriesComponent implements OnInit {
   }
 
   onCardClick(servicio: Servicio) {
+    if (this.selectedServicioId === servicio.id) {
+      // Si el servicio ya está seleccionado, quita el filtro
+      this.selectedServicioId = null;
+      localStorage.removeItem('filtro');
+    } else {
+      // Si no está seleccionado, aplica el filtro
+      this.selectedServicioId = servicio.id;
+      localStorage.setItem('filtro', servicio.id);
+    }
+    window.location.reload(); // Recargar la página o componente
   }
 }
-

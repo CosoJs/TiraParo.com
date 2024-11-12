@@ -100,3 +100,8 @@ body {
     line-height: 1;
     text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
 }
+
+.card.selected {
+    outline: 3px solid #00f; /* Cambia el color del borde para resaltar */
+    opacity: 0.8; /* Reduce la opacidad para indicar que está seleccionada */
+}

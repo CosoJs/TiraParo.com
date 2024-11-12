@@ -2,6 +2,7 @@
   <div class="card-container">
     <div *ngFor="let servicio of servicios$ | async" 
          class="card" 
+         [ngClass]="{ 'selected': selectedServicioId === servicio.id }"
          (click)="onCardClick(servicio)">
       <div class="card-background" [ngStyle]="{'background-image': 'url(' + servicio.Image + ')'}"></div>
       <div class="content">
@@ -10,4 +11,3 @@
     </div>
   </div>
 </section>
-
