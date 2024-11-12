@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment'; // Asegúrate de que la ruta sea correcta
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faClipboardList, faUserCheck, faClipboardCheck, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +41,6 @@ import { EditarServicioComponent } from './Components/editar-servicio/editar-ser
 import { ModalordenesdeservicioComponent } from './Components/modalordenesdeservicio/modalordenesdeservicio.component';
 import { CalendarComponent } from './Components/calendar/calendar.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +69,7 @@ import { CalendarComponent } from './Components/calendar/calendar.component';
     CalendarComponent,
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     NgxDaterangepickerMd.forRoot(),
     AppRoutingModule,
@@ -76,7 +78,9 @@ import { CalendarComponent } from './Components/calendar/calendar.component';
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    AngularFireAuthModule, HttpClientModule,],
+    AngularFireAuthModule,
+    HttpClientModule,
+  ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
@@ -84,4 +88,8 @@ import { CalendarComponent } from './Components/calendar/calendar.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faClipboardList, faUserCheck, faClipboardCheck, faCheckSquare);
+  }
+}
