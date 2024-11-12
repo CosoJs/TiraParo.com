@@ -19,6 +19,7 @@
 .orders-thumbnails {
   display: flex;
   gap: 1rem;
+  height: 25rem;
   overflow-x: auto;
   scroll-behavior: smooth;
   width: calc(100% - 4rem);
@@ -182,4 +183,138 @@
 
 .order-wrapper:hover .card-content {
   opacity: 1;
+}
+
+.order-wrapper {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background-size: contain;
+  background-position: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-background {
+  position: absolute;
+  font-size: 80px;
+  color: #e0e0e0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.order-wrapper .card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+}
+
+.order-wrapper:hover .card-content {
+  opacity: 1;
+}
+
+.order-wrapper h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.order-wrapper p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.orders-gallery {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 2rem;
+  margin: 2rem auto;
+}
+
+.orders-thumbnails {
+  display: flex;
+  align-items: center; /* Centra las cards verticalmente */
+  justify-content: center;
+  gap: 1rem;
+  height: 25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: calc(100% - 4rem);
+  padding: 0 1rem;
+}
+
+.order-wrapper {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background-size: contain;
+  background-position: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-wrapper .card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+}
+
+.order-wrapper:hover .card-content {
+  opacity: 1;
+}
+
+.icon-background {
+  position: absolute;
+  font-size: 80px;
+  color: #e0e0e0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
