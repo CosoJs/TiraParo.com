@@ -185,8 +185,9 @@ export class RegistroServiciosComponent {
     if (!this.selectedServicio) return 'servicio';
     if (!this.descripcionServicio) return 'descripción';
     if (this.aniosExperiencia === null) return 'años de experiencia';
+    if (this.aniosExperiencia < 0) return 'años de experiencia (debe ser 0 o mayor)';
     return null;
-  }
+  }  
 
   onLogoSelected(event: any): void {
     const file = event.target.files[0];
