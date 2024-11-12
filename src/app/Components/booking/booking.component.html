@@ -9,11 +9,11 @@
       <div class="form-title">Reserva para {{ tarea?.nombre }}</div>
       <form (ngSubmit)="confirmBooking()" *ngIf="!bookingSuccess">
         <div class="form-group">
-          <label for="description">Descripción</label>
+          <label for="description">Dirección</label>
           <textarea
             id="description"
             class="form-control"
-            placeholder="Escribe una descripción de tu reserva"
+            placeholder="Escribe la dirección de donde quieres reservar"
             [(ngModel)]="description"
             name="description"
             required
