@@ -25,7 +25,7 @@
         <header class="invoice-header">
             <h1>Resumen de operaciones</h1>
             <div class="invoice-info">
-                <p><strong>Fecha:</strong> 30/10/2024</p>
+                <p><strong>Fecha:</strong> periodo 5  al 5 de cada mes</p>
             </div>
         </header>
 
@@ -38,7 +38,8 @@
             </div>
             <div class="client-info">
                 <h2>Para:</h2>
-                <p>Nombre del Cliente</p>
+                <!-- Prestador de Servicio -->
+                <p>Nombre del Cliente</p> 
                 <p>Dirección del Cliente</p>
                 <p>Teléfono: (098) 765-4321</p>
                 <p>Email: cliente-ejemplo.com</p>
@@ -49,6 +50,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Id Servicio</th>
                         <th>Descripción</th>
                         <th>Precio de Servicio</th>
                         <th>Comisión</th>
@@ -57,18 +59,21 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Producto 1</td>
-                        <td>500</td>
-                        <td>$50.00</td>
-                        <td>$450.00</td>
+                        <td>si la hay id o indentificador de servicio </td>
+                        <td>NOmbre del servicio </td>
+                        <td>$500</td>
+                        <td>5% del costo del servicio</td>
+                        <td>Diferencia  entre el precios servicio y comisión, que es lo uqe gana el cliente</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Producto 2</td>
                         <td>750</td>
                         <td>$75.00</td>
                         <td>$675.00</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Servicio 1</td>
                         <td>300</td>
                         <td>$30.00</td>
@@ -80,9 +85,9 @@
 
         <section class="invoice-summary">
             <div class="total">
-                <p><strong>Subtotal:</strong> $1550.00</p>
-                <p><strong>Comisión (5%):</strong> $77.50</p>
-                <h3><strong>Total:</strong> $1472.50</h3>
+                <p><strong>Subtotal:</strong> total sin comision</p>
+                <p><strong>Comisión (5%):</strong> comision</p>
+                <h3><strong>Total:</strong> $Diferencia entre subtotal y comision</h3>
             </div>
         </section>
 
