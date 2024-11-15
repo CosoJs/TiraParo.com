@@ -127,7 +127,8 @@ export class PerfilcardsComponent implements OnInit {
     }
   }
 
-  async onDelete(user: User) {
+  async onDelete(user: User, event: Event) {
+    event.stopPropagation(); // Evitar que el evento se propague al contenedor de la tarjeta
     const usuarioId = localStorage.getItem('UsuarioId');
     if (!usuarioId) {
       console.error('Usuario no identificado.');
