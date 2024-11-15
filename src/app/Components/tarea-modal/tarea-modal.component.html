@@ -29,8 +29,14 @@
                 </div>
                 <div class="form-group">
                     <label for="imagen">Agregar Imagen(es)</label>
-                    <input type="file" id="imagen" class="form-control" (change)="onImageSelected($event)" multiple>
-                </div>
+                    <input 
+                        type="file" 
+                        id="imagen" 
+                        class="form-control" 
+                        (change)="onImageSelected($event)" 
+                        multiple
+                        accept="image/*">
+                </div>                
 
                 <!-- Galería de imágenes con desplazamiento estilo carrusel -->
                 <div class="image-gallery" *ngIf="imagePreviews.length > 0">
