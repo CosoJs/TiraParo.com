@@ -1,0 +1,320 @@
+/* Contenedor principal del carrusel */
+.orders-gallery {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 2rem;
+  margin: 2rem auto; /* Separación entre los carruseles */
+}
+
+.main-container {
+  margin-top: 2rem;
+}
+
+/* Estilo de las miniaturas (cards) y ocultar scrollbars */
+.orders-thumbnails {
+  display: flex;
+  gap: 1rem;
+  height: 25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: calc(100% - 4rem);
+  padding: 0 1rem;
+}
+
+/* Ocultar las barras de desplazamiento */
+.orders-thumbnails::-webkit-scrollbar {
+  display: none;
+}
+.orders-thumbnails {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Estilo de las tarjetas */
+.order-wrapper {
+  flex: 0 0 250px;
+  height: auto;
+  min-height: 300px;
+  max-height: 350px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.order-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Botones de navegación */
+.nav-left,
+.nav-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ff7800;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.nav-left {
+  left: 0.5rem;
+}
+
+.nav-right {
+  right: 0.5rem;
+}
+
+.nav-left:hover,
+.nav-right:hover {
+  background-color: #ff6801;
+}
+
+/* Estilo del botón "Marcar como Completado" en el modal */
+.complete-btn {
+  background-color: #ff7800;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: inline-block;
+  text-align: center;
+}
+
+.complete-btn:hover {
+  background-color: #ff6801;
+}
+
+.order-wrapper {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-wrapper .card-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+}
+
+.order-wrapper:hover .card-content {
+  opacity: 1;
+}
+
+.order-wrapper h3 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.order-wrapper p {
+  font-size: 16px;
+}
+.icon-background {
+  position: absolute;
+  font-size: 100px;
+  color: #f0f0f0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.order-wrapper .card-content {
+  position: relative;
+  z-index: 2; /* Asegura que el contenido esté encima del icono */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+}
+
+.order-wrapper:hover .card-content {
+  opacity: 1;
+}
+
+.order-wrapper {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background-size: contain;
+  background-position: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-background {
+  position: absolute;
+  font-size: 80px;
+  color: #e0e0e0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.order-wrapper .card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+}
+
+.order-wrapper:hover .card-content {
+  opacity: 1;
+}
+
+.order-wrapper h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.order-wrapper p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.orders-gallery {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 2rem;
+  margin: 2rem auto;
+}
+
+.orders-thumbnails {
+  display: flex;
+  align-items: center; /* Centra las cards verticalmente */
+  justify-content: center;
+  gap: 1rem;
+  height: 25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: calc(100% - 4rem);
+  padding: 0 1rem;
+}
+
+.order-wrapper {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background-size: contain;
+  background-position: center;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-wrapper .card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+}
+
+.order-wrapper:hover .card-content {
+  opacity: 1;
+}
+
+.icon-background {
+  position: absolute;
+  font-size: 80px;
+  color: #e0e0e0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}

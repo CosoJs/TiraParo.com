@@ -1,147 +1,147 @@
 .sidebar {
-    width: 4.375rem;
-    height: 100vh;
-    background-color: #ff6801;
-    transition: width 0.3s ease;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
+  width: 4.375rem;
+  height: 100vh;
+  background-color: #ff6801;
+  transition: width 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .sidebar.expanded {
-    width: 15.625rem;
+  width: 15.625rem;
 }
 
 .logo {
-    text-align: center;
-    padding: 1.25rem 0;
+  text-align: center;
+  padding: 1.25rem 0;
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-text {
-    color: white;
-    font-size: 1.5625rem;
-    margin-left: 0.625rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+  font-size: 1.5625rem;
+  margin-left: 0.625rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .nav-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-list li {
-    display: flex;
-    align-items: center;
-    padding: 0.9375rem;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s, justify-content 0.3s;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: 0.9375rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, justify-content 0.3s;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  justify-content: center;
 }
 
 .nav-list li i {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .nav-list li .item-title {
-    display: none;
-    font-size: 1.125rem;
-    margin-left: 1.25rem;
+  display: none;
+  font-size: 1.125rem;
+  margin-left: 1.25rem;
 }
 
 .nav-list li:hover {
-    background-color: #333333;
-    justify-content: flex-start;
+  background-color: #333333;
+  justify-content: flex-start;
 }
 
 .nav-list li.active {
-    background-color: #333333;
-    justify-content: flex-start;
+  background-color: #333333;
+  justify-content: flex-start;
 }
 
 .sidebar.expanded .nav-list li {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .sidebar.expanded .nav-list li i {
-    margin-right: 1.25rem;
+  margin-right: 1.25rem;
 }
 
 .sidebar.expanded .nav-list li .item-title {
-    display: inline;
+  display: inline;
 }
 
 @media (min-width: 1200px) {
-    .sidebar {
-        width: 5rem;
-    }
+  .sidebar {
+    width: 5rem;
+  }
 
-    .sidebar.expanded {
-        width: 16rem;
-    }
+  .sidebar.expanded {
+    width: 16rem;
+  }
 
-    .logo-text {
-        font-size: 1.75rem;
-    }
+  .logo-text {
+    font-size: 1.75rem;
+  }
 
-    .nav-list li {
-        padding: 1rem;
-    }
+  .nav-list li {
+    padding: 1rem;
+  }
 
-    .nav-list li i {
-        font-size: 1.75rem;
-    }
+  .nav-list li i {
+    font-size: 1.75rem;
+  }
 }
 
 @media (max-width: 1199px) and (min-width: 768px) {
-    .sidebar {
-        width: 4.5rem;
-    }
+  .sidebar {
+    width: 4.5rem;
+  }
 
-    .sidebar.expanded {
-        width: 14rem;
-    }
+  .sidebar.expanded {
+    width: 14rem;
+  }
 
-    .logo-text {
-        font-size: 1.5rem;
-    }
+  .logo-text {
+    font-size: 1.5rem;
+  }
 
-    .nav-list li {
-        padding: 0.875rem;
-    }
+  .nav-list li {
+    padding: 0.875rem;
+  }
 
-    .nav-list li i {
-        font-size: 1.5rem;
-    }
+  .nav-list li i {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 767px) {
-    .sidebar {
-        width: 3.5rem;
-    }
+  .sidebar {
+    width: 3.5rem;
+  }
 
-    .sidebar.expanded {
-        width: 12rem;
-    }
+  .sidebar.expanded {
+    width: 12rem;
+  }
 
-    .logo-text {
-        font-size: 1.25rem;
-    }
+  .logo-text {
+    font-size: 1.25rem;
+  }
 
-    .nav-list li {
-        padding: 0.75rem;
-    }
+  .nav-list li {
+    padding: 0.75rem;
+  }
 
-    .nav-list li i {
-        font-size: 1.25rem;
-    }
+  .nav-list li i {
+    font-size: 1.25rem;
+  }
 }

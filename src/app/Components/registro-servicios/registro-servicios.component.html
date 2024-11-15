@@ -1,116 +1,125 @@
-<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }" (window:unload)="reiniciarCampos()" (router-outlet)="reiniciarCampos()">
-    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
-      <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }" (window:unload)="reiniciarCampos()"
+  (router-outlet)="reiniciarCampos()">
+  <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+    <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+  </div>
+
+  <div class="main-content">
+    <h2 class="form-title">Registro Perfil de Servicio</h2>
+
+    <!-- Selección de Categorías -->
+    <div class="form-group">
+      <label for="categorias">Categorías:</label>
+      <select id="categorias" (change)="onCategoriaChange()" [(ngModel)]="selectedCategoria">
+        <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
+      </select>
     </div>
-  
-    <div class="main-content">
-      <h2 class="form-title">Registro Perfil de Servicio</h2>
-  
-      <!-- Selección de Categorías -->
-      <div class="form-group">
-        <label for="categorias">Categorías:</label>
-        <select id="categorias" (change)="onCategoriaChange()" [(ngModel)]="selectedCategoria">
-          <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
-        </select>
+
+    <!-- Selección de Servicios -->
+    <div class="form-group">
+      <label for="servicios">Servicios:</label>
+      <select id="servicios" [(ngModel)]="selectedServicio">
+        <option *ngFor="let servicio of serviciosFiltrados" [value]="servicio">{{ servicio }}</option>
+      </select>
+    </div>
+
+    <!-- Logo del servicio -->
+    <div class="form-group">
+      <label for="logo">Subir Logo del Servicio:</label>
+      <div class="upload-logo-container">
+        <input type="file" id="logo" (change)="onLogoSelected($event)" accept="image/*" style="display: none;" />
+        <input placeholder="Subir logo" class="upload-logo-button" type="file" (change)="onLogoSelected($event)"
+          accept="image/*" />
       </div>
-  
-      <!-- Selección de Servicios -->
-      <div class="form-group">
-        <label for="servicios">Servicios:</label>
-        <select id="servicios" [(ngModel)]="selectedServicio">
-          <option *ngFor="let servicio of serviciosFiltrados" [value]="servicio">{{ servicio }}</option>
-        </select>
-      </div>
-  
-      <!-- Logo del servicio -->
-      <div class="form-group">
-        <label for="logo">Subir Logo del Servicio:</label>
-        <div class="upload-logo-container">
-          <input type="file" id="logo" (change)="onLogoSelected($event)" accept="image/*" style="display: none;" />
-          <input placeholder="Subir logo" class="upload-logo-button" type="file" (change)="onLogoSelected($event)" accept="image/*" />
-        </div>
-      </div>
-  
-      <!-- Vista previa del logo -->
-      <img *ngIf="logoPreview" [src]="logoPreview" alt="Vista previa del logo" class="logo-preview" />
-  
-      <!-- Descripción del Servicio -->
-      <div class="form-group">
-        <label for="descripcion">Nombre del Servicio:</label>
-        <textarea id="descripcion" placeholder="Describe el servicio" [(ngModel)]="descripcionServicio"></textarea>
-      </div>
-  
-      <!-- Años de Experiencia -->
-      <div class="form-group">
-        <label for="experiencia">Años de Experiencia:</label>
-        <input id="experiencia" type="number" placeholder="Ejemplo: 5" [(ngModel)]="aniosExperiencia">
-      </div>
-  
-      <!-- Tareas Realizadas como Galería Horizontal -->
-      <div class="form-group">
-        <button class="add-task-button" mat-button (click)="abrirModalTareas()">Agregar Tarea</button>
-        <label>Tareas Realizadas:</label>
-        <div class="tareas-container">
-          <button class="nav-left" (click)="scrollLeft()">&larr;</button>
-          <div class="tareas-galeria" style="height: 350px; overflow-y: hidden;">
-            <div class="card" *ngFor="let tarea of tareasRealizadas">
-              <div class="card-img" *ngIf="tarea.imagenes && tarea.imagenes.length">
-                <img [src]="tarea.imagenes[0]" alt="Imagen de la tarea" class="thumbnail-image" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <!-- Vista previa del logo -->
+    <img *ngIf="logoPreview" [src]="logoPreview" alt="Vista previa del logo" class="logo-preview" />
+
+    <!-- Descripción del Servicio -->
+    <div class="form-group">
+      <label for="descripcion">Nombre del Servicio:</label>
+      <textarea id="descripcion" placeholder="Describe el servicio" [(ngModel)]="descripcionServicio"></textarea>
+    </div>
+
+    <!-- Años de Experiencia -->
+    <div class="form-group">
+      <label for="experiencia">Años de Experiencia:</label>
+      <input id="experiencia" type="number" placeholder="Ejemplo: 5" [(ngModel)]="aniosExperiencia">
+    </div>
+
+    <!-- Tareas Realizadas como Galería Horizontal -->
+    <div class="form-group">
+      <button class="add-task-button" mat-button (click)="abrirModalTareas()">Agregar Tarea</button>
+      <label>Tareas Realizadas:</label>
+      <div class="tareas-container">
+        <button class="nav-left" (click)="scrollLeft()">&larr;</button>
+        <div class="tareas-galeria" style="height: 350px; overflow-y: hidden;">
+          <div class="card" *ngFor="let tarea of tareasRealizadas">
+            <div class="card-img" *ngIf="tarea.imagenes && tarea.imagenes.length">
+              <img [src]="tarea.imagenes[0]" alt="Imagen de la tarea" class="thumbnail-image"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="card-info">
+              <p class="text-title">Tarea: {{ tarea.nombre }}</p>
+              <p class="text-body">Descripción: {{ tarea.descripcion }}</p>
+            </div>
+            <div class="card-footer">
+              <span class="text-title">Precio: {{ tarea.precio }}</span>
+              <div class="card-button">
+                <!-- Botón de edición -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  (click)="editarTarea(tarea)" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                </svg>
+
+
               </div>
-              <div class="card-info">
-                <p class="text-title">Tarea: {{ tarea.nombre }}</p>
-                <p class="text-body">Descripción: {{ tarea.descripcion }}</p>
+              <!-- Botón de eliminar -->
+              <div class="action-button card-button" (click)="eliminarTarea(tarea, $event)" aria-label="Eliminar tarea"
+                title="Eliminar tarea">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
+                  <path
+                    d="M 13 3 A 1.0001 1.0001 0 0 0 11.986328 4 L 6 4 A 1.0001 1.0001 0 1 0 6 6 L 24 6 A 1.0001 1.0001 0 1 0 24 4 L 18.013672 4 A 1.0001 1.0001 0 0 0 17 3 L 13 3 z M 6 8 L 6 24 C 6 25.105 6.895 26 8 26 L 22 26 C 23.105 26 24 25.105 24 24 L 24 8 L 6 8 z">
+                  </path>
+                </svg>
               </div>
-              <div class="card-footer">
-                <span class="text-title">Precio: {{ tarea.precio }}</span>
-                <div class="card-button">
-                  <!-- Botón de edición -->
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill separado" viewBox="0 0 16 16" (click)="editarTarea(tarea)">
-                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-                  </svg>
-                
-                  <!-- Botón de eliminar -->
-                  <div class="action-button" (click)="eliminarTarea(tarea, $event)" aria-label="Eliminar tarea" title="Eliminar tarea">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                      <path d="M5.5 5V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1h3.5a.5.5 0 0 1 0 1H2a.5.5 0 0 1 0-1H5.5zm1-.5V4h6v.5h-6zM2.5 6v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V6h-11z"/>
-                    </svg>
-                  </div>
-                </div>
-                
-              </div>
+
             </div>
           </div>
-          <button class="nav-right" (click)="scrollRight()">&rarr;</button>
         </div>
+        <button class="nav-right" (click)="scrollRight()">&rarr;</button>
       </div>
-  
-      <!-- Horario de Trabajo -->
-      <div class="form-group">
-        <label for="horario">Horario de Trabajo:</label>
-        <input id="horario" type="text" placeholder="Ejemplo: Lunes a Viernes, 9am - 6pm" [(ngModel)]="horarioTrabajo">
-      </div>
-  
-      <!-- Ubicación o Área de Servicio -->
-      <div class="form-group">
-        <label for="ubicacion">Ubicación/Área de Servicio:</label>
-        <input id="ubicacion" type="text" placeholder="Ciudad o zona de cobertura" [(ngModel)]="ubicacionServicio" (input)="buscarUbicacion()">
-  
-        <!-- Lista de Sugerencias -->
-        <ul *ngIf="ubicacionSugerencias.length" class="suggestions-list">
-          <li *ngFor="let sugerencia of ubicacionSugerencias" (click)="seleccionarUbicacion(sugerencia)">
-            {{ sugerencia.display_name }}
-          </li>
-        </ul>
-      </div>
-  
-      <!-- Información de Contacto Opcional -->
-      <div class="form-group">
-        <label for="contacto">Información de Contacto:</label>
-        <textarea id="contacto" placeholder="Teléfono o email (opcional)" [(ngModel)]="informacionContacto"></textarea>
-      </div>
-  
-      <!-- Botón para Guardar -->
-      <button class="submit-button" (click)="guardarServicio()">Crear Perfil de Servicio</button>
     </div>
+
+    <!-- Horario de Trabajo -->
+    <div class="form-group">
+      <label for="horario">Horario de Trabajo:</label>
+      <input id="horario" type="text" placeholder="Ejemplo: Lunes a Viernes, 9am - 6pm" [(ngModel)]="horarioTrabajo">
+    </div>
+
+    <!-- Ubicación o Área de Servicio -->
+    <div class="form-group">
+      <label for="ubicacion">Ubicación/Área de Servicio:</label>
+      <input id="ubicacion" type="text" placeholder="Ciudad o zona de cobertura" [(ngModel)]="ubicacionServicio"
+        (input)="buscarUbicacion()">
+
+      <!-- Lista de Sugerencias -->
+      <ul *ngIf="ubicacionSugerencias.length" class="suggestions-list">
+        <li *ngFor="let sugerencia of ubicacionSugerencias" (click)="seleccionarUbicacion(sugerencia)">
+          {{ sugerencia.display_name }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Información de Contacto Opcional -->
+    <div class="form-group">
+      <label for="contacto">Información de Contacto:</label>
+      <textarea id="contacto" placeholder="Teléfono o email (opcional)" [(ngModel)]="informacionContacto"></textarea>
+    </div>
+
+    <!-- Botón para Guardar -->
+    <button class="submit-button" (click)="guardarServicio()">Crear Perfil de Servicio</button>
   </div>
-  
+</div>
