@@ -66,3 +66,29 @@
 .name {
   font-weight: bold;
 }
+
+.card .btn-delete {
+  background-color: transparent;
+  border: none;
+  color: #e3342f;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.card .btn-delete:hover {
+  background-color: rgba(227, 52, 47, 0.1);
+  transform: scale(1.1);
+}
+
+.card .btn-delete svg {
+  width: 20px;
+  height: 20px;
+}

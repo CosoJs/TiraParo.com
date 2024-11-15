@@ -148,14 +148,38 @@ export class RegistroServiciosComponent {
 
   eliminarTarea(tarea: any, event: MouseEvent): void {
     event.stopPropagation();
-    this.tareasRealizadas = this.tareasRealizadas.filter(
-      (t) => t.nombre !== tarea.nombre
-    );
-    localStorage.setItem(
-      'tareasRealizadas',
-      JSON.stringify(this.tareasRealizadas)
-    );
+  
+    // Mostrar alerta de confirmación con SweetAlert2
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Quieres eliminar la tarea "${tarea.nombre}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma, eliminar la tarea
+        this.tareasRealizadas = this.tareasRealizadas.filter(
+          (t) => t.nombre !== tarea.nombre
+        );
+        localStorage.setItem(
+          'tareasRealizadas',
+          JSON.stringify(this.tareasRealizadas)
+        );
+  
+        // Mostrar mensaje de éxito
+        Swal.fire(
+          'Eliminada',
+          `La tarea "${tarea.nombre}" ha sido eliminada.`,
+          'success'
+        );
+      }
+    });
   }
+  
 
   onCategoriaChange() {
     if (this.selectedCategoria) {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, getDocs } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { ActivatedRoute , Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { doc, deleteDoc } from '@angular/fire/firestore';
 
 interface User {
   id: string;
@@ -19,10 +21,19 @@ interface User {
 })
 export class PerfilcardsComponent implements OnInit {
   users: User[] = [];
+  showDeleteButton = false;
 
   constructor(private firestore: Firestore, private router: Router) {}
 
   async ngOnInit() {
+
+    // Verifica si estamos en la ruta '/mis-perfiles-servicio'
+    if (this.router.url === '/mis-perfiles-servicio') {
+      this.showDeleteButton = true;
+    } else {
+      this.showDeleteButton = false;
+    }
+    
     const userId = localStorage.getItem('UsuarioId');
     if (!userId) {
       console.error('Usuario no identificado.');
@@ -115,4 +126,67 @@ export class PerfilcardsComponent implements OnInit {
       console.error('ID de usuario no disponible.', user);
     }
   }
+
+  async onDelete(user: User) {
+    const usuarioId = localStorage.getItem('UsuarioId');
+    if (!usuarioId) {
+      console.error('Usuario no identificado.');
+      return;
+    }
+  
+    const servicioPath = `users/${usuarioId}/Servicios/${user.id}`;
+    const categoriaPath = `Servicios/${user.categoria}/Users/${user.id}`;
+  
+    // Mostrar cuadro de confirmación
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el servicio permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-secondary',
+      },
+      buttonsStyling: false,
+    });
+  
+    if (!result.isConfirmed) {
+      console.log('Eliminación cancelada por el usuario.');
+      return;
+    }
+  
+    try {
+      // Eliminar de la primera ubicación
+      const servicioDoc = doc(this.firestore, servicioPath);
+      await deleteDoc(servicioDoc);
+  
+      // Eliminar de la segunda ubicación
+      const categoriaDoc = doc(this.firestore, categoriaPath);
+      await deleteDoc(categoriaDoc);
+  
+      // Eliminar del arreglo local para actualizar la vista
+      this.users = this.users.filter((u) => u.id !== user.id);
+  
+      // Mostrar mensaje de éxito
+      await Swal.fire({
+        title: 'Eliminado',
+        text: 'El servicio ha sido eliminado con éxito.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+      });
+    } catch (error) {
+      console.error('Error al eliminar el servicio:', error);
+  
+      // Mostrar mensaje de error
+      await Swal.fire({
+        title: 'Error',
+        text: 'Hubo un problema al eliminar el servicio.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
+    }
+  }
+  
 }

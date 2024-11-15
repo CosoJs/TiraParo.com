@@ -134,3 +134,43 @@ svg {
 .card-button:hover .svg-icon {
     fill: #fff;
 }
+
+.card-button-container {
+    display: flex;
+    gap: 10px; /* Espaciado entre los botones */
+    justify-content: center; /* Centra los botones */
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px; /* Espaciado entre botones individuales */
+  }
+  
+  .action-button {
+    border: 1px solid #252525;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3em;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .action-button:hover {
+    border: 1px solid #ffcaa6;
+    background-color: #ffcaa6;
+  }
+  
+  .action-button .svg-icon {
+    width: 24px;
+    height: 24px;
+    fill: #252525;
+  }
+  
+  .action-button:hover .svg-icon {
+    fill: #fff;
+  }
+  

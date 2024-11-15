@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import Swal from 'sweetalert2';
+import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore'; // Firebase Firestore
+import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage'; // Firebase Storage
+import { Router } from '@angular/router'; // Router para verificar la URL actual
+import Swal from 'sweetalert2'; // SweetAlert2 para alertas
 
 @Component({
   selector: 'app-tarea-modal',
@@ -17,7 +20,9 @@ export class TareaModalComponent {
 
   constructor(
     private dialogRef: MatDialogRef<TareaModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private firestore: Firestore, // Inyección de Firestore
+    private router: Router // Inyección del router
   ) {
     if (data) {
       this.nombreTarea = data.nombre || '';
@@ -27,6 +32,7 @@ export class TareaModalComponent {
       this.imagesToDelete = new Array(this.imagePreviews.length).fill(false);
     }
   }
+  
 
   // Propiedad computada para el contador de imágenes
   get imageCount(): number {
@@ -66,6 +72,7 @@ export class TareaModalComponent {
 
     this.dialogRef.close(nuevaTarea);
   }
+  
 
   onImageSelected(event: any): void {
     const files = event.target.files;
