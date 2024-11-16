@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalordenesdeservicioComponent } from '../modalordenesdeservicio/modalordenesdeservicio.component';
-
+/**sfsfafds */
 @Component({
   selector: 'app-orders2',
   templateUrl: './orders2.component.html',
