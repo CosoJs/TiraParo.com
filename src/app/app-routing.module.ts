@@ -14,7 +14,6 @@ import { ServicioDeUsuariosComponent } from './Components/servicio-de-usuarios/s
 import { InvoiceComponent } from './Components/invoice/invoice.component';
 import { BookingComponent } from './Components/booking/booking.component';
 import { OrdenesComponent } from './Components/orders/orders.component';
-import { Orders2Component } from './Components/orders2/orders2.component';
 import { EditarServicioComponent } from './Components/editar-servicio/editar-servicio.component';
 import { CalendarComponent } from './Components/calendar/calendar.component';
 
@@ -44,8 +43,7 @@ const routes: Routes = [
     canActivate: [loginguard],
   },
   { path: 'booking/:id', component: BookingComponent },
-  {path: 'Agenda', component: OrdenesComponent},
-  {path: 'Ordenes de servicio', component: Orders2Component},
+  {path: 'order', component: OrdenesComponent},
   {path: 'calendar', component: CalendarComponent},
 ];
 

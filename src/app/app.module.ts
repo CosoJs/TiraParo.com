@@ -40,7 +40,6 @@ import { OrdenesComponent } from './Components/orders/orders.component';
 import { EditarServicioComponent } from './Components/editar-servicio/editar-servicio.component';
 import { ModalordenesdeservicioComponent } from './Components/modalordenesdeservicio/modalordenesdeservicio.component';
 import { CalendarComponent } from './Components/calendar/calendar.component';
-import { Orders2Component } from './Components/orders2/orders2.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +67,6 @@ import { Orders2Component } from './Components/orders2/orders2.component';
     EditarServicioComponent,
     ModalordenesdeservicioComponent,
     CalendarComponent,
-    Orders2Component,
   ],
   imports: [
     FontAwesomeModule,
