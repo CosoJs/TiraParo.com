@@ -1,9 +1,141 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globales */
 body {
-    margin: 0px;
+  font-family: 'Poppins', sans-serif; /* Cambiado a Poppins */
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+header {
+  background-color: #333;
+  padding: 1rem 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+nav .brand {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600; /* Cambiado a un peso más ligero */
+  text-decoration: none;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ffa500;
+}
+
+/* Contenedor de login */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+}
+
+.login-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif; /* Cambiado a Poppins */
+  font-weight: 500;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tabs button.active {
+  background: #ffa500;
+  color: white;
+}
+
+.tabs button:hover {
+  background: #ffc04d;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif; /* Cambiado a Poppins */
+  font-weight: 600; /* Peso más prominente */
+  font-size: 2rem; /* Aumentado para impacto */
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+form button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffa500;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif; /* Cambiado a Poppins */
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: #ff8c00;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #333;
+  color: #fff;
+  font-size: 0.9rem;
+}

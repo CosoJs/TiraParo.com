@@ -1,210 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
+/* --- General Carousel Wrapper --- */
 .carousel-wrapper {
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    overflow: hidden;
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #f8f8f8;
-    margin-bottom: 35px;
-    margin-top: 35px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  margin: 35px auto;
+  overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+  font-family: 'Poppins', sans-serif;
 }
 
 .carousel-container {
-    display: flex;
-    min-height: 100%;
-    transition: transform 0.5s ease;
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
 }
 
+/* --- Slides --- */
 .slide {
-    display: none;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .slide.active {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
+/* --- Text Content --- */
 .slide-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
-    padding-right: 20px;
-    margin-right: 20px;
-}
-
-.slide-content {
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  padding-right: 20px;
+  margin-right: 20px;
 }
 
 .title {
-    font-size: 2.2em;
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #ff6801;
+  margin-bottom: 10px;
 }
 
 .description {
-    font-size: 1.1em;
-    color: #555;
-    line-height: 1.5;
-    text-align: justify;
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.6;
+  text-align: justify;
 }
 
 .footnote {
-    font-size: 0.9em;
-    color: #999;
-    margin-top: 10px;
-    font-style: italic;
+  font-size: 0.9em;
+  color: #999;
+  margin-top: 10px;
+  font-style: italic;
 }
 
+/* --- Image and Video Content --- */
 .slide-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    width: 55%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  width: 55%;
 }
 
 .image,
 .video-background {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    object-fit: cover;
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
 
+/* --- Progress Bar --- */
 .progress-bar-container {
-    margin-top: 10px;
-    width: 100%;
-    height: 4px;
-    display: flex;
-    justify-content: space-between;
-    background-color: #e0e0e0;
-    border-radius: 2px;
+  margin-top: 10px;
+  width: 100%;
+  height: 4px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #e0e0e0;
+  border-radius: 2px;
 }
 
 .progress-bar-segment {
-    flex: 1;
-    height: 100%;
-    cursor: pointer;
-    background-color: #e0e0e0;
-    transition: background-color 0.3s ease;
+  flex: 1;
+  height: 100%;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  transition: background-color 0.3s ease;
 }
 
 .progress-bar-segment:not(:last-child) {
-    margin-right: 2px;
+  margin-right: 2px;
 }
 
 .progress-bar-segment.active {
-    background-color: #ff6801;
+  background-color: #ff6801;
 }
 
-/* Media query para pantallas menores a 700px */
+/* --- Responsive Design --- */
+/* For screens smaller than 700px */
 @media (max-width: 700px) {
-    .slide.active {
-        flex-direction: column;
-    }
+  .slide.active {
+    flex-direction: column;
+  }
 
-    .slide-content-wrapper {
-        width: 100%;
-        margin-right: 0;
-        padding-right: 0;
-    }
+  .slide-content-wrapper {
+    width: 100%;
+    padding-right: 0;
+    margin-right: 0;
+  }
 
-    .slide-image {
-        width: 100%;
-        margin-top: 20px;
-    }
+  .slide-image {
+    width: 100%;
+    margin-top: 20px;
+  }
 
-    .title {
-        font-size: 1.8em;
-    }
+  .title {
+    font-size: 1.8em;
+  }
 
-    .description {
-        font-size: 1em;
-    }
+  .description {
+    font-size: 1em;
+  }
 
-    .footnote {
-        font-size: 0.8em;
-    }
+  .footnote {
+    font-size: 0.8em;
+  }
 }
 
-/* Media query para pantallas menores a 480px */
+/* For screens smaller than 480px */
 @media (max-width: 480px) {
-    .title {
-        font-size: 1.6em;
-    }
+  .title {
+    font-size: 1.6em;
+  }
 
-    .description {
-        font-size: 1em;
-    }
+  .description {
+    font-size: 1em;
+  }
 
-    .footnote {
-        font-size: 0.8em;
-    }
+  .footnote {
+    font-size: 0.8em;
+  }
+
+  .progress-bar-container {
+    height: 3px;
+  }
 }
 
-@media (max-width: 440px) {
-    .contenedor-del-texto {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        box-sizing: border-box;
-        width: 100%;
-        height: auto;
-    }
-
-    .slide.active {
-        flex-direction: column;
-    }
-
-    .slide-image {
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    h1, p {
-        font-size: 1em;
-        margin: 0;
-    }
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.contenedor-del-texto {
-    margin: 0 auto;
-    padding: 15px;
-    height: auto;
-    max-width: 100%;
-    overflow: hidden;
-}
-
+/* For ultra-small screens (below 300px) */
 @media (max-width: 300px) {
-    .contenedor-del-texto {
-        font-size: 0.9em;
-    }
+  .title {
+    font-size: 1.5em;
+  }
 
-    h1 {
-        font-size: 1.5em;
-    }
+  .description {
+    font-size: 0.9em;
+  }
 
-    p {
-        font-size: 0.8em;
-    }
+  .footnote {
+    font-size: 0.75em;
+  }
 }

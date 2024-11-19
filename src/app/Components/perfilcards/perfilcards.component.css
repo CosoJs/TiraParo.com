@@ -1,33 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
+/* --- Estilos Globales --- */
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  /* Tres tarjetas por fila */
+  /* Adaptación flexible de tarjetas */
   gap: 30px;
-  /* Incrementa el espacio entre tarjetas */
   justify-items: center;
   padding: 20px;
-  /* Espacio alrededor del contenedor */
 }
 
 .card {
   width: 100%;
   max-width: 350px;
-  /* Limita el ancho máximo de cada tarjeta */
-  background-color: #f5f5f5;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.2s;
-  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .card:hover {
   transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .card-image {
   height: 200px;
-  /* Aumenta la altura de la imagen */
   background-size: cover;
   background-position: center;
   border-radius: 8px;
@@ -38,29 +39,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ddd;
-  color: #777;
+  background-color: #eeeeee;
+  color: #999999;
   font-size: 14px;
   border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .category {
   font-size: 14px;
-  color: #777;
+  color: #777777;
   margin-top: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .heading {
-  font-size: 18px;
-  /* Aumenta el tamaño de fuente */
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 5px;
+  color: #333333;
+  margin-top: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .author {
-  font-size: 12px;
-  color: #555;
-  margin-top: 5px;
+  font-size: 14px;
+  color: #555555;
+  margin-top: 10px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .name {

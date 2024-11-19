@@ -11,21 +11,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centra horizontalmente */
     padding: 1em;
     border: 2px dashed #ccc;
     background-color: #f9f9f9;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 40%;
-    /* Ajusta el ancho */
-    height: 100%;
-    /* Ajusta la altura */
+    width: 40%; /* Ajusta el ancho */
+    height: 100%; /* Ajusta la altura */
     text-align: center;
-    /* Centra el contenido dentro del botón */
-    gap: 1em;
-    /* Espacio entre el icono y el texto */
+    gap: 1em; /* Espacio entre el icono y el texto */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Fuente aplicada */
+    font-size: 1.2rem; /* Ajuste del tamaño de la fuente */
+    color: #666; /* Color del texto */
+    font-weight: bold; /* Hace el texto más prominente */
 }
 
 .upload-button:hover {
@@ -41,15 +40,14 @@
 }
 
 .icon svg {
-    width: 12em;
-    /* Ajusta el tamaño del icono */
-    height: 8em;
-    color: #666;
+    width: 4em; /* Ajusta el tamaño del icono */
+    height: 4em; /* Ajusta la altura del icono */
+    color: #666; /* Color del icono */
 }
 
 .upload-button span {
-    font-size: 3em;
-    color: #666;
+    font-size: 1.5rem; /* Ajusta el tamaño del texto del botón */
+    color: #333; /* Color del texto */
     display: flex;
     align-items: center;
     /* Centra el texto verticalmente */

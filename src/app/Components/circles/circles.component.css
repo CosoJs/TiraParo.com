@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
+/* --- Estilos Globales --- */
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Fuente base */
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -54,7 +57,7 @@ h3 {
     font-size: 1.25rem;
     color: #ff6801;
     margin: 1.25rem 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Fuente para los títulos */
 }
 
 p {
@@ -62,7 +65,7 @@ p {
     font-size: 1rem;
     margin-bottom: 1.25rem;
     line-height: 1.6;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Fuente para los párrafos */
 }
 
 @media (max-width: 48rem) {

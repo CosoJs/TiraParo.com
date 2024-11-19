@@ -1,51 +1,13 @@
-/* Spinner de carga */
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Asegura que esté por encima de todo */
-}
-
-/* Lista de sugerencias */
-.suggestions-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-.suggestions-list li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.suggestions-list li:hover {
-  background-color: #f0f0f0;
-}
-
-/* Vista previa del logo */
-.logo-preview {
-  max-width: 100px;
-  max-height: 100px;
-  margin-top: 10px;
-}
-
-/* Contenedor y Layout */
+/* General Layout */
 .container {
   display: flex;
   min-height: 100vh;
   background-color: #f5f5f5;
   padding: 2rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+/* Sidebar */
 .sidebar {
   width: 4rem;
   transition: width 0.3s ease;
@@ -55,6 +17,7 @@
   width: 15rem;
 }
 
+/* Main Content */
 .main-content {
   flex: 1;
   max-width: 50%;
@@ -67,12 +30,13 @@
 
 .form-title {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
   color: #ff6801;
   margin-bottom: 1.5rem;
 }
 
-/* Estilos del Formulario */
+/* Form Styles */
 .form-group {
   margin-bottom: 1.5rem;
   display: flex;
@@ -100,6 +64,7 @@ textarea {
   border-radius: 0.25rem;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 input:focus,
@@ -114,7 +79,7 @@ textarea {
   resize: none;
 }
 
-/* Tareas Galería Container */
+/* Task Gallery Styles */
 .tareas-container {
   display: flex;
   align-items: center;
@@ -126,7 +91,6 @@ textarea {
   position: relative;
 }
 
-/* Botones de navegación */
 .nav-left,
 .nav-right {
   background-color: #ff7800;
@@ -156,7 +120,6 @@ textarea {
   background-color: #ff6801;
 }
 
-/* Contenedor de tarjetas para la galería horizontal */
 .tareas-galeria {
   display: flex;
   gap: 1rem;
@@ -166,11 +129,11 @@ textarea {
   padding: 0 2rem;
 }
 
-/* Estilos de tarjeta */
+/* Task Card Styles */
 .card {
   width: 190px;
   height: 254px;
-  padding: .8em;
+  padding: 0.8em;
   background: #f5f5f5;
   position: relative;
   overflow: visible;
@@ -181,17 +144,12 @@ textarea {
   background-color: #ffcaa6;
   height: 40%;
   width: 100%;
-  border-radius: .5rem;
-  transition: .3s ease;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
 }
 
 .card-info {
   padding-top: 10%;
-}
-
-svg {
-  width: 20px;
-  height: 20px;
 }
 
 .card-footer {
@@ -203,29 +161,31 @@ svg {
   border-top: 1px solid #ddd;
 }
 
-/* Textos */
+/* Texts */
 .text-title {
   font-weight: 900;
   font-size: 1.2em;
   line-height: 1.5;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .text-body {
-  font-size: .9em;
+  font-size: 0.9em;
   padding-bottom: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-/* Botón */
+/* Button Styles */
 .card-button {
   border: 1px solid #252525;
   display: flex;
-  padding: .3em;
+  padding: 0.3em;
   cursor: pointer;
   border-radius: 50px;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
-/* Hover */
+/* Hover Effects */
 .card-img:hover {
   transform: translateY(-25%);
   box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
@@ -236,7 +196,7 @@ svg {
   background-color: #ffcaa6;
 }
 
-/* Botón de eliminación en cada tarjeta */
+/* Delete Button */
 .delete-button {
   position: absolute;
   top: 5px;
@@ -254,7 +214,7 @@ svg {
   justify-content: center;
 }
 
-/* Botón de agregar tarea */
+/* Add Task Button */
 .add-task-button,
 .submit-button {
   width: 100%;
@@ -270,6 +230,7 @@ svg {
   transition: background-color 0.3s ease;
   margin: 0 auto;
   display: block;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .add-task-button:hover,
@@ -280,20 +241,20 @@ svg {
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
+      flex-direction: column;
   }
 
   .sidebar {
-    width: 100%;
-    height: auto;
+      width: 100%;
+      height: auto;
   }
 
   .main-content {
-    margin-left: 0;
+      margin-left: 0;
   }
 
   .tarea-card {
-    width: 100%;
-    margin: 0.625rem 0;
+      width: 100%;
+      margin: 0.625rem 0;
   }
 }

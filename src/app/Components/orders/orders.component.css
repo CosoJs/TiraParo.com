@@ -6,19 +6,20 @@
     justify-content: space-between;
     overflow: hidden;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 2rem;
-    margin: 2rem auto; /* Separación entre los carruseles */
+    margin: 3rem auto; /* Más espacio entre los carruseles */
 }
 
-.main-container{
+/* Margen superior del contenedor */
+.main-container {
     margin-top: 2rem;
 }
 
 /* Estilo de las miniaturas (cards) y ocultar scrollbars */
 .orders-thumbnails {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem; /* Más espacio entre las tarjetas */
     overflow-x: auto;
     scroll-behavior: smooth;
     width: calc(100% - 4rem);
@@ -36,29 +37,46 @@
 
 /* Estilo de las tarjetas */
 .order-wrapper {
-    flex: 0 0 250px;
+    flex: 0 0 260px;
     height: auto;
     min-height: 300px;
     max-height: 350px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px; /* Bordes más redondeados */
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombras más suaves */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    padding: 1rem; /* Añadido padding interno */
 }
 
 .order-wrapper:hover {
     transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombras más pronunciadas al hover */
 }
 
+/* Contenido de las tarjetas */
 .card-content {
-    padding: 20px;
+    padding: 1rem;
     text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.card-content h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.card-content p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0.5rem 0;
 }
 
 /* Botones de navegación */
@@ -69,22 +87,27 @@
     background-color: #ff7800;
     border: none;
     color: white;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.5rem;
-}
-
-.nav-left {
-    left: 0.5rem;
-}
-
-.nav-right {
-    right: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-left:hover, .nav-right:hover {
     background-color: #ff6801;
+    transform: scale(1.1);
+}
+
+/* Botón izquierdo */
+.nav-left {
+    left: 0.5rem;
+}
+
+/* Botón derecho */
+.nav-right {
+    right: 0.5rem;
 }
 
 /* Estilo del botón "Marcar como Completado" en el modal */
@@ -96,11 +119,22 @@
     border: none;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.3s ease;
     display: inline-block;
     text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .complete-btn:hover {
     background-color: #ff6801;
+}
+
+/* Títulos de los carruseles */
+h2 {
+    text-align: left;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.75rem;
+    color: #333;
+    margin-bottom: 1rem;
+    padding-left: 2rem; /* Alineado con el carrusel */
 }

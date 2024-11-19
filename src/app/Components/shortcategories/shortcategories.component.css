@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
+/* --- Estilos Globales --- */
 * {
     border: 0;
     margin: 0;
@@ -8,45 +11,43 @@
 html {
     height: 100%;
     font-size: 14px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     height: 100%;
 }
 
+/* --- Hero Section --- */
 .hero-section {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centra todo el contenido horizontalmente */
+    align-items: center; /* Centra verticalmente */
     background-color: #fff;
-    padding: 50px;
-    gap: 15px;
-    /* Gap between the cards */
+    padding: 50px 20px; /* Espaciado interno */
 }
 
+/* --- Card Container --- */
 .card-container {
     display: flex;
-    gap: 5px;
     justify-content: center;
-    flex-wrap: wrap;
-    /* Wrap cards in multiple rows if necessary */
+    gap: 15px; /* Espaciado entre las tarjetas */
+    flex-wrap: wrap; /* Asegura que las tarjetas se ajusten en varias filas en pantallas pequeñas */
+    max-width: 1200px; /* Limita el ancho máximo del contenedor */
 }
 
+/* --- Card Styles --- */
 .card {
     position: relative;
     list-style: none;
-    width: 205px;
+    width: 220px; /* Ancho fijo para todas las tarjetas */
+    height: 300px; /* Altura fija para que las tarjetas sean consistentes */
     transition: transform 0.3s ease;
     overflow: hidden;
     border-radius: 20px;
-}
-
-.card::before {
-    content: "";
-    display: block;
-    padding-bottom: 150%;
-    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff; /* Asegura un fondo blanco */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
 .card-background {
@@ -58,45 +59,65 @@ body {
     border-radius: 20px;
     background-size: cover;
     background-position: center;
-    filter: brightness(0.9) saturate(1) contrast(1);
-    transform-origin: bottom;
-    transform: scale(1) translateZ(0);
+    filter: brightness(0.85) saturate(1) contrast(1);
     transition: transform 0.3s ease;
 }
 
 .card:hover .card-background {
-    transform: scale(1.15) translateZ(0);
+    transform: scale(1.1); /* Efecto de zoom al hacer hover */
 }
 
 .card-container:hover .card:not(:hover) {
-    transform: scale(0.9);
+    transform: scale(0.95); /* Las tarjetas que no están seleccionadas se encogen un poco */
 }
 
-.card-container:hover .card:not(:hover) .card-background,
-.card-container:hover .card:not(:hover) .card-category {
-    filter: brightness(0.5) saturate(0) contrast(1.2) blur(10px);
+.card-container:hover .card:not(:hover) .card-background {
+    filter: brightness(0.6) saturate(0.8) blur(4px); /* Las tarjetas no seleccionadas se oscurecen */
 }
 
+/* --- Content Styles --- */
 .content {
+    position: absolute;
     top: 50%;
     left: 0;
-    padding: 25px;
-    position: absolute;
+    width: 100%;
+    text-align: center;
     transform: translateY(-50%);
-}
-
-.card-category {
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 5px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
+    padding: 10px;
+    z-index: 1;
 }
 
 .card-heading {
     color: #fff;
-    font-size: 25px;
-    line-height: 1;
-    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 600;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Media Queries --- */
+
+/* Pantallas medianas (hasta 768px) */
+@media (max-width: 768px) {
+    .card {
+        width: 200px;
+        height: 280px;
+    }
+
+    .card-heading {
+        font-size: 16px;
+    }
+}
+
+/* Pantallas pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+    .card {
+        width: 180px;
+        height: 260px;
+    }
+
+    .card-heading {
+        font-size: 14px;
+    }
 }
