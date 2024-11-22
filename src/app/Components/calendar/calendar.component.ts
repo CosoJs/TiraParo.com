@@ -163,7 +163,7 @@ export class CalendarComponent implements OnInit {
       console.error('UsuarioId no encontrado en localStorage.');
       return;
     }
-
+  
     day.items.forEach((item: any) => {
       const reservaRef = doc(this.firestore, `users/${userId}/${item.collection}/${item.id}`);
       getDoc(reservaRef).then((docSnap) => {
@@ -172,8 +172,10 @@ export class CalendarComponent implements OnInit {
           this.modalItems.push({
             contentType: item.contentType,
             platform: item.platform,
-            details: reservaData['descripcion'] || 'Sin descripción'  // Usa ['descripcion'] en lugar de reservaData.descripcion
-          });          
+            id: item.id,
+            collection: item.collection, // Asegúrate de incluir 'collection'
+            details: reservaData['descripcion'] || 'Sin descripción'
+          });
           this.modalOpen = true;
         } else {
           console.error('Documento no encontrado.');
@@ -181,6 +183,7 @@ export class CalendarComponent implements OnInit {
       }).catch(error => console.error('Error al cargar los detalles:', error));
     });
   }
+  
 
   cerrarModal() {
     this.modalOpen = false;
