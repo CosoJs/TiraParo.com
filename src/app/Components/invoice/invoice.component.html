@@ -1,99 +1,70 @@
 <div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
     <!-- Sidebar -->
     <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
-        <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+      <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
     </div>
-
-    <!-- Botón de descarga en la esquina superior derecha de la pantalla -->
+  
+    <!-- Botón de descarga -->
     <button (click)="downloadPDF()" class="button fixed-button">
-        <p class="text">Descargar</p>
-        <div class="svg">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
-                <path
-                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
-                </path>
-                <path
-                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
-                </path>
-            </svg>
-        </div>
+      <p class="text">Descargar</p>
+      <div class="svg">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
+          <path
+            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
+          </path>
+          <path
+            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
+          </path>
+        </svg>
+      </div>
     </button>
-
+  
     <!-- Contenedor de la factura -->
     <div id="invoice-container" class="invoice-container">
-        <!-- Contenido de la factura aquí -->
-        <header class="invoice-header">
-            <h1>Resumen de operaciones</h1>
-            <div class="invoice-info">
-                <p><strong>Fecha:</strong> periodo 5  al 5 de cada mes</p>
-            </div>
-        </header>
-
-        <section class="invoice-details">
-            <div class="company-info">
-                <h2>De:</h2>
-                <p>Tirando paro</p>
-                <p>Teléfono: (123) 456-7890</p>
-                <p>Email: contacto-empresa.com</p>
-            </div>
-            <div class="client-info">
-                <h2>Para:</h2>
-                <!-- Prestador de Servicio -->
-                <p>Nombre del Cliente</p> 
-                <p>Dirección del Cliente</p>
-                <p>Teléfono: (098) 765-4321</p>
-                <p>Email: cliente-ejemplo.com</p>
-            </div>
-        </section>
-
-        <section class="invoice-items">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id Servicio</th>
-                        <th>Descripción</th>
-                        <th>Precio de Servicio</th>
-                        <th>Comisión</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>si la hay id o indentificador de servicio </td>
-                        <td>NOmbre del servicio </td>
-                        <td>$500</td>
-                        <td>5% del costo del servicio</td>
-                        <td>Diferencia  entre el precios servicio y comisión, que es lo uqe gana el cliente</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Producto 2</td>
-                        <td>750</td>
-                        <td>$75.00</td>
-                        <td>$675.00</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Servicio 1</td>
-                        <td>300</td>
-                        <td>$30.00</td>
-                        <td>$270.00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="invoice-summary">
-            <div class="total">
-                <p><strong>Subtotal:</strong> total sin comision</p>
-                <p><strong>Comisión (5%):</strong> comision</p>
-                <h3><strong>Total:</strong> $Diferencia entre subtotal y comision</h3>
-            </div>
-        </section>
-
-        <footer class="invoice-footer">
-            <p>Cobramos una comisión del 5% sobre el valor de cada trabajo completado en la plataforma, asegurando
-                calidad y continuidad en nuestros servicios.</p>
-        </footer>
+      <header class="invoice-header">
+        <h1>Resumen de operaciones</h1>
+        <div class="invoice-info">
+          <p><strong>Fecha:</strong> Periodo del 5 al 5 de cada mes</p>
+        </div>
+      </header>
+  
+      <section class="invoice-items">
+        <table>
+          <thead>
+            <tr>
+              <th>Id Servicio</th>
+              <th>Descripción</th>
+              <th>Precio de Servicio</th>
+              <th>Comisión</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoiceData">
+              <td>{{ item.id }}</td>
+              <td>{{ item.description }}</td>
+              <td>${{ item.price }}</td>
+              <td>${{ item.commission }}</td>
+              <td>${{ item.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+  
+      <section class="invoice-summary">
+        <div class="total">
+          <p><strong>Subtotal:</strong> ${{ subtotal }}</p>
+          <p><strong>Comisión (5%):</strong> ${{ totalCommission }}</p>
+          <h3><strong>Total:</strong> ${{ total }}</h3>
+        </div>
+      </section>
+  
+      <footer class="invoice-footer">
+        <p>
+          Cobramos una comisión del 5% sobre el valor de cada trabajo completado en la plataforma, asegurando calidad y
+          continuidad en nuestros servicios.
+        </p>
+      </footer>
     </div>
-</div>
+  </div>
+  
