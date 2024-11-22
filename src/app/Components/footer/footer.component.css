@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
 footer {
     background-color: #333;
     color: #fff;
     padding: 2.5rem 0;
     margin-top: -0.625rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Fuente base para texto continuo */
 }
 
 .footer-container {
@@ -22,6 +24,7 @@ footer {
 .footer-column h3 {
     margin-bottom: 0.9375rem;
     font-size: 1.125rem;
+    font-family: 'Poppins', sans-serif; /* Fuente para encabezados */
 }
 
 .footer-column ul {
@@ -36,6 +39,7 @@ footer {
 .footer-column ul li a {
     color: #ccc;
     text-decoration: none;
+    font-family: 'Roboto', sans-serif; /* Fuente para enlaces */
 }
 
 .footer-column ul li a:hover {
@@ -44,6 +48,7 @@ footer {
 
 .footer-column p {
     margin: 0.625rem 0;
+    font-family: 'Roboto', sans-serif; /* Fuente para párrafos */
 }
 
 .social-icons a {
@@ -61,6 +66,7 @@ footer {
     text-align: center;
     padding: 1.25rem;
     background-color: #222;
+    font-family: 'Roboto', sans-serif; /* Fuente base */
 }
 
 @media (max-width: 64rem) {

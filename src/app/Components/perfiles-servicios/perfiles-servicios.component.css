@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
 /* Botón de carga */
 .button-container {
     margin-top: 3em;
@@ -11,7 +13,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centra horizontalmente */
     padding: 1em;
     border: 2px dashed #ccc;
     background-color: #f9f9f9;
@@ -19,13 +20,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 40%;
-    /* Ajusta el ancho */
     height: 100%;
-    /* Ajusta la altura */
     text-align: center;
-    /* Centra el contenido dentro del botón */
     gap: 1em;
-    /* Espacio entre el icono y el texto */
+    font-family: 'Poppins', sans-serif;
 }
 
 .upload-button:hover {
@@ -37,22 +35,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centra el icono dentro de su contenedor */
 }
 
 .icon svg {
     width: 12em;
-    /* Ajusta el tamaño del icono */
     height: 8em;
     color: #666;
 }
 
 .upload-button span {
-    font-size: 3em;
+    font-size: 2.5em;
     color: #666;
     display: flex;
     align-items: center;
-    /* Centra el texto verticalmente */
 }
 
 /* Tarjetas */
@@ -64,33 +59,29 @@
 /* Contenedor principal */
 .container {
     display: grid;
-    grid-template-columns: auto 1fr; /* Sidebar toma el espacio justo y el resto es para el contenido */
-    transition: grid-template-columns 0.3s ease; /* Suave transición cuando cambia el ancho de la sidebar */
-    height: 100vh; /* Ocupa todo el alto de la pantalla */
-    gap: 20px; /* Espacio entre la sidebar y el contenido principal */
+    grid-template-columns: auto 1fr;
+    transition: grid-template-columns 0.3s ease;
+    height: 100vh;
+    gap: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .sidebar {
     padding: 20px;
     width: 80px;
-    /* Sidebar contraída */
     transition: width 0.3s ease;
-    /* Suave transición para expandir o contraer */
 }
 
 .sidebar.expanded {
     width: 150px;
-    /* Sidebar expandida */
 }
 
 /* Contenido principal */
 .main-content {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    /* Tres filas: searchbar, cards, free space */
     padding: 20px;
     transition: all 0.3s ease;
-    /* Suave ajuste del contenido cuando cambia el tamaño de la sidebar */
 }
 
 /* Searchbar */
@@ -99,7 +90,6 @@
     text-align: center;
 }
 
-/* Tarjetas */
 .cards {
     padding: 10px;
     text-align: center;
@@ -130,20 +120,18 @@
     }
 }
 
-/* Para pantallas medianas o tablets (ancho máximo de 1024px) */
+/* Para pantallas medianas o tablets */
 @media (max-width: 1024px) {
     .container {
         grid-template-columns: 1fr;
-        /* La sidebar ocupa toda la pantalla en dispositivos más pequeños */
     }
 
     .sidebar {
         position: absolute;
         z-index: 1000;
-        left: -200px; /* Inicialmente fuera de la vista */
+        left: -200px;
         width: 200px;
         transition: left 0.3s ease;
-        /* Cambiar el tamaño de la barra lateral para dispositivos medianos */
     }
 
     .sidebar.expanded {
@@ -152,53 +140,47 @@
 
     .main-content {
         padding-left: 20px;
-        /* Asegúrate de que el contenido se ajuste cuando la barra lateral se expande */
     }
 }
 
-/* Para pantallas pequeñas (smartphones - ancho máximo de 768px) */
+/* Para pantallas pequeñas */
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;
-        /* Elimina la estructura de columnas y muestra todo en una sola columna */
     }
 
     .sidebar {
         position: absolute;
         z-index: 1000;
-        left: -250px; /* Sidebar oculta fuera de la pantalla */
+        left: -250px;
         height: 100vh;
         width: 250px;
         transition: left 0.3s ease;
     }
 
     .sidebar.expanded {
-        left: 0; /* Sidebar visible en pantallas pequeñas cuando está expandida */
+        left: 0;
     }
 
     .main-content {
         padding-left: 0;
-        /* No hay espacio lateral en pantallas pequeñas */
     }
 
     .searchbar,
     .cards,
     .free-space {
         padding: 5px;
-        /* Reduce el padding para contenido en pantallas pequeñas */
     }
 }
 
-/* Para pantallas extra pequeñas (ancho máximo de 480px) */
+/* Para pantallas extra pequeñas */
 @media (max-width: 480px) {
     .sidebar {
         width: 200px;
-        /* Ajustar la barra lateral para pantallas muy pequeñas */
     }
 
     .main-content {
         padding: 5px;
-        /* Reducir el padding en contenido para pantallas extra pequeñas */
     }
 
     .searchbar,
@@ -206,16 +188,15 @@
     .free-space {
         padding: 5px;
         font-size: 14px;
-        /* Reducir el tamaño de texto y padding para adaptarse a pantallas pequeñas */
     }
 }
 
-/* Margen al contenido principal para que no se solape con la sidebar no expandida */
+/* Margen al contenido principal */
 .main-content {
-    margin-left: 1.5rem; /* Margen reducido en 1 rem */
+    margin-left: 1.5rem;
 }
 
 /* Ajuste específico para el contenedor del buscador */
 .searchbar {
-    margin-left: 1.5rem; /* Margen reducido en 1 rem */
+    margin-left: 1.5rem;
 }
