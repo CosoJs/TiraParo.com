@@ -42,7 +42,7 @@
             <span class="item-title" *ngIf="isHovered">Mis perfiles de servicio</span>
         </li>
 
-        <li [class.active]="activeItem === 'Transfer'" (mouseover)="highlightItem('Transfer')"
+        <li [routerLink]="['/calendar']" [class.active]="activeItem === 'Transfer'" (mouseover)="highlightItem('Transfer')"
             (mouseout)="removeHighlight()" (click)="onNavItemClicked('Transfer')">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                 class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
