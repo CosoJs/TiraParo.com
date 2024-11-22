@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalordenesdeservicioComponent } from '../modalordenesdeservicio/modalordenesdeservicio.component';
 
 @Component({
   selector: 'app-calendar',
@@ -7,19 +9,61 @@ import { Firestore, collection, getDocs } from '@angular/fire/firestore';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  daysInMonth: { day: number | null; items: { contentType: string; platform: string }[]; isToday?: boolean, isOtherMonth?: boolean }[] = [];
+  daysInMonth: {
+    day: number | null;
+    items: { contentType: string; platform: string; id: string; collection: string }[];
+    isToday?: boolean;
+    isOtherMonth?: boolean;
+  }[] = [];
   selectedYear = new Date().getFullYear();
   selectedMonth = new Date().getMonth();
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   weekdays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
   reservas: any[] = [];
   ordenes: any[] = [];
+  modalItems: any[] = [];
+  modalOpen = false;
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.loadReservas();
     this.loadOrdenes();
+  }
+
+  abrirModalOrden(id: string, collection: string) {
+    console.log('ID recibido:', id);
+    const userId = localStorage.getItem('UsuarioId');
+    if (!userId) {
+      console.error('UsuarioId no encontrado en localStorage.');
+      return;
+    }
+
+    const reservaRef = doc(this.firestore, `users/${userId}/${collection}/${id}`);
+    getDoc(reservaRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        const reservaData = docSnap.data();
+        const dialogRef = this.dialog.open(ModalordenesdeservicioComponent, {
+          data: {
+            id,
+            cliente: reservaData?.['cliente'],
+            descripcion: reservaData?.['descripcion'],
+            email: reservaData?.['email'],
+            estado: reservaData?.['estado'],
+            fechaInicio: reservaData?.['fechaInicio'],
+            servicioId: reservaData?.['servicioId'],
+            tareaId: reservaData?.['tareaId'],
+            telefono: reservaData?.['telefono'],
+            usuarioId: reservaData?.['usuarioId'],
+            origen: collection === 'reservas' ? 'ordenesDeServicio' : 'peticionesDeServicio'
+          },
+        });
+      } else {
+        console.error('Documento no encontrado en Firestore.');
+      }
+    }).catch((error) => {
+      console.error('Error al obtener el documento:', error);
+    });
   }
 
   async loadReservas() {
@@ -29,7 +73,9 @@ export class CalendarComponent implements OnInit {
       const data = doc.data();
       return {
         ...data,
-        fechaInicio: data['fechaInicio'] ? data['fechaInicio'].toDate() : null // Convertir si existe
+        fechaInicio: data['fechaInicio'] ? data['fechaInicio'].toDate() : null,
+        id: doc.id,
+        collection: 'misreservas'
       };
     });
     this.generateDaysInMonth();
@@ -42,7 +88,9 @@ export class CalendarComponent implements OnInit {
       const data = doc.data();
       return {
         ...data,
-        fechaInicio: data['fechaInicio'] ? data['fechaInicio'].toDate() : null // Convertir si existe
+        fechaInicio: data['fechaInicio'] ? data['fechaInicio'].toDate() : null,
+        id: doc.id,
+        collection: 'reservas'
       };
     });
     this.generateDaysInMonth();
@@ -57,12 +105,10 @@ export class CalendarComponent implements OnInit {
     const previousMonthDays = new Date(this.selectedYear, this.selectedMonth, 0).getDate();
     const startOffset = (firstDayOfMonth + 6) % 7;
 
-    // Añadir días del mes anterior
     for (let i = startOffset; i > 0; i--) {
       this.daysInMonth.push({ day: previousMonthDays - i + 1, items: [], isOtherMonth: true });
     }
 
-    // Añadir días del mes actual
     for (let i = 1; i <= daysInCurrentMonth; i++) {
       const isToday = this.selectedYear === today.getFullYear() &&
                       this.selectedMonth === today.getMonth() &&
@@ -74,36 +120,71 @@ export class CalendarComponent implements OnInit {
       this.daysInMonth.push({ day: i, items, isToday });
     }
 
-    // Añadir días del siguiente mes para completar la cuadrícula de 42 días (6 filas)
     const endOffset = 42 - this.daysInMonth.length;
     for (let i = 1; i <= endOffset; i++) {
       this.daysInMonth.push({ day: i, items: [], isOtherMonth: true });
     }
   }
 
-  getDateString(day: { day: number | null }): string {
-    return day.day
-      ? `${this.selectedYear}-${String(this.selectedMonth + 1).padStart(2, '0')}-${String(day.day).padStart(2, '0')}`
-      : '';
-  }  
-
   getItemsForDate(date: Date) {
     const items: any[] = [];
-
-    // Filtrar reservas y órdenes para la fecha específica
+  
     this.reservas.forEach(reserva => {
       if (reserva.fechaInicio && reserva.fechaInicio.toDateString() === date.toDateString()) {
-        items.push({ contentType: 'MIS RESERVAS', platform: 'platform-2' });
+        items.push({ 
+          contentType: 'MIS RESERVAS', 
+          platform: 'platform-2', 
+          id: reserva.id, 
+          collection: reserva.collection,
+          clickEvent: `abrirModalOrden(${reserva.id}, 'misreservas')` // Añadido el evento
+        });
       }
     });
-
+  
     this.ordenes.forEach(orden => {
       if (orden.fechaInicio && orden.fechaInicio.toDateString() === date.toDateString()) {
-        items.push({ contentType: 'Ordenes', platform: 'platform-1' });
+        items.push({ 
+          contentType: 'Ordenes', 
+          platform: 'platform-1', 
+          id: orden.id, 
+          collection: orden.collection,
+          clickEvent: `abrirModalOrden(${orden.id}, 'reservas')` // Añadido el evento
+        });
       }
     });
-
+  
     return items;
+  }  
+
+  abrirModalDetalles(day: any) {
+    this.modalItems = [];
+    const userId = localStorage.getItem('UsuarioId');
+    if (!userId) {
+      console.error('UsuarioId no encontrado en localStorage.');
+      return;
+    }
+
+    day.items.forEach((item: any) => {
+      const reservaRef = doc(this.firestore, `users/${userId}/${item.collection}/${item.id}`);
+      getDoc(reservaRef).then((docSnap) => {
+        if (docSnap.exists()) {
+          const reservaData = docSnap.data();
+          this.modalItems.push({
+            contentType: item.contentType,
+            platform: item.platform,
+            details: reservaData['descripcion'] || 'Sin descripción'  // Usa ['descripcion'] en lugar de reservaData.descripcion
+          });          
+          this.modalOpen = true;
+        } else {
+          console.error('Documento no encontrado.');
+        }
+      }).catch(error => console.error('Error al cargar los detalles:', error));
+    });
+  }
+
+  cerrarModal() {
+    this.modalOpen = false;
+    this.modalItems = [];
   }
 
   prevMonth() {
@@ -125,4 +206,10 @@ export class CalendarComponent implements OnInit {
     }
     this.generateDaysInMonth();
   }
+
+  getDateString(day: any): string {
+    const date = new Date(this.selectedYear, this.selectedMonth, day.day);
+    return date.toISOString().split('T')[0];  // Devuelve la fecha en formato 'YYYY-MM-DD'
+  }
+  
 }
