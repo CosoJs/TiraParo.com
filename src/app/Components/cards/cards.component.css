@@ -1,8 +1,13 @@
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+}
+
 .carousel-wrapper {
     position: relative;
     width: 90%;
     max-width: 1200px;
-    margin: auto;
+    margin: 35px auto;
     overflow: hidden;
     min-height: 70vh;
     display: flex;
@@ -11,9 +16,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #f8f8f8;
-    margin-bottom: 35px;
-    margin-top: 35px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .carousel-container {
@@ -22,6 +25,7 @@
     transition: transform 0.5s ease;
 }
 
+/* Estilo de las diapositivas */
 .slide {
     display: none;
     width: 100%;
@@ -53,6 +57,7 @@
     color: #333;
     font-weight: bold;
     margin-bottom: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .description {
@@ -60,6 +65,7 @@
     color: #555;
     line-height: 1.5;
     text-align: justify;
+    font-family: 'Arial', sans-serif;
 }
 
 .footnote {
@@ -67,6 +73,7 @@
     color: #999;
     margin-top: 10px;
     font-style: italic;
+    font-family: 'Arial', sans-serif;
 }
 
 .slide-image {
@@ -85,6 +92,7 @@
     object-fit: cover;
 }
 
+/* Barra de progreso */
 .progress-bar-container {
     margin-top: 10px;
     width: 100%;
@@ -111,7 +119,7 @@
     background-color: #ff6801;
 }
 
-/* Media query para pantallas menores a 700px */
+/* Media queries */
 @media (max-width: 700px) {
     .slide.active {
         flex-direction: column;
@@ -141,7 +149,6 @@
     }
 }
 
-/* Media query para pantallas menores a 480px */
 @media (max-width: 480px) {
     .title {
         font-size: 1.6em;
@@ -183,10 +190,7 @@
     }
 }
 
-* {
-    box-sizing: border-box;
-}
-
+/* Contenedor de texto */
 .contenedor-del-texto {
     margin: 0 auto;
     padding: 15px;

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+
 * {
     border: 0;
     margin: 0;
@@ -8,11 +10,12 @@
 html {
     height: 100%;
     font-size: 14px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Fuente base */
 }
 
 body {
     height: 100%;
+    background-color: #f5f5f5; /* Fondo suave */
 }
 
 .hero-section {
@@ -21,25 +24,32 @@ body {
     justify-content: center;
     background-color: #fff;
     padding: 50px;
-    gap: 15px;
-    /* Gap between the cards */
 }
 
 .card-container {
-    display: flex;
-    gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Las tarjetas se adaptan automáticamente */
+    gap: 15px; /* Espacio entre tarjetas */
     justify-content: center;
-    flex-wrap: wrap;
-    /* Wrap cards in multiple rows if necessary */
+    max-width: 1200px; /* Limita el ancho máximo */
+    width: 100%;
+    padding: 20px;
 }
 
 .card {
     position: relative;
     list-style: none;
-    width: 205px;
-    transition: transform 0.3s ease;
+    width: 100%; /* Ocupa el espacio disponible */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Más sombra al pasar el mouse */
 }
 
 .card::before {
@@ -60,48 +70,64 @@ body {
     background-position: center;
     filter: brightness(0.9) saturate(1) contrast(1);
     transform-origin: bottom;
-    transform: scale(1) translateZ(0);
+    transform: scale(1);
     transition: transform 0.3s ease;
 }
 
 .card:hover .card-background {
-    transform: scale(1.15) translateZ(0);
-}
-
-.card-container:hover .card:not(:hover) {
-    transform: scale(0.9);
-}
-
-.card-container:hover .card:not(:hover) .card-background,
-.card-container:hover .card:not(:hover) .card-category {
-    filter: brightness(0.5) saturate(0) contrast(1.2) blur(10px);
+    transform: scale(1.15);
 }
 
 .content {
-    top: 50%;
-    left: 0;
-    padding: 25px;
     position: absolute;
-    transform: translateY(-50%);
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    text-align: center;
+    padding: 10px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 .card-category {
-    color: #fff;
-    font-size: 12px;
+    color: #fff; /* Texto blanco */
+    font-size: 0.85rem;
     font-weight: 500;
-    letter-spacing: 5px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 2px;
     margin-bottom: 8px;
     text-transform: uppercase;
 }
 
 .card-heading {
-    color: #fff;
-    font-size: 25px;
-    line-height: 1;
-    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+    color: #fff; /* Texto blanco */
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
-.card.selected {
-    outline: 3px solid #00f; /* Cambia el color del borde para resaltar */
-    opacity: 0.8; /* Reduce la opacidad para indicar que está seleccionada */
+/* Responsividad */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta el tamaño en pantallas pequeñas */
+    }
+
+    .card-heading {
+        font-size: 1.2rem; /* Reduce el tamaño del texto */
+    }
+
+    .card-category {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr); /* Muestra dos tarjetas por fila */
+    }
+
+    .card {
+        border-radius: 10px;
+    }
 }
