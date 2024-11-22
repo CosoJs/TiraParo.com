@@ -1,57 +1,69 @@
-<div class="calendar-wrapper">
-    <!-- Encabezado del calendario -->
-    <div class="calendar-header">
-      <button (click)="prevMonth()">Anterior</button>
-      <h1>{{ monthNames[selectedMonth] }} {{ selectedYear }}</h1>
-      <button (click)="nextMonth()">Siguiente</button>
-    </div>
-  
-    <!-- Contenido del calendario -->
-    <div class="calendar-content">
-      <div>
-        <!-- Días de la semana -->
-        <div class="weekdays">
-          <div *ngFor="let day of weekdays">{{ day }}</div>
-        </div>
-  
-        <!-- Días del mes aqui debo agregar (click)="abrirModalOrden(orden.id, 'misreservas')" y (click)="abrirModalOrden(orden.id, 'reservas')"-->
-        <ul class="calendar-days">
-          <li *ngFor="let day of daysInMonth" [ngClass]="{'today': day.isToday, 'other-month': day.isOtherMonth}">
-            <time *ngIf="day.items.length === 0" [attr.datetime]="getDateString(day)">
-              {{ day.day }}
-            </time>
-  
-            <!-- Botón para abrir detalles si hay más de un elemento -->
-            <div *ngIf="day.items.length > 0" class="item-wrapper">
-              <div *ngFor="let item of day.items.slice(0, 2)" [ngClass]="item.platform" class="item-card" (click)="abrirModalOrden(item.id, item.collection)">
-                {{ item.contentType }}
-              </div>
-              <button *ngIf="day.items.length > 2" (click)="abrirModalDetalles(day)" class="more-button">
-                +{{ day.items.length - 2 }} más
-              </button>
-              
-              <button *ngIf="day.items.length <= 2" (click)="abrirModalDetalles(day)" class="more-button">
-                Ver detalles
-              </button>
-            </div>
-          </li>
-        </ul>
+<div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
+  <!-- Sidebar -->
+  <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+    <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <div class="calendar-wrapper">
+      <!-- Encabezado del calendario -->
+      <div class="calendar-header">
+        <button (click)="prevMonth()">Anterior</button>
+        <h1>{{ monthNames[selectedMonth] }} {{ selectedYear }}</h1>
+        <button (click)="nextMonth()">Siguiente</button>
       </div>
-    </div>
-  
-    <!-- Modal -->
-<div *ngIf="modalOpen" class="modal-backdrop">
-    <div class="modal">
-      <h3>Detalles del día</h3>
-      <ul>
-        <li *ngFor="let item of modalItems" [ngClass]="item.platform" (click)="abrirModalOrden(item.id, item.collection)">
-          <p><strong>{{ item.contentType }}</strong></p>
-          <p>{{ item.details }}</p>
-        </li>
-      </ul>
-      <button (click)="cerrarModal()">Cerrar</button>
+
+      <!-- Contenido del calendario -->
+      <div class="calendar-content">
+        <div>
+          <!-- Días de la semana -->
+          <div class="weekdays">
+            <div *ngFor="let day of weekdays">{{ day }}</div>
+          </div>
+
+          <!-- Días del mes aqui debo agregar (click)="abrirModalOrden(orden.id, 'misreservas')" y (click)="abrirModalOrden(orden.id, 'reservas')"-->
+          <ul class="calendar-days">
+            <li *ngFor="let day of daysInMonth" [ngClass]="{'today': day.isToday, 'other-month': day.isOtherMonth}">
+              <time *ngIf="day.items.length === 0" [attr.datetime]="getDateString(day)">
+                {{ day.day }}
+              </time>
+
+              <!-- Botón para abrir detalles si hay más de un elemento -->
+              <div *ngIf="day.items.length > 0" class="item-wrapper">
+                <div *ngFor="let item of day.items.slice(0, 2)" [ngClass]="item.platform" class="item-card"
+                  (click)="abrirModalOrden(item.id, item.collection)">
+                  {{ item.contentType }}
+                </div>
+                <button *ngIf="day.items.length > 2" (click)="abrirModalDetalles(day)" class="more-button">
+                  +{{ day.items.length - 2 }} más
+                </button>
+
+                <button *ngIf="day.items.length <= 2" (click)="abrirModalDetalles(day)" class="more-button">
+                  Ver detalles
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div *ngIf="modalOpen" class="modal-backdrop">
+        <div class="modal">
+          <h3>Detalles del día</h3>
+          <ul>
+            <li *ngFor="let item of modalItems" [ngClass]="item.platform"
+              (click)="abrirModalOrden(item.id, item.collection)">
+              <p><strong>{{ item.contentType }}</strong></p>
+              <p>{{ item.details }}</p>
+            </li>
+          </ul>
+          <button (click)="cerrarModal()">Cerrar</button>
+        </div>
+      </div>
+
     </div>
   </div>
-  
-  </div>
-  
+</div>

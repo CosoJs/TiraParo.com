@@ -184,6 +184,17 @@ export class CalendarComponent implements OnInit {
     });
   }
   
+  isSidebarExpanded: boolean = false;
+
+    // Métodos existentes
+
+    expandSidebar() {
+        this.isSidebarExpanded = true;
+    }
+
+    collapseSidebar() {
+        this.isSidebarExpanded = false;
+    }
 
   cerrarModal() {
     this.modalOpen = false;
