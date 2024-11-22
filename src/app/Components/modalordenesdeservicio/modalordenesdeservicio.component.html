@@ -21,6 +21,14 @@
       </div>
     </div>
     <div class="modal-footer modal-actions">
+      <!-- Botón para marcar como completado -->
+      <button
+        *ngIf="mostrarBotonMarcarCompletado()"
+        type="button"
+        class="btn btn-primary submit-btn"
+        (click)="marcarComoCompletado()">
+        Marcar como Completado
+      </button>
       <button type="button" class="btn btn-primary submit-btn" (click)="cerrarModal()">Cerrar</button>
     </div>
   </div>

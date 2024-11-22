@@ -94,7 +94,13 @@ export class ModalordenesdeservicioComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // Marcar la orden como completada
+  mostrarBotonMarcarCompletado(): boolean {
+    // Mostrar el botón solo si:
+    // - Se abrió como 'reservas'
+    // - El estado actual es 'Pendiente'
+    return this.data.origen === 'ordenesDeServicio' && this.data.estado === 'Pendiente';
+  }
+  
   async marcarComoCompletado(): Promise<void> {
     if (!this.data.usuarioId || !this.data.cliente || !this.data.id) {
       console.error("Datos incompletos: usuarioId, cliente o id faltan.");
@@ -102,27 +108,25 @@ export class ModalordenesdeservicioComponent implements OnInit {
     }
     
     try {
-      // Construir las referencias a las rutas en Firestore
       const ordenProveedorRef = doc(this.firestore, `users/${this.data.usuarioId}/reservas/${this.data.id}`);
       const ordenClienteRef = doc(this.firestore, `users/${this.data.cliente}/misreservas/${this.data.id}`);
-      
-      // Imprimir las rutas para verificar que sean correctas
-      console.log("Ruta Proveedor:", `users/${this.data.usuarioId}/reservas/${this.data.id}`);
-      console.log("Ruta Cliente:", `users/${this.data.cliente}/misreservas/${this.data.id}`);
-      
-      // Actualizar el campo 'estado' a 'Completado' en ambas rutas
+  
+      // Actualizar el estado a 'Completado'
       await Promise.all([
         updateDoc(ordenProveedorRef, { estado: 'Completado' }),
         updateDoc(ordenClienteRef, { estado: 'Completado' })
       ]);
   
-      // Cambiar el estado localmente para reflejar el cambio en la vista
+      // Actualizar el estado local
       this.data.estado = 'Completado';
   
-      // Cerrar el modal
-      this.dialogRef.close();
+      // Emitir evento al cerrar el modal para notificar el cambio
+      this.dialogRef.close({ actualizado: true, id: this.data.id });
+  
+      console.log("La orden fue marcada como completada.");
     } catch (error) {
       console.error("Error al marcar como completado:", error);
     }
-  }
+    window.location.reload(); // Recargar la página o componente
+  }   
 }
