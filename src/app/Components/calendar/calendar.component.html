@@ -23,7 +23,7 @@
   
             <!-- Botón para abrir detalles si hay más de un elemento -->
             <div *ngIf="day.items.length > 0" class="item-wrapper">
-              <div *ngFor="let item of day.items.slice(0, 2)" [ngClass]="item.platform" class="item-card">
+              <div *ngFor="let item of day.items.slice(0, 2)" [ngClass]="item.platform" class="item-card" (click)="abrirModalOrden(item.id, item.collection)">
                 {{ item.contentType }}
               </div>
               <button *ngIf="day.items.length > 2" (click)="abrirModalDetalles(day)" class="more-button">
@@ -40,17 +40,18 @@
     </div>
   
     <!-- Modal -->
-    <div *ngIf="modalOpen" class="modal-backdrop">
-      <div class="modal">
-        <h3>Detalles del día</h3>
-        <ul>
-          <li *ngFor="let item of modalItems" [ngClass]="item.platform">
-            <p><strong>{{ item.contentType }}</strong></p>
-            <p>{{ item.details }}</p>
-          </li>
-        </ul>
-        <button (click)="cerrarModal()">Cerrar</button>
-      </div>
+<div *ngIf="modalOpen" class="modal-backdrop">
+    <div class="modal">
+      <h3>Detalles del día</h3>
+      <ul>
+        <li *ngFor="let item of modalItems" [ngClass]="item.platform" (click)="abrirModalOrden(item.id, item.collection)">
+          <p><strong>{{ item.contentType }}</strong></p>
+          <p>{{ item.details }}</p>
+        </li>
+      </ul>
+      <button (click)="cerrarModal()">Cerrar</button>
     </div>
+  </div>
+  
   </div>
   
