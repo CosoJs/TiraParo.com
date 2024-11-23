@@ -115,7 +115,9 @@ export class Orders2Component{
         const servicioData = doc.data();
         const servicioId = doc.id;
         this.obtenerDetalles(servicioData, servicioId, (detalle) => {
-          this.misServiciosCompletados.push(detalle);
+          if (servicioData['estado'] === 'Completado') {
+            this.misPeticiones.push(detalle);
+          }
         });
       });
     }).catch((error) => {

@@ -26,8 +26,16 @@
         <div class="form-group">
           <label for="endDate">Fecha de Finalización</label>
           <div class="date-picker-container">
-            <input ngxDaterangepickerMd [(ngModel)]="endDate" [singleDatePicker]="true" [autoApply]="true"
-              class="form-control" name="endDate" placeholder="Selecciona la fecha" />
+            <input
+              ngxDaterangepickerMd
+              [(ngModel)]="endDate"
+              [singleDatePicker]="true"
+              [autoApply]="true"
+              class="form-control"
+              name="endDate"
+              placeholder="Selecciona la fecha"
+              readonly
+            />
           </div>
         </div>
 
