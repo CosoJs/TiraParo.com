@@ -10,56 +10,27 @@
       <form (ngSubmit)="confirmBooking()" *ngIf="!bookingSuccess">
         <div class="form-group">
           <label for="description">Dirección</label>
-          <textarea
-            id="description"
-            class="form-control"
-            placeholder="Escribe la dirección de donde quieres reservar"
-            [(ngModel)]="description"
-            name="description"
-            required
-          ></textarea>
+          <textarea id="description" class="form-control" placeholder="Escribe la dirección de donde quieres reservar"
+            [(ngModel)]="description" name="description" required></textarea>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            class="form-control"
-            placeholder="Ingresa tu correo electrónico"
-            [(ngModel)]="email"
-            name="email"
-            required
-          />
+          <input id="email" type="email" class="form-control" placeholder="Ingresa tu correo electrónico"
+            [(ngModel)]="email" name="email" required />
         </div>
         <div class="form-group">
           <label for="telefono">Teléfono</label>
-          <input
-            id="telefono"
-            type="tel"
-            class="form-control"
-            placeholder="Ingresa tu número de teléfono"
-            [(ngModel)]="telefono"
-            name="telefono"
-            required
-          />
+          <input id="telefono" type="tel" class="form-control" placeholder="Ingresa tu número de teléfono"
+            [(ngModel)]="telefono" name="telefono" required />
         </div>
         <div class="form-group">
-          <label for="startDate">Fecha de Inicio</label>
+          <label for="endDate">Fecha de Finalización</label>
           <div class="date-picker-container">
-            <input
-              ngxDaterangepickerMd
-              [(ngModel)]="startDate"
-              id="startDate"
-              class="form-control"
-              name="startDate"
-              placeholder="Selecciona la fecha de inicio"
-              required
-              [singleDatePicker]="true"
-              [autoApply]="true"
-              autocomplete="off"
-            />
+            <input ngxDaterangepickerMd [(ngModel)]="endDate" [singleDatePicker]="true" [autoApply]="true"
+              class="form-control" name="endDate" placeholder="Selecciona la fecha" />
           </div>
         </div>
+
         <button type="submit" class="submit-button">Reservar Ahora</button>
       </form>
 

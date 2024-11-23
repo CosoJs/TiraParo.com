@@ -17,7 +17,7 @@ export class BookingComponent implements OnInit {
   usuarioId: string | null = null;
   bookingSuccess: boolean = false;
 
-  startDate: moment.Moment = moment();
+  endDate: any = null; // Inicializar como null
   email: string = '';
   telefono: string = '';
   description: string = '';
@@ -61,41 +61,76 @@ export class BookingComponent implements OnInit {
   }
 
   async confirmBooking() {
-    console.log("Confirming booking...");
-  
-    if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) return;
-  
-    const bookingData = {
-      tareaId: this.tareaId,
-      servicioId: this.UsuarioDeServicio,
-      usuarioId: this.usuarioMain,
-      fechaInicio: Timestamp.fromDate(this.startDate.toDate()),
-      descripcion: this.description,
-      email: this.email,
-      telefono: this.telefono,
-      estado: 'Pendiente',
-      cliente: this.usuarioId,
-    };
-  
-    try {
-      // Generar un nuevo ID manualmente
-      const bookingId = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`)).id;
-  
-      // Guardar en la primera ubicación con el ID generado
-      const bookingRef1 = doc(this.firestore, `users/${this.usuarioMain}/reservas/${bookingId}`);
-      await setDoc(bookingRef1, bookingData);
-  
-      // Guardar en la segunda ubicación con el mismo ID
-      const bookingRef2 = doc(this.firestore, `users/${this.usuarioId}/misreservas/${bookingId}`);
-      await setDoc(bookingRef2, bookingData);
-  
-      this.bookingSuccess = true;
-      setTimeout(() => this.router.navigate(['/home']), 2000);
-    } catch (error) {
-      console.error('Error al confirmar la reserva:', error);
+    console.log("Confirmando reserva...");
+    console.log("Valor de endDate antes de procesar:", this.endDate);
+
+    // Validar datos esenciales
+    if (!this.tareaId || !this.usuarioMain || !this.UsuarioDeServicio || !this.usuarioId) {
+        console.error("Faltan datos obligatorios para confirmar la reserva.");
+        return;
     }
-  }
-  
+
+    if (!this.endDate || !this.endDate.endDate) {
+        console.error("La fecha de finalización no está definida o no es válida.");
+        return;
+    }
+
+    let fechaFin: Date;
+
+    // Validar y procesar el valor de endDate.endDate
+    try {
+        if (typeof this.endDate.endDate === 'string') {
+            // Si es una cadena, convertirla a Date
+            fechaFin = new Date(this.endDate.endDate);
+            if (isNaN(fechaFin.getTime())) {
+                throw new Error("La fecha de finalización no es válida. (Cadena no convertible)");
+            }
+        } else if (typeof this.endDate.endDate === 'object' && this.endDate.endDate.isValid) {
+            // Si es un objeto Dayjs y es válido
+            fechaFin = this.endDate.endDate.toDate();
+        } else if (this.endDate.endDate instanceof Date) {
+            // Si ya es un objeto Date
+            fechaFin = this.endDate.endDate;
+        } else {
+            throw new Error("Tipo de fecha desconocido para endDate.endDate.");
+        }
+    } catch (error) {
+        console.error("Error procesando la fecha de finalización:", error);
+        return;
+    }
+
+    console.log("Fecha de finalización seleccionada:", fechaFin);
+
+    // Construir los datos para guardar en Firestore
+    const bookingData = {
+        tareaId: this.tareaId,
+        servicioId: this.UsuarioDeServicio,
+        usuarioId: this.usuarioMain,
+        fechaInicio: Timestamp.fromDate(fechaFin),
+        descripcion: this.description,
+        email: this.email,
+        telefono: this.telefono,
+        estado: "Pendiente",
+        cliente: this.usuarioId,
+    };
+
+    try {
+        const bookingId = doc(collection(this.firestore, `users/${this.usuarioMain}/reservas`)).id;
+
+        const bookingRef1 = doc(this.firestore, `users/${this.usuarioMain}/reservas/${bookingId}`);
+        await setDoc(bookingRef1, bookingData);
+
+        const bookingRef2 = doc(this.firestore, `users/${this.usuarioId}/misreservas/${bookingId}`);
+        await setDoc(bookingRef2, bookingData);
+
+        this.bookingSuccess = true;
+        console.log("Reserva confirmada con éxito.");
+        setTimeout(() => this.router.navigate(["/home"]), 2000);
+    } catch (error) {
+        console.error("Error al confirmar la reserva:", error);
+    }
+}
+
 
   isSidebarExpanded: boolean = false;
 

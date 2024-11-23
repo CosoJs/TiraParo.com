@@ -1,116 +1,190 @@
 .section {
-    position: relative;
-    min-height: 110vh; /* Mantén la altura aumentada del fondo */
-    padding: 2rem 4rem; /* Espacio adicional en los laterales */
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Alinea el formulario al inicio de la sección */
-    padding-top: 2rem; /* Espacio desde el top */
+  position: relative;
+  min-height: 110vh; /* Mantén la altura aumentada del fondo */
+  padding: 2rem 4rem; /* Espacio adicional en los laterales */
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea el formulario al inicio de la sección */
+  padding-top: 2rem; /* Espacio desde el top */
 }
 
 .booking-form {
-    width: 100%;
-    max-width: 600px;
-    background: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    padding: 2rem 3rem 2rem 2rem; /* Aumenta el padding a la derecha */
-    margin: 0 auto;
-    position: relative;
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 2rem 3rem 2rem 2rem; /* Aumenta el padding a la derecha */
+  margin: 0 auto;
+  position: relative;
 }
 
 .form-title {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #ff6801;
-    margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ff6801;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 label {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
 input,
 select,
 textarea {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-    transition: border-color 0.3s ease;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-    outline: none;
-    border-color: #ff6801;
-    box-shadow: 0 0 0 2px rgba(255, 104, 1, 0.2);
+  outline: none;
+  border-color: #ff6801;
+  box-shadow: 0 0 0 2px rgba(255, 104, 1, 0.2);
 }
 
 textarea {
-    resize: none;
-    height: 100px;
+  resize: none;
+  height: 100px;
 }
 
 .submit-button {
-    width: 100%;
-    background-color: #ff7800;
-    color: white;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  background-color: #ff7800;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-    background-color: #ff6801;
+  background-color: #ff6801;
 }
 
 /* Estilos para el calendario */
 ::ng-deep .md-drppicker {
-    left: 50% !important; /* Centra el calendario */
-    transform: translateX(-50%) !important; /* Ajusta para centrar */
-    top: auto !important;
-    padding: 0px !important;
-    background-color: transparent !important; /* Evita el cambio de fondo */
-    box-shadow: none !important; /* Elimina cualquier sombra */
+  left: 50% !important; /* Centra el calendario */
+  transform: translateX(-50%) !important; /* Ajusta para centrar */
+  top: auto !important;
+  padding: 0px !important;
+  background-color: transparent !important; /* Evita el cambio de fondo */
+  box-shadow: none !important; /* Elimina cualquier sombra */
 }
 
 ::ng-deep .md-drppicker .calendar-table .table-condensed .month,
 ::ng-deep .md-drppicker .calendar-table .table-condensed .year,
 ::ng-deep .md-drppicker .calendar-table .table-condensed .date {
-    background-color: transparent !important; /* Fondo transparente para mes y año */
+  background-color: transparent !important; /* Fondo transparente para mes y año */
 }
 
 ::ng-deep .md-drppicker td.active,
 ::ng-deep .md-drppicker td.active:hover {
-    background-color: #ff6801 !important; /* Mantén el color activo solo en la selección */
+  background-color: #ff6801 !important; /* Mantén el color activo solo en la selección */
 }
 
 ::ng-deep .md-drppicker .ranges li,
 ::ng-deep .md-drppicker .drp-buttons .cancelBtn,
 ::ng-deep .md-drppicker .drp-buttons .applyBtn {
-    background-color: transparent !important; /* Fondo transparente para botones */
-    color: #ff6801 !important; /* Color del texto */
+  background-color: transparent !important; /* Fondo transparente para botones */
+  color: #ff6801 !important; /* Color del texto */
 }
 
 ::ng-deep .md-drppicker .drp-buttons .applyBtn {
-    background-color: #ff6801 !important; /* Fondo naranja para botón aplicar */
-    color: white !important;
+  background-color: #ff6801 !important; /* Fondo naranja para botón aplicar */
+  color: white !important;
+}
+
+.section {
+  position: relative;
+  min-height: 110vh;
+  padding: 2rem 4rem;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 2rem;
+}
+
+.booking-form {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 2rem 3rem;
+  margin: 0 auto;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ff6801;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #ff6801;
+  box-shadow: 0 0 0 2px rgba(255, 104, 1, 0.2);
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #ff7800;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #ff6801;
 }
