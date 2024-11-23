@@ -40,11 +40,30 @@ body {
     position: relative;
     list-style: none;
     width: 100%; /* Ocupa el espacio disponible */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     overflow: hidden;
     border-radius: 20px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+}
+
+/* Tarjeta seleccionada */
+.card.selected {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Más sombra */
+    opacity: 1; /* Totalmente visible */
+}
+
+/* Tarjetas no seleccionadas */
+.card:not(.selected) {
+    filter: blur(3px) brightness(0.); /* Borroso y oscuro */
+    pointer-events: all; /* Aún clicables */
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+.card:not(.selected)::before{
+    background-color: #fff;
+    
+    opacity: 0.4; /* Se ven opacas pero clicables */
 }
 
 .card:hover {
@@ -71,11 +90,11 @@ body {
     filter: brightness(0.9) saturate(1) contrast(1);
     transform-origin: bottom;
     transform: scale(1);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.card:hover .card-background {
-    transform: scale(1.15);
+.card.selected .card-background {
+    filter: brightness(1);
 }
 
 .content {
