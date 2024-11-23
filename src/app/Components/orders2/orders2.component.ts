@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalordenesdeservicioComponent } from '../modalordenesdeservicio/modalordenesdeservicio.component';
-/**sfsfafds */
+
 @Component({
   selector: 'app-orders2',
   templateUrl: './orders2.component.html',
@@ -116,7 +116,7 @@ export class Orders2Component{
         const servicioId = doc.id;
         this.obtenerDetalles(servicioData, servicioId, (detalle) => {
           if (servicioData['estado'] === 'Completado') {
-            this.misPeticiones.push(detalle);
+            this.misServiciosCompletados.push(detalle); // Corregido: Agregar a misServiciosCompletados
           }
         });
       });
