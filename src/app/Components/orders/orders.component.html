@@ -4,7 +4,7 @@
     <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
   </div>
 
-  <!-- Contenido Principals -->
+  <!-- Contenido Principal -->
   <section class="main-container">
     <!-- Carrusel de Mis Órdenes de Clientes -->
     <h2>Mis Órdenes de Clientes</h2>
@@ -12,13 +12,12 @@
       <button class="nav-left" (click)="scrollOrdersLeft('orders-thumbnails-ordenes')">&larr;</button>
       <div class="orders-thumbnails orders-thumbnails-ordenes">
         <div *ngFor="let orden of misOrdenes" class="order-wrapper" (click)="abrirModalOrden(orden.id, 'reservas')">
-          <fa-icon [icon]="['fas', 'user-check']" class="icon-background"></fa-icon>
+          <img [src]="orden.imageUrl" alt="{{ orden.nombre }}" class="order-image" />
           <div class="card-content">
             <h3>{{ orden.nombre }}</h3>
             <p>{{ orden.descripcion }}</p>
             <p>Precio: ${{ orden.precio }}</p>
-            <button *ngIf="orden.estado !== 'Completado'" (click)="marcarComoCompletado(orden.id)">Marcar como
-              Completado</button>
+            <button *ngIf="orden.estado !== 'Completado'" (click)="marcarComoCompletado(orden.id, $event)">Marcar como Completado</button>
           </div>
         </div>
       </div>
@@ -30,9 +29,8 @@
     <div class="orders-gallery">
       <button class="nav-left" (click)="scrollOrdersLeft('orders-thumbnails-ordenes-completadas')">&larr;</button>
       <div class="orders-thumbnails orders-thumbnails-ordenes-completadas">
-        <div *ngFor="let orden of misOrdenesCompletadas" class="order-wrapper"
-          (click)="abrirModalOrden(orden.id, 'reservas')">
-          <fa-icon [icon]="['fas', 'clipboard-check']" class="icon-background"></fa-icon>
+        <div *ngFor="let orden of misOrdenesCompletadas" class="order-wrapper" (click)="abrirModalOrden(orden.id, 'reservas')">
+          <img [src]="orden.imageUrl" alt="{{ orden.nombre }}" class="order-image" />
           <div class="card-content">
             <h3>{{ orden.nombre }}</h3>
             <p>{{ orden.descripcion }}</p>
@@ -42,6 +40,5 @@
       </div>
       <button class="nav-right" (click)="scrollOrdersRight('orders-thumbnails-ordenes-completadas')">&rarr;</button>
     </div>
-
   </section>
 </div>
