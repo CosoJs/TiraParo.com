@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap");
 
 /* --- Video and Background Styling --- */
 .video-background {
@@ -42,12 +42,14 @@
   max-width: 350px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   color: #333;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   z-index: 1;
+  padding-left: 1.5rem; /* Espacio a la izquierda */
+  padding-right: 1.5rem; /* Espacio a la derecha */
 }
 
 .auth-container h2 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
@@ -55,14 +57,14 @@
 }
 
 .auth-container label {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   color: #333;
 }
 
 .auth-container input {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   padding: 10px;
   border: 1px solid #ccc;
@@ -82,7 +84,7 @@
   border: none;
   padding: 10px 15px;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 5px;
@@ -97,7 +99,7 @@
 }
 
 .tabs button:hover {
-  background-color: #D55B09;
+  background-color: #d55b09;
   color: white;
 }
 
@@ -126,7 +128,7 @@ button {
 }
 
 button:hover {
-  background-color: #D55B09;
+  background-color: #d55b09;
 }
 
 .submit {
@@ -156,7 +158,7 @@ button:hover {
 }
 
 .nav-logo {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   text-decoration: none;
@@ -172,7 +174,7 @@ button:hover {
 }
 
 .nav-links li a {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
@@ -255,6 +257,110 @@ button:hover {
   }
 }
 
-
+.navbar > .nav-container > input[type="checkbox"]#menu-toggle {
+  display: none; /* Ocultar el checkbox */
+}
 
 /* --- Nuevo --- */
+/* Estilo para el ícono del menú hamburguesa */
+.menu-icon {
+  display: none; /* Oculto por defecto */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  display: block;
+  background-color: white;
+  height: 3px;
+  margin: 4px 0;
+  width: 25px;
+  transition: 0.3s;
+}
+
+/* Muestra el menú hamburguesa en pantallas pequeñas */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #333;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  #menu-toggle:checked + .menu-icon + .nav-links {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    position: relative;
+    z-index: 100; /* Para evitar que tape el menú */
+  }
+}
+/* --- Botones de Tabs Responsivos --- */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+  .tabs {
+    display: flex;
+    flex-direction: column; /* Mantener en columna */
+    gap: 0.5rem; /* Espaciado entre botones */
+    align-items: center; /* Centrar botones */
+  }
+
+  .tabs button {
+    width: 90%; /* Ajustar ancho a pantalla */
+    max-width: 300px; /* Límite para pantallas medianas */
+    padding: 0.7rem; /* Ajustar padding */
+    font-size: 1rem; /* Texto ajustado */
+  }
+}
+
+/* Teléfonos grandes */
+@media (max-width: 768px) {
+  .tabs {
+    width: 100%; /* Ocupa todo el ancho */
+    gap: 0.4rem; /* Menor separación entre botones */
+  }
+
+  .tabs button {
+    width: 90%; /* Botones más pequeños */
+    max-width: 280px;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem; /* Reducir tamaño de los botones */
+  }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 576px) {
+  .tabs button {
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    max-width: 250px; /* Más pequeños para pantallas reducidas */
+    font-size: 0.85rem; /* Texto más pequeño */
+    padding: 0.5rem 0.7rem;
+  }
+}
+.auth-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.85);
+  width: 90%;
+  max-width: 350px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
+}
