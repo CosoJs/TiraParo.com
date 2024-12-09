@@ -1,9 +1,9 @@
 <div class="container" [ngClass]="{ 'sidebar-expanded': isSidebarExpanded }">
-    <!-- Sidebar -->
-    <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
-      <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
-    </div>
-  
+  <!-- Sidebar -->
+  <div class="sidebar" [ngClass]="{ 'expanded': isSidebarExpanded }">
+    <app-sidebar (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()"></app-sidebar>
+  </div>
+  <section class="main-container">
     <!-- Botón de descarga -->
     <button (click)="downloadPDF()" class="button fixed-button">
       <p class="text">Descargar</p>
@@ -18,7 +18,7 @@
         </svg>
       </div>
     </button>
-  
+
     <!-- Contenedor de la factura -->
     <div id="invoice-container" class="invoice-container">
       <header class="invoice-header">
@@ -27,7 +27,7 @@
           <p><strong>Fecha:</strong> Periodo del 5 al 5 de cada mes</p>
         </div>
       </header>
-  
+
       <section class="invoice-items">
         <table>
           <thead>
@@ -50,7 +50,7 @@
           </tbody>
         </table>
       </section>
-  
+
       <section class="invoice-summary">
         <div class="total">
           <p><strong>Subtotal:</strong> ${{ subtotal }}</p>
@@ -58,7 +58,7 @@
           <h3><strong>Total:</strong> ${{ total }}</h3>
         </div>
       </section>
-  
+
       <footer class="invoice-footer">
         <p>
           Cobramos una comisión del 5% sobre el valor de cada trabajo completado en la plataforma, asegurando calidad y
@@ -66,5 +66,6 @@
         </p>
       </footer>
     </div>
-  </div>
-  
+  </section>
+
+</div>

@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { Firestore, collection, doc, getDoc, getDocs } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+} from '@angular/fire/firestore';
 import { getStorage, ref, getDownloadURL } from '@angular/fire/storage';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalordenesdeservicioComponent } from '../modalordenesdeservicio/modalordenesdeservicio.component';
@@ -23,7 +29,6 @@ export class Orders2Component {
     this.userId = localStorage.getItem('UsuarioId') || '';
     if (this.userId) {
       this.cargarMisPeticiones(this.userId);
-      
     } else {
       console.error('UsuarioId no encontrado en localStorage.');
     }
@@ -31,7 +36,10 @@ export class Orders2Component {
 
   abrirModalOrden(id: string, collection: string) {
     console.log('ID recibido:', id);
-    const reservaRef = doc(this.firestore, `users/${this.userId}/${collection}/${id}`);
+    const reservaRef = doc(
+      this.firestore,
+      `users/${this.userId}/${collection}/${id}`
+    );
     getDoc(reservaRef)
       .then((docSnap) => {
         if (docSnap.exists()) {
@@ -40,7 +48,10 @@ export class Orders2Component {
             data: {
               ...reservaData,
               id,
-              origen: collection === 'misreservas' ? 'ordenesDeServicio' : 'peticionesDeServicio',
+              origen:
+                collection === 'misreservas'
+                  ? 'ordenesDeServicio'
+                  : 'peticionesDeServicio',
             },
           });
         } else {
@@ -60,31 +71,44 @@ export class Orders2Component {
     this.isSidebarExpanded = false;
   }
 
-  async obtenerImagen(usuarioId: string, servicioId: string, tareaId: string): Promise<string> {
+  async obtenerImagen(
+    usuarioId: string,
+    servicioId: string,
+    tareaId: string
+  ): Promise<string> {
     const imagePath = `images/${usuarioId}/${servicioId}/${tareaId}/image_0.png`;
     const imageRef = ref(this.storage, imagePath);
 
     try {
       return await getDownloadURL(imageRef);
     } catch (error) {
-      console.warn(`Imagen no encontrada para ${imagePath}, usando imagen predeterminada.`);
+      console.warn(
+        `Imagen no encontrada para ${imagePath}, usando imagen predeterminada.`
+      );
       return 'assets/default-image.png'; // Ruta a una imagen predeterminada
     }
   }
 
   cargarMisPeticiones(userId: string) {
-    const misReservasRef = collection(this.firestore, `users/${userId}/misreservas`);
+    const misReservasRef = collection(
+      this.firestore,
+      `users/${userId}/misreservas`
+    );
     getDocs(misReservasRef)
       .then((querySnapshot) => {
         querySnapshot.forEach(async (docSnap) => {
           const reservaData = docSnap.data();
           const reservaId = docSnap.id;
-          const imageUrl = await this.obtenerImagen(reservaData['usuarioId'], reservaData['servicioId'], reservaData['tareaId']);
+          const imageUrl = await this.obtenerImagen(
+            reservaData['usuarioId'],
+            reservaData['servicioId'],
+            reservaData['tareaId']
+          );
           const detalle = { ...reservaData, id: reservaId, imagen: imageUrl };
 
           if (reservaData['estado'] === 'Pendiente') {
             this.misPeticiones.push(detalle);
-          }else{
+          } else {
             this.misServiciosCompletados.push(detalle);
           }
         });
@@ -97,14 +121,20 @@ export class Orders2Component {
   scrollOrdersLeft(className: string) {
     const element = document.querySelector(`.${className}`);
     if (element) {
-      element.scrollLeft -= 200;
+      console.log('Scroll antes:', element.scrollLeft);
+      const containerWidth = element.clientWidth;
+      element.scrollLeft -= containerWidth / 2;
+      console.log('Scroll después:', element.scrollLeft);
     }
   }
 
   scrollOrdersRight(className: string) {
     const element = document.querySelector(`.${className}`);
     if (element) {
-      element.scrollLeft += 200;
+      console.log('Scroll antes:', element.scrollLeft);
+      const containerWidth = element.clientWidth;
+      element.scrollLeft += containerWidth / 2;
+      console.log('Scroll después:', element.scrollLeft);
     }
   }
 }

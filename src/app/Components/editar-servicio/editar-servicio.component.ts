@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import {
-  Firestore,
-  doc,
-  getDoc,
-  updateDoc,
-} from '@angular/fire/firestore';
-import { getStorage, ref, uploadString, getDownloadURL } from '@angular/fire/storage';
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from '@angular/fire/storage';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,7 +26,8 @@ export class EditarServicioComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private navegacion: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,20 +41,27 @@ export class EditarServicioComponent implements OnInit {
 
   cargarDatosTarea(tareaId: string): void {
     if (this.userId && this.perfilessevicios) {
-      const tareaRef = doc(this.firestore, `users/${this.userId}/Servicios/${this.perfilessevicios}/tareas/${tareaId}`);
-      getDoc(tareaRef).then((docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          this.nombre = data['nombre'];
-          this.descripcion = data['descripcion'];
-          this.precio = data['precio'];
-          this.imagenes = data['imagenes'] || [];
-        } else {
-          console.log('No se encontró la tarea con el ID proporcionado en Firestore.');
-        }
-      }).catch((error) => {
-        console.error('Error al cargar la tarea desde Firestore:', error);
-      });
+      const tareaRef = doc(
+        this.firestore,
+        `users/${this.userId}/Servicios/${this.perfilessevicios}/tareas/${tareaId}`
+      );
+      getDoc(tareaRef)
+        .then((docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            this.nombre = data['nombre'];
+            this.descripcion = data['descripcion'];
+            this.precio = data['precio'];
+            this.imagenes = data['imagenes'] || [];
+          } else {
+            console.log(
+              'No se encontró la tarea con el ID proporcionado en Firestore.'
+            );
+          }
+        })
+        .catch((error) => {
+          console.error('Error al cargar la tarea desde Firestore:', error);
+        });
     }
   }
 
@@ -67,7 +76,9 @@ export class EditarServicioComponent implements OnInit {
 
       reader.onload = async (e: any) => {
         const imageBase64 = e.target.result;
-        const imagePath = `images/${this.userId}/${this.perfilessevicios}/${this.tareaId}/image_${Date.now()}_${i}.png`;
+        const imagePath = `images/${this.userId}/${this.perfilessevicios}/${
+          this.tareaId
+        }/image_${Date.now()}_${i}.png`;
         const storageRef = ref(storage, imagePath);
 
         try {
@@ -89,15 +100,23 @@ export class EditarServicioComponent implements OnInit {
 
   async guardarCambios(): Promise<void> {
     if (this.userId && this.perfilessevicios && this.tareaId) {
-      const tareaRef = doc(this.firestore, `users/${this.userId}/Servicios/${this.perfilessevicios}/tareas/${this.tareaId}`);
+      const tareaRef = doc(
+        this.firestore,
+        `users/${this.userId}/Servicios/${this.perfilessevicios}/tareas/${this.tareaId}`
+      );
       try {
         await updateDoc(tareaRef, {
           nombre: this.nombre,
           descripcion: this.descripcion,
           precio: this.precio,
-          imagenes: this.imagenes
+          imagenes: this.imagenes,
         });
-        Swal.fire('Éxito', 'La tarea ha sido actualizada con éxito.', 'success');
+        Swal.fire(
+          'Éxito',
+          'La tarea ha sido actualizada con éxito.',
+          'success'
+        );
+        this.navegacion.navigate(['/home']);
       } catch (error) {
         console.error('Error al guardar los cambios: ', error);
         Swal.fire('Error', 'No se pudo actualizar la tarea.', 'error');

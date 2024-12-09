@@ -6,8 +6,8 @@
   justify-content: space-between;
   overflow: hidden;
   width: 100%;
-  max-width: 1000px;
-  padding: 0 2rem;
+  max-width: 90%;
+  padding: 0 2vw;
   margin: 2rem auto; /* Separación entre los carruseles */
 }
 
@@ -18,12 +18,11 @@
 /* Estilo de las miniaturas (cards) y ocultar scrollbars */
 .orders-thumbnails {
   display: flex;
-  gap: 1rem;
-  height: 25rem;
+  gap: 2vw;
   overflow-x: auto;
   scroll-behavior: smooth;
-  width: calc(100% - 4rem);
-  padding: 0 1rem;
+  width: calc(100% - 4vw);
+  padding: 0 2vw;
 }
 
 /* Ocultar las barras de desplazamiento */
@@ -37,13 +36,12 @@
 
 /* Estilo de las tarjetas */
 .order-wrapper {
-  flex: 0 0 250px;
-  min-height: 300px;
-  max-height: 350px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
+  flex: 0 0 25%;
+  min-height: 40vh;
+  border: 0.1rem solid #ccc;
+  border-radius: 1rem;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -60,15 +58,15 @@
 /* Estilo para las imágenes */
 .order-wrapper img {
   width: 100%;
-  height: 180px; /* Ajusta según el diseño */
+  height: 50%;
   object-fit: cover; /* Ajusta la imagen al espacio disponible */
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 /* Contenido de las tarjetas */
 .card-content {
-  padding: 20px;
+  padding: 1.5vh;
   text-align: center;
   flex-grow: 1;
   display: flex;
@@ -77,14 +75,14 @@
 }
 
 .card-content h3 {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
   margin: 0;
 }
 
 .card-content p {
-  font-size: 14px;
-  margin: 5px 0;
+  font-size: 1rem;
+  margin: 0.5vh 0;
 }
 
 /* Botones de navegación */
@@ -96,7 +94,7 @@
   background-color: #ff7800;
   border: none;
   color: white;
-  padding: 0.5rem;
+  padding: 1vh;
   border-radius: 50%;
   cursor: pointer;
   font-size: 1.5rem;
@@ -104,11 +102,11 @@
 }
 
 .nav-left {
-  left: 0.5rem;
+  left: 0.5vw;
 }
 
 .nav-right {
-  right: 0.5rem;
+  right: 0.5vw;
 }
 
 .nav-left:hover,
@@ -137,7 +135,7 @@
 /* Iconos y superposición */
 .icon-background {
   position: absolute;
-  font-size: 80px;
+  font-size: 5vw;
   color: #e0e0e0;
   top: 50%;
   left: 50%;
@@ -157,13 +155,78 @@
   justify-content: center;
   text-align: center;
   color: white;
-  font-size: 18px;
+  font-size: 1.2rem;
   opacity: 0;
-  border-radius: 15px;
-  padding: 10px;
+  border-radius: 1rem;
+  padding: 1vh;
   transition: opacity 0.5s ease;
 }
 
 .order-wrapper:hover .card-content {
   opacity: 1;
+}
+
+.main-container {
+  margin-left: 7rem;
+}
+
+/* Media queries */
+@media screen and (max-width: 768px) {
+  .order-wrapper {
+    flex: 0 0 45%;
+    max-height: 30vh;
+  }
+
+  .order-wrapper img {
+    height: 50%;
+  }
+
+  .orders-gallery {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+
+  .orders-thumbnails {
+    gap: 1rem;
+  }
+
+  .nav-left,
+  .nav-right {
+    font-size: 1.25rem;
+  }
+
+  .main-container {
+    margin-left: 6rem;
+    margin-right: 2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .order-wrapper {
+    flex: 0 0 90%;
+    max-height: 30vh;
+  }
+
+  .order-wrapper img {
+    height: 50%;
+  }
+
+  .card-content h3 {
+    font-size: 1rem;
+  }
+
+  .card-content p {
+    font-size: 0.85rem;
+  }
+
+  .nav-left,
+  .nav-right {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .main-container {
+    margin-left: 4rem;
+    margin-right: 2rem;
+  }
 }

@@ -35,40 +35,37 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 2rem;
-  border-radius: 15px;
+  padding: 2em;
+  border-radius: 1em;
   background-color: rgba(255, 255, 255, 0.85);
-  width: 100%;
-  max-width: 350px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  color: #333;
+  width: 90%;
+  max-width: 22em;
+  box-shadow: 0 0.375em 0.75em rgba(0, 0, 0, 0.15);
   font-family: "Roboto", sans-serif;
   z-index: 1;
-  padding-left: 1.5rem; /* Espacio a la izquierda */
-  padding-right: 1.5rem; /* Espacio a la derecha */
 }
 
 .auth-container h2 {
   font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.5em;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
 }
 
 .auth-container label {
   font-family: "Roboto", sans-serif;
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 500;
   color: #333;
 }
 
 .auth-container input {
   font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  font-size: 1em;
+  padding: 0.625em;
+  border: 0.0625em solid #ccc;
+  border-radius: 0.3125em;
   width: 100%;
   transition: border-color 0.3s;
 }
@@ -82,12 +79,12 @@
 .tabs button {
   background-color: #c0c0c0;
   border: none;
-  padding: 10px 15px;
+  padding: 0.625em 1em;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: 0.3125em;
   transition: background-color 0.3s, color 0.3s;
   color: #333;
 }
@@ -107,21 +104,21 @@
 form {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 1.25em;
   background: transparent;
-  border-radius: 10px;
+  border-radius: 0.625em;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1em;
 }
 
 button {
-  padding: 10px;
+  padding: 0.625em;
   background-color: #ff6801;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125em;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s;
@@ -132,7 +129,7 @@ button:hover {
 }
 
 .submit {
-  width: 100%;
+  width: 106%;
   background-color: #ff6801;
 }
 
@@ -143,23 +140,23 @@ button:hover {
   width: 100%;
   background-color: #333;
   color: white;
-  padding: 10px 0;
+  padding: 0.625em 0;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.2);
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 75em;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 1.25em;
 }
 
 .nav-logo {
   font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.5em;
   font-weight: 700;
   text-decoration: none;
   color: white;
@@ -168,59 +165,54 @@ button:hover {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 1.25em;
   margin: 0;
   padding: 0;
 }
 
 .nav-links li a {
   font-family: "Roboto", sans-serif;
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 500;
   text-decoration: none;
   color: white;
-  padding: 5px 10px;
+  padding: 0.3125em 0.625em;
   transition: background-color 0.3s;
 }
 
 .nav-links li a:hover {
   background-color: #555;
-  border-radius: 5px;
+  border-radius: 0.3125em;
 }
 
 /* --- Responsive Styles --- */
-@media (max-width: 1024px) {
-  .auth-container {
-    width: 25rem;
-    left: 10%;
-    padding: 1.5rem;
-  }
-
-  .navbar {
-    padding: 8px 0;
-  }
-
-  .nav-logo {
-    font-size: 1.25rem;
-  }
-
-  .nav-links {
-    gap: 15px;
-  }
-
-  .submit {
-    width: 18.75rem;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 64em) {
   .auth-container {
     width: 90%;
-    padding: 1rem;
+    padding: 1.5em;
   }
 
   .navbar {
-    padding: 10px 15px;
+    padding: 0.5em 0;
+  }
+
+  .nav-logo {
+    font-size: 1.25em;
+  }
+
+  .nav-links {
+    gap: 1em;
+  }
+}
+
+@media (max-width: 48em) {
+  .auth-container {
+    width: 90%;
+    padding: 1em;
+  }
+
+  .navbar {
+    padding: 0.625em 0.9375em;
   }
 
   .nav-container {
@@ -229,42 +221,31 @@ button:hover {
 
   .nav-links {
     flex-direction: column;
-    gap: 10px;
-  }
-
-  .submit {
-    width: 16.875rem;
+    gap: 0.625em;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 36em) {
   .auth-container {
-    width: 20rem;
-    left: 2.5%;
-    padding: 15px;
+    width: 90%;
+    padding: 0.9375em;
   }
 
   .nav-container {
-    padding: 0 10px;
+    padding: 0 0.625em;
   }
 
   .nav-logo {
-    font-size: 1.125rem;
-  }
-
-  .submit {
-    width: 15rem;
+    font-size: 1.125em;
   }
 }
 
 .navbar > .nav-container > input[type="checkbox"]#menu-toggle {
-  display: none; /* Ocultar el checkbox */
+  display: none;
 }
 
-/* --- Nuevo --- */
-/* Estilo para el ícono del menú hamburguesa */
 .menu-icon {
-  display: none; /* Oculto por defecto */
+  display: none;
   flex-direction: column;
   cursor: pointer;
 }
@@ -272,14 +253,13 @@ button:hover {
 .menu-icon span {
   display: block;
   background-color: white;
-  height: 3px;
-  margin: 4px 0;
-  width: 25px;
+  height: 0.1875em;
+  margin: 0.25em 0;
+  width: 1.5625em;
   transition: 0.3s;
 }
 
-/* Muestra el menú hamburguesa en pantallas pequeñas */
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .menu-icon {
     display: flex;
   }
@@ -287,13 +267,13 @@ button:hover {
   .nav-links {
     display: none;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.625em;
     background-color: #333;
     position: absolute;
-    top: 50px;
+    top: 3.125em;
     left: 0;
     width: 100%;
-    padding: 10px 0;
+    padding: 0.625em 0;
   }
 
   #menu-toggle:checked + .menu-icon + .nav-links {
@@ -301,66 +281,48 @@ button:hover {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .auth-container {
     position: relative;
-    z-index: 100; /* Para evitar que tape el menú */
+    z-index: 100;
   }
 }
-/* --- Botones de Tabs Responsivos --- */
 
-/* Tablets y pantallas medianas */
-@media (max-width: 1024px) {
+@media (max-width: 64em) {
   .tabs {
     display: flex;
-    flex-direction: column; /* Mantener en columna */
-    gap: 0.5rem; /* Espaciado entre botones */
-    align-items: center; /* Centrar botones */
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
   }
 
   .tabs button {
-    width: 90%; /* Ajustar ancho a pantalla */
-    max-width: 300px; /* Límite para pantallas medianas */
-    padding: 0.7rem; /* Ajustar padding */
-    font-size: 1rem; /* Texto ajustado */
+    width: 90%;
+    max-width: 18.75em;
+    padding: 0.7em;
+    font-size: 1em;
   }
 }
 
-/* Teléfonos grandes */
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .tabs {
-    width: 100%; /* Ocupa todo el ancho */
-    gap: 0.4rem; /* Menor separación entre botones */
+    width: 100%;
+    gap: 0.4em;
   }
 
   .tabs button {
-    width: 90%; /* Botones más pequeños */
-    max-width: 280px;
-    font-size: 0.95rem;
-    padding: 0.6rem 0.8rem; /* Reducir tamaño de los botones */
+    width: 90%;
+    max-width: 17.5em;
+    font-size: 0.95em;
+    padding: 0.6em 0.8em;
   }
 }
 
-/* Teléfonos pequeños */
-@media (max-width: 576px) {
+@media (max-width: 36em) {
   .tabs button {
-    width: 100%; /* Asegura que ocupe todo el ancho */
-    max-width: 250px; /* Más pequeños para pantallas reducidas */
-    font-size: 0.85rem; /* Texto más pequeño */
-    padding: 0.5rem 0.7rem;
+    width: 100%;
+    max-width: 15.625em;
+    font-size: 0.85em;
+    padding: 0.5em 0.7em;
   }
-}
-.auth-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2rem;
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.85);
-  width: 90%;
-  max-width: 350px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  font-family: "Roboto", sans-serif;
-  z-index: 1;
 }

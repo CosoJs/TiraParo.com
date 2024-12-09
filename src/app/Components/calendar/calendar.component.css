@@ -306,3 +306,135 @@ button {
     transform: scale(1);
   }
 }
+/* Botones de navegación (Siguiente y Anterior) */
+.calendar-header button {
+  background: #fff;
+  border: 2px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.calendar-header button:hover {
+  background: #f0f0f0;
+  border-color: #aaa;
+  color: #000;
+}
+
+/* Estilo de las celdas del calendario */
+.calendar-days li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  width: 8rem;
+  font-weight: 400;
+  font-size: 1.2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.calendar-days li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo para el día actual */
+.today {
+  background: #f9f9f9;
+  border: 2px solid #007bff;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Días de otros meses */
+.other-month time {
+  color: #bbb;
+  font-style: italic;
+}
+
+/* Media Query para pantallas pequeñas (hasta 600px) */
+@media (max-width: 600px) {
+  .calendar-header h1 {
+    font-size: 1.5rem; /* Reduce el tamaño del título */
+  }
+
+  .calendar-header button {
+    font-size: 0.9rem; /* Ajusta el tamaño de los botones */
+    padding: 8px 12px;
+  }
+
+  .weekdays {
+    font-size: 0.9rem; /* Reduce el tamaño del texto de los días */
+  }
+
+  .calendar-days li {
+    height: 4rem; /* Reduce el tamaño de las celdas */
+    width: 4rem;
+    font-size: 0.8rem; /* Reduce el tamaño del texto */
+  }
+}
+
+/* Media Query para pantallas medianas (601px a 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .calendar-header h1 {
+    font-size: 1.8rem; /* Ajusta el tamaño del título */
+  }
+
+  .calendar-header button {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  .weekdays {
+    font-size: 1rem; /* Ajusta el tamaño del texto de los días */
+  }
+
+  .calendar-days li {
+    height: 6rem; /* Ajusta el tamaño de las celdas */
+    width: 6rem;
+    font-size: 1rem; /* Ajusta el tamaño del texto */
+  }
+}
+
+/* Media Query para pantallas grandes (más de 1024px) */
+@media (min-width: 1025px) {
+  .calendar-header h1 {
+    font-size: 2.5rem; /* Aumenta el tamaño del título */
+  }
+
+  .calendar-header button {
+    font-size: 1.2rem; /* Ajusta el tamaño de los botones */
+    padding: 12px 18px;
+  }
+
+  .weekdays {
+    font-size: 1.2rem; /* Mantén el tamaño del texto */
+  }
+
+  .calendar-days li {
+    height: 8rem; /* Mantén el tamaño de las celdas */
+    width: 8rem;
+    font-size: 1.2rem; /* Mantén el tamaño del texto */
+  }
+}
+
+/* Ajustes para landscape en dispositivos móviles */
+@media (orientation: landscape) and (max-height: 500px) {
+  .calendar-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .calendar-days li {
+    height: 3rem; /* Reduce las celdas */
+    width: 3rem;
+    font-size: 0.7rem; /* Ajusta el tamaño del texto */
+  }
+}

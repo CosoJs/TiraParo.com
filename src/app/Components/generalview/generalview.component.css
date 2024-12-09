@@ -1,160 +1,477 @@
 /* Contenedor principal */
 .container {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    /* Sidebar toma el espacio justo y el resto es para el contenido */
-    transition: grid-template-columns 0.3s ease;
-    /* Suave transición cuando cambia el ancho de la sidebar */
-    height: 100vh;
-    /* Ocupa todo el alto de la pantalla */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* Sidebar toma el espacio justo y el resto es para el contenido */
+  transition: grid-template-columns 0.3s ease;
+  /* Suave transición cuando cambia el ancho de la sidebar */
+  height: 100vh;
+  /* Ocupa todo el alto de la pantalla */
 }
 
 .sidebar {
-    padding: 20px;
-    width: 80px;
-    /* Sidebar contraída */
-    transition: width 0.3s ease;
-    /* Suave transición para expandir o contraer */
+  padding: 1.25rem;
+  width: 5rem;
+  /* Sidebar contraída */
+  transition: width 0.3s ease;
+  /* Suave transición para expandir o contraer */
 }
 
 .sidebar.expanded {
-    width: 150px;
-    /* Sidebar expandida */
+  width: 9.375rem;
+  /* Sidebar expandida */
 }
 
 /* Contenido principal */
 .main-content {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    /* Tres filas: searchbar, cards, free space */
-    padding: 20px;
-    transition: all 0.3s ease;
-    /* Suave ajuste del contenido cuando cambia el tamaño de la sidebar */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* Tres filas: searchbar, cards, free space */
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  /* Suave ajuste del contenido cuando cambia el tamaño de la sidebar */
 }
 
 /* Searchbar */
 .searchbar {
-    padding: 10px;
-    text-align: center;
+  padding: 0.625rem;
+  text-align: center;
 }
 
 /* Tarjetas */
 .cards {
-    padding: 10px;
-    text-align: center;
+  padding: 0.625rem;
+  text-align: center;
 }
 
 /* Free Space */
 .free-space {
-    padding: 10px;
-    text-align: center;
+  padding: 0.625rem;
+  text-align: center;
+}
+
+.main-content {
+  margin-left: 1rem;
 }
 
 /* Responsividad para pantallas más pequeñas */
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
+@media (max-width: 48rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
 
-    .sidebar {
-        position: absolute;
-        z-index: 1000;
-        left: -250px;
-        height: 100%;
-        transition: left 0.3s ease;
-    }
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -15.625rem;
+    height: 100%;
+    transition: left 0.3s ease;
+  }
 
-    .sidebar.expanded {
-        left: 0;
-    }
+  .sidebar.expanded {
+    left: 0;
+  }
 }
 
-/* Para pantallas medianas o tablets (ancho máximo de 1024px) */
-@media (max-width: 1024px) {
-    .container {
-        grid-template-columns: 1fr;
-        /* La sidebar ocupa toda la pantalla en dispositivos más pequeños */
-    }
+/* Para pantallas medianas o tablets (ancho máximo de 64rem) */
+@media (max-width: 64rem) {
+  .container {
+    grid-template-columns: 1fr;
+    /* La sidebar ocupa toda la pantalla en dispositivos más pequeños */
+  }
 
-    .sidebar {
-        position: absolute;
-        z-index: 1000;
-        left: -200px; /* Inicialmente fuera de la vista */
-        width: 200px;
-        transition: left 0.3s ease;
-        /* Cambiar el tamaño de la barra lateral para dispositivos medianos */
-    }
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -12.5rem; /* Inicialmente fuera de la vista */
+    width: 12.5rem;
+    transition: left 0.3s ease;
+    /* Cambiar el tamaño de la barra lateral para dispositivos medianos */
+  }
 
-    .sidebar.expanded {
-        left: 0;
-    }
+  .sidebar.expanded {
+    left: 0;
+  }
 
-    .main-content {
-        padding-left: 20px;
-        /* Asegúrate de que el contenido se ajuste cuando la barra lateral se expande */
-    }
+  .main-content {
+    padding-left: 1.25rem;
+    /* Asegúrate de que el contenido se ajuste cuando la barra lateral se expande */
+  }
+
+  .main-content {
+    margin-left: 6rem;
+    margin-right: 2rem;
+  }
 }
 
-/* Para pantallas pequeñas (smartphones - ancho máximo de 768px) */
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-        /* Elimina la estructura de columnas y muestra todo en una sola columna */
-    }
+/* Para pantallas pequeñas (smartphones - ancho máximo de 48rem) */
+@media (max-width: 48rem) {
+  .container {
+    grid-template-columns: 1fr;
+    /* Elimina la estructura de columnas y muestra todo en una sola columna */
+  }
 
-    .sidebar {
-        position: absolute;
-        z-index: 1000;
-        left: -250px; /* Sidebar oculta fuera de la pantalla */
-        height: 100vh;
-        width: 250px;
-        transition: left 0.3s ease;
-    }
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -15.625rem; /* Sidebar oculta fuera de la pantalla */
+    height: 100vh;
+    width: 15.625rem;
+    transition: left 0.3s ease;
+  }
 
-    .sidebar.expanded {
-        left: 0; /* Sidebar visible en pantallas pequeñas cuando está expandida */
-    }
+  .sidebar.expanded {
+    left: 0; /* Sidebar visible en pantallas pequeñas cuando está expandida */
+  }
 
-    .main-content {
-        padding-left: 0;
-        /* No hay espacio lateral en pantallas pequeñas */
-    }
+  .main-content {
+    padding-left: 0;
+    /* No hay espacio lateral en pantallas pequeñas */
+  }
 
-    .searchbar,
-    .cards,
-    .free-space {
-        padding: 5px;
-        /* Reduce el padding para contenido en pantallas pequeñas */
-    }
+  .searchbar,
+  .cards,
+  .free-space {
+    padding: 0.3125rem;
+    /* Reduce el padding para contenido en pantallas pequeñas */
+  }
+  .main-content {
+    margin-left: 4rem;
+    margin-right: 2rem;
+  }
 }
 
-/* Para pantallas extra pequeñas (ancho máximo de 480px) */
-@media (max-width: 480px) {
-    .sidebar {
-        width: 200px;
-        /* Ajustar la barra lateral para pantallas muy pequeñas */
-    }
+/* Para pantallas extra pequeñas (ancho máximo de 30rem) */
+@media (max-width: 30rem) {
+  .sidebar {
+    width: 12.5rem;
+    /* Ajustar la barra lateral para pantallas muy pequeñas */
+  }
 
-    .main-content {
-        padding: 5px;
-        /* Reducir el padding en contenido para pantallas extra pequeñas */
-    }
+  .main-content {
+    padding: 0.3125rem;
+    /* Reducir el padding en contenido para pantallas extra pequeñas */
+  }
 
-    .searchbar,
-    .cards,
-    .free-space {
-        padding: 5px;
-        font-size: 14px;
-        /* Reducir el tamaño de texto y padding para adaptarse a pantallas pequeñas */
-    }
-}
-
-/* Margen al contenido principal para que no se solape con la sidebar no expandida */
-.main-content {
-    margin-left: 1.5rem; /* Margen reducido en 1 rem */
+  .searchbar,
+  .cards,
+  .free-space {
+    padding: 0.3125rem;
+    font-size: 0.875rem;
+    /* Reducir el tamaño de texto y padding para adaptarse a pantallas pequeñas */
+  }
 }
 
 /* Ajuste específico para el contenedor del buscador */
 .searchbar {
-    margin-left: 1.5rem; /* Margen reducido en 1 rem */
+  margin-left: 1rem; /* Margen reducido en 1 rem */
+}
+/* Contenedor principal */
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* Sidebar toma el espacio justo y el resto es para el contenido */
+  transition: grid-template-columns 0.3s ease;
+  /* Suave transición cuando cambia el ancho de la sidebar */
+  height: 100vh;
+  /* Ocupa todo el alto de la pantalla */
+}
+
+.sidebar {
+  padding: 1.25rem;
+  width: 5rem;
+  /* Sidebar contraída */
+  transition: width 0.3s ease;
+  /* Suave transición para expandir o contraer */
+}
+
+.sidebar.expanded {
+  width: 9.375rem;
+  /* Sidebar expandida */
+}
+
+/* Contenido principal */
+.main-content {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* Tres filas: searchbar, cards, free space */
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  /* Suave ajuste del contenido cuando cambia el tamaño de la sidebar */
+}
+
+/* Searchbar */
+.searchbar {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+/* Tarjetas */
+.cards {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+/* Free Space */
+.free-space {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 48rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -15.625rem;
+    height: 100%;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.expanded {
+    left: 0;
+  }
+}
+
+/* Para pantallas medianas o tablets (ancho máximo de 64rem) */
+@media (max-width: 64rem) {
+  .container {
+    grid-template-columns: 1fr;
+    /* La sidebar ocupa toda la pantalla en dispositivos más pequeños */
+  }
+
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -12.5rem; /* Inicialmente fuera de la vista */
+    width: 12.5rem;
+    transition: left 0.3s ease;
+    /* Cambiar el tamaño de la barra lateral para dispositivos medianos */
+  }
+
+  .sidebar.expanded {
+    left: 0;
+  }
+
+  .main-content {
+    padding-left: 1.25rem;
+    /* Asegúrate de que el contenido se ajuste cuando la barra lateral se expande */
+  }
+}
+
+/* Para pantallas pequeñas (smartphones - ancho máximo de 48rem) */
+@media (max-width: 48rem) {
+  .container {
+    grid-template-columns: 1fr;
+    /* Elimina la estructura de columnas y muestra todo en una sola columna */
+  }
+
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -15.625rem; /* Sidebar oculta fuera de la pantalla */
+    height: 100vh;
+    width: 15.625rem;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.expanded {
+    left: 0; /* Sidebar visible en pantallas pequeñas cuando está expandida */
+  }
+
+  .main-content {
+    padding-left: 0;
+    /* No hay espacio lateral en pantallas pequeñas */
+  }
+
+  .searchbar,
+  .cards,
+  .free-space {
+    padding: 0.3125rem;
+    /* Reduce el padding para contenido en pantallas pequeñas */
+  }
+}
+
+/* Para pantallas extra pequeñas (ancho máximo de 30rem) */
+@media (max-width: 30rem) {
+  .sidebar {
+    width: 12.5rem;
+    /* Ajustar la barra lateral para pantallas muy pequeñas */
+  }
+
+  .main-content {
+    padding: 0.3125rem;
+    /* Reducir el padding en contenido para pantallas extra pequeñas */
+  }
+
+  .searchbar,
+  .cards,
+  .free-space {
+    padding: 0.3125rem;
+    font-size: 0.875rem;
+    /* Reducir el tamaño de texto y padding para adaptarse a pantallas pequeñas */
+  }
+}
+/* Ajuste específico para el contenedor del buscador */
+.searchbar {
+  margin-left: 1rem; /* Margen reducido en 1 rem */
+}
+/* Contenedor principal */
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* Sidebar toma el espacio justo y el resto es para el contenido */
+  transition: grid-template-columns 0.3s ease;
+  /* Suave transición cuando cambia el ancho de la sidebar */
+  height: 100vh;
+  /* Ocupa todo el alto de la pantalla */
+}
+
+.sidebar {
+  padding: 1.25rem;
+  width: 5rem;
+  /* Sidebar contraída */
+  transition: width 0.3s ease;
+  /* Suave transición para expandir o contraer */
+}
+
+.sidebar.expanded {
+  width: 9.375rem;
+  /* Sidebar expandida */
+}
+
+/* Contenido principal */
+.main-content {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* Tres filas: searchbar, cards, free space */
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  /* Suave ajuste del contenido cuando cambia el tamaño de la sidebar */
+}
+
+/* Searchbar */
+.searchbar {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+/* Tarjetas */
+.cards {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+/* Free Space */
+.free-space {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 48rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -15.625rem;
+    height: 100%;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.expanded {
+    left: 0;
+  }
+}
+
+/* Para pantallas medianas o tablets (ancho máximo de 64rem) */
+@media (max-width: 64rem) {
+  .container {
+    grid-template-columns: 1fr;
+    /* La sidebar ocupa toda la pantalla en dispositivos más pequeños */
+  }
+
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -12.5rem; /* Inicialmente fuera de la vista */
+    width: 12.5rem;
+    transition: left 0.3s ease;
+    /* Cambiar el tamaño de la barra lateral para dispositivos medianos */
+  }
+
+  .sidebar.expanded {
+    left: 0;
+  }
+
+  .main-content {
+    padding-left: 1.25rem;
+    /* Asegúrate de que el contenido se ajuste cuando la barra lateral se expande */
+  }
+}
+
+/* Para pantallas pequeñas (smartphones - ancho máximo de 48rem) */
+@media (max-width: 48rem) {
+  .container {
+    grid-template-columns: 1fr;
+    /* Elimina la estructura de columnas y muestra todo en una sola columna */
+  }
+
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    left: -15.625rem; /* Sidebar oculta fuera de la pantalla */
+    height: 100vh;
+    width: 15.625rem;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.expanded {
+    left: 0; /* Sidebar visible en pantallas pequeñas cuando está expandida */
+  }
+
+  .main-content {
+    padding-left: 0;
+    /* No hay espacio lateral en pantallas pequeñas */
+  }
+
+  .searchbar,
+  .cards,
+  .free-space {
+    padding: 0.3125rem;
+    /* Reduce el padding para contenido en pantallas pequeñas */
+  }
+}
+
+/* Para pantallas extra pequeñas (ancho máximo de 30rem) */
+@media (max-width: 30rem) {
+  .sidebar {
+    width: 12.5rem;
+    /* Ajustar la barra lateral para pantallas muy pequeñas */
+  }
+
+  .main-content {
+    padding: 0.3125rem;
+    /* Reducir el padding en contenido para pantallas extra pequeñas */
+  }
+
+  .searchbar,
+  .cards,
+  .free-space {
+    padding: 0.3125rem;
+    font-size: 0.875rem;
+    /* Reducir el tamaño de texto y padding para adaptarse a pantallas pequeñas */
+  }
+}
+
+/* Ajuste específico para el contenedor del buscador */
+.searchbar {
+  margin-left: 1rem; /* Margen reducido en 1 rem */
 }

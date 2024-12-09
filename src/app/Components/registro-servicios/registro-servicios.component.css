@@ -281,6 +281,11 @@ svg {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .main-content {
+    max-width: 90%;
+    margin: 0;
+    margin-left: 4rem;
+  }
   .container {
     flex-direction: column;
   }
@@ -288,10 +293,6 @@ svg {
   .sidebar {
     width: 100%;
     height: auto;
-  }
-
-  .main-content {
-    margin-left: 0;
   }
 
   .tarea-card {
@@ -304,10 +305,9 @@ svg {
   margin-right: 10px;
 }
 
- 
 .custum-file-upload {
-  height: 100px;
-  width: 300px;
+  height: 6rem;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: space-between;
@@ -319,11 +319,10 @@ svg {
   background-color: rgba(255, 255, 255, 1);
   padding: 1.5rem;
   border-radius: 10px;
-  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+  box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
 }
 
 .custum-file-upload .icon {
-
   display: flex;
   align-items: center;
   justify-content: center;

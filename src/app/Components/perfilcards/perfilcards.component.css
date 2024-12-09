@@ -1,24 +1,24 @@
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   /* Tres tarjetas por fila */
-  gap: 30px;
+  gap: 2rem;
   /* Incrementa el espacio entre tarjetas */
   justify-items: center;
-  padding: 20px;
+  padding: 2rem;
   /* Espacio alrededor del contenedor */
 }
 
 .card {
   width: 100%;
-  max-width: 350px;
+  max-width: 22rem;
   /* Limita el ancho máximo de cada tarjeta */
   background-color: #f5f5f5;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .card:hover {
@@ -26,41 +26,41 @@
 }
 
 .card-image {
-  height: 200px;
+  height: 12.5rem;
   /* Aumenta la altura de la imagen */
   background-size: cover;
   background-position: center;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .card-image-placeholder {
-  height: 200px;
+  height: 12.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #ddd;
   color: #777;
-  font-size: 14px;
-  border-radius: 8px;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
 }
 
 .category {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #777;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .heading {
-  font-size: 18px;
+  font-size: 1.125rem;
   /* Aumenta el tamaño de fuente */
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 0.3125rem;
 }
 
 .author {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #555;
-  margin-top: 5px;
+  margin-top: 0.3125rem;
 }
 
 .name {
@@ -70,11 +70,10 @@
 .card .btn-delete {
   background-color: transparent;
   border: none;
-
   cursor: pointer;
-  font-size: 16px;
-  padding: 5px;
-  margin-top: 10px;
+  font-size: 1rem;
+  padding: 0.3125rem;
+  margin-top: 0.625rem;
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -89,6 +88,54 @@
 }
 
 .card .btn-delete svg {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .card-container {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .card {
+    max-width: 20rem;
+  }
+
+  .heading {
+    font-size: 1rem;
+  }
+
+  .author {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .card {
+    max-width: 18rem;
+  }
+
+  .card-image {
+    height: 10rem;
+  }
+
+  .heading {
+    font-size: 0.875rem;
+  }
+
+  .author {
+    font-size: 0.5rem;
+  }
+
+  .category {
+    font-size: 0.75rem;
+  }
 }

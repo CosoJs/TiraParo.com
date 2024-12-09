@@ -1,195 +1,305 @@
 /* Contenedor general de tarjetas */
 .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 40px;
-    justify-items: center;
-    padding: 20px;
-    align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 2.5rem;
+  justify-items: center;
+  padding: 5%;
+  align-items: stretch;
 }
 
 /* Estilo de las tarjetas */
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 350px;
-    min-height: 450px;
-    background-color: #f5f5f5;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 22rem;
+  min-height: 28rem;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 /* Imagen dentro de la tarjeta */
 .card-img {
-    position: relative;
-    background-color: #ffcaa6;
-    height: 200px;
-    border-radius: 0.5rem;
-    overflow: hidden;
+  position: relative;
+  background-color: #ffcaa6;
+  height: 40%;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .card-img .image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.5rem;
 }
 
 /* Botones para cambiar imágenes */
 .card-img button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-img button:first-of-type {
-    left: 10px;
+  left: 2%;
 }
 
 .card-img button:last-of-type {
-    right: 10px;
+  right: 2%;
 }
 
 .card-img button .svg-icon {
-    width: 20px;
-    height: 20px;
-    fill: #252525;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: #252525;
 }
 
 .card-img button:hover .svg-icon {
-    fill: #000;
+  fill: #000;
 }
 
 /* Información de la tarjeta */
 .card-info {
-    padding-top: 10%;
-    flex-grow: 1;
+  padding-top: 5%;
+  flex-grow: 1;
 }
 
 .text-title {
-    font-weight: 900;
-    font-size: 1.2em;
-    line-height: 1.5;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1.5;
 }
 
 .text-body {
-    font-size: 0.9em;
-    padding-bottom: 10px;
+  font-size: 0.9rem;
+  padding-bottom: 5%;
 }
 
 /* Pie de la tarjeta */
 .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5%;
+  border-top: 0.0625rem solid #ddd;
 }
 
 /* Botones de acción */
 .action-buttons {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 5%;
 }
 
 .action-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid #252525;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.0625rem solid #252525;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
 
 .action-button:hover {
-    border-color: #ffcaa6;
-    background-color: #ffcaa6;
+  border-color: #ffcaa6;
+  background-color: #ffcaa6;
 }
 
 .action-button .svg-icon {
-    width: 24px;
-    height: 24px;
-    fill: #252525;
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #252525;
 }
 
 .action-button:hover .svg-icon {
-    fill: #fff;
+  fill: #fff;
 }
 
 /* Botón de carga */
 .button-container {
-    margin-top: 3em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10em;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 }
 
 .upload-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Centra horizontalmente */
-    padding: 1em;
-    border: 2px dashed #ccc;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 40%;
-    /* Ajusta el ancho */
-    height: 100%;
-    /* Ajusta la altura */
-    text-align: center;
-    /* Centra el contenido dentro del botón */
-    gap: 1em;
-    /* Espacio entre el icono y el texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+  border: 0.125rem dashed #ccc;
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 40%;
+  height: auto;
+  text-align: center;
+  gap: 5%;
 }
 
 .upload-button:hover {
-    background-color: #eaeaea;
+  background-color: #eaeaea;
 }
 
 /* Icono ajustado */
 .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Centra el icono dentro de su contenedor */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon svg {
-    width: 12em;
-    /* Ajusta el tamaño del icono */
-    height: 8em;
-    color: #666;
+  width: 5rem;
+  height: auto;
+  color: #666;
 }
 
 .upload-button span {
-    font-size: 3em;
-    color: #666;
-    display: flex;
-    align-items: center;
-    /* Centra el texto verticalmente */
+  font-size: 1.2rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+/* Media queries para adaptabilidad */
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 2%;
+    padding: 5%;
+  }
+
+  .card {
+    max-width: 18rem;
+    min-height: 24rem;
+    padding: 2%;
+  }
+
+  .card-img {
+    height: 30%;
+  }
+
+  .text-title {
+    font-size: 1rem;
+  }
+
+  .text-body {
+    font-size: 0.8rem;
+  }
+
+  .upload-button {
+    width: 60%;
+    font-size: 1rem;
+  }
+
+  .icon svg {
+    width: 4rem;
+    height: auto;
+  }
+
+  .upload-button span {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 2%;
+    padding: 2%;
+  }
+
+  .card {
+    max-width: 16rem;
+    min-height: 20rem;
+    padding: 2%;
+  }
+
+  .card-img {
+    height: 25%;
+  }
+
+  .text-title {
+    font-size: 0.9rem;
+  }
+
+  .text-body {
+    font-size: 0.75rem;
+  }
+
+  .upload-button {
+    width: 80%;
+    font-size: 0.9rem;
+  }
+
+  .icon svg {
+    width: 3rem;
+    height: auto;
+  }
+
+  .upload-button span {
+    font-size: 0.9rem;
+  }
+}
+
+/* Estilo para el título */
+.profile-title {
+  margin-left: 5%; /* Separación del menú lateral */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos si es necesario */
+}
+.profile-title h2 {
+  font-size: 2rem; /* Tamaño relativo a la anchura de la ventana */
+}
+
+/* Media query para resoluciones más pequeñas */
+@media (max-width: 768px) {
+  .profile-title {
+    margin-left: 8%;
+  }
+  .profile-title h2 {
+    font-size: 2rem; /* Tamaño más pequeño pero legible */
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-title {
+    margin-left: 8%;
+  }
+  .profile-title h2 {
+    font-size: 1rem; /* Se ajusta aún más para pantallas muy pequeñas */
+  }
+}
+
+@media (max-width: 410px) {
+  .profile-title {
+    margin-left: 8%;
+  }
+  .profile-title h2 {
+    font-size: 1rem; /* Se ajusta aún más para pantallas muy pequeñas */
+  }
 }
