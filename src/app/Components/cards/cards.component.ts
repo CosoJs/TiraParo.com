@@ -11,7 +11,7 @@ export class CardsComponent {
     {
       title: '¿Quienes somos?',
       description: `
-      En tiraparo.com, somos el vínculo entre quienes buscan servicios confiables y profesionales altamente capacitados en una amplia variedad de oficios. Nuestra misión es ofrecer una experiencia de contratación fácil, segura y de calidad, tanto para tu hogar como para tu negocio.
+      ExpertoenCasa es el vínculo entre quienes buscan servicios confiables y profesionales altamente capacitados en una amplia variedad de oficios. Nuestra misión es ofrecer una experiencia de contratación fácil, segura y de calidad, tanto para tu hogar como para tu negocio.
       <br>
       <br>
       Contamos con un equipo de expertos listos para respaldar cualquier proyecto, asegurando un servicio excepcional y soluciones adaptadas a tus necesidades.
@@ -26,7 +26,7 @@ export class CardsComponent {
     },
     {
       title: '¿Como funciona?',
-      description: `En tiraparo.com, nos dedicamos a conectar a profesionales como tú con una amplia base de clientes que buscan servicios de calidad. Nuestro objetivo es facilitarte el acceso a nuevas oportunidades de trabajo y ayudarte a expandir tu negocio sin complicaciones.
+      description: `Nos dedicamos a conectar a profesionales como tú con una amplia base de clientes que buscan servicios de calidad. Nuestro objetivo es facilitarte el acceso a nuevas oportunidades de trabajo y ayudarte a expandir tu negocio sin complicaciones.
       <br>
       <br>
       Trabajamos bajo un modelo sencillo y transparente: solo cobramos un 5% sobre el costo de tu mano de obra al mes, sin incluir gastos adicionales como materiales o transporte. 
