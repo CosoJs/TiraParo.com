@@ -31,11 +31,7 @@
       <div class="orders-thumbnails orders-thumbnails-ordenes-completadas">
         <div *ngFor="let orden of misOrdenesCompletadas" class="order-wrapper" (click)="abrirModalOrden(orden.id, 'reservas')">
           <img [src]="orden.imageUrl" alt="{{ orden.nombre }}" class="order-image" />
-          <div class="card-content">
-            <h3>{{ orden.nombre }}</h3>
-            <p>{{ orden.descripcion }}</p>
-            <p>Precio: ${{ orden.precio }}</p>
-          </div>
+        
         </div>
       </div>
       <button class="nav-right" (click)="scrollOrdersRight('orders-thumbnails-ordenes-completadas')">&rarr;</button>
